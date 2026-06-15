@@ -1,0 +1,70 @@
+---
+const rules = [
+  {
+    n: "01",
+    title: "Intensidad inteligente",
+    body: "En compuestos pesados deja <b>1–3 reps en reserva (RIR)</b>. Reserva el fallo para aislamientos seguros (curl, elevaciones, extensión de tríceps).",
+  },
+  {
+    n: "02",
+    title: "Tempo",
+    body: "<b>Explosivo</b> al empujar/jalar (como un golpe), <b>2–3 s</b> controlando la bajada (excéntrica).",
+  },
+  {
+    n: "03",
+    title: "Potencia primero",
+    body: "Lo explosivo y el trabajo de manos van <b>al inicio</b> de la sesión, nunca al final.",
+  },
+  {
+    n: "04",
+    title: "Descanso",
+    body: "<b>90 s</b> en compuestos pesados; <b>45–60 s</b> en aislamientos; <b>60–90 s</b> entre rounds.",
+  },
+  {
+    n: "05",
+    title: "Doble progresión",
+    body: "Sube reps hasta el tope del rango; al llegar al tope en todas las series, <b>sube peso</b> y vuelve al piso del rango. Anota peso y reps cada sesión.",
+  },
+  {
+    n: "06",
+    title: "Movilidad / prehab",
+    body: '<b>2–3 min de banda</b> para hombro y cadera antes de empujar o golpear. ⌚ Cada ejercicio marca el tipo a usar en el Apple Watch; usa "+" para encadenar los bloques de la sesión.',
+  },
+];
+---
+
+<section class="wrap" id="reglas">
+  <div class="sec-head reveal">
+    <h2>Reglas de Oro</h2><span class="tag">no negociables</span>
+  </div>
+  <div class="rules-grid">
+    {
+      rules.map((r) => (
+        <article class="rule reveal">
+          <span class="n">{r.n}</span>
+          <div>
+            <h3>{r.title}</h3>
+            <p set:html={r.body} />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+  <div class="callout reveal">
+    <h3>Cardio: cuerda vs. elíptica</h3>
+    <p>
+      Si no haces cuerda, en la elíptica: <b
+        >12–15 min a ritmo moderado-alto</b
+      >, o <b>10–12 min por intervalos</b> (1 min fuerte / 1 min suave). Esto
+      iguala el estímulo cardiovascular de 10 min de cuerda.
+    </p>
+    <p>
+      <em
+        >Honestidad de mentor: la elíptica NO entrena el juego de pies ni la
+        coordinación que sí da la cuerda — y ese era uno de tus objetivos de
+        MMA. Si puedes, dedica 5 min a aprender cuerda + 8 min de elíptica, o
+        compensa con desplazamientos y pivotes en el shadow boxing.</em
+      >
+    </p>
+  </div>
+</section>

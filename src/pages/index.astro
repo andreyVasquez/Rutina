@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import IconSprite from "../components/IconSprite.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Changes from "../components/Changes.astro";
+import Rules from "../components/Rules.astro";
+import Day from "../components/Day.astro";
+import Supplements from "../components/Supplements.astro";
+import Footer from "../components/Footer.astro";
+import { days } from "../data/rutina";
+---
+
+<Layout>
+  <IconSprite />
+  <Nav />
+  <Hero />
+  <Changes />
+  <Rules />
+  {days.map((day) => <Day day={day} />)}
+  <Supplements />
+  <Footer />
+</Layout>

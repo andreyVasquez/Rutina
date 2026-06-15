@@ -1,0 +1,76 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Rutina de Entrenamiento — Hipertrofia + Striking" } =
+  Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- PWA / iconos -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#0b0b0d" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Rutina" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<script>
+  // Registra el service worker solo en producción (evita cachear en dev).
+  if (import.meta.env.PROD && "serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    });
+  }
+
+  const els = document.querySelectorAll<HTMLElement>(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    els.forEach((e) => e.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add("in");
+            io.unobserve(en.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -30px 0px" },
+    );
+    els.forEach((e, i) => {
+      e.style.transitionDelay = Math.min((i % 6) * 55, 330) + "ms";
+      io.observe(e);
+    });
+  }
+</script>

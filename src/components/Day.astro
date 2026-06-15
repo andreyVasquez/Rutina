@@ -1,0 +1,44 @@
+---
+import type { DayData } from "../data/rutina";
+
+interface Props {
+  day: DayData;
+}
+
+const { day } = Astro.props;
+const gridClass = day.recovery ? "recov" : "cards";
+---
+
+<section class="day" id={day.id}>
+  <div class="wrap">
+    <header class="day-head reveal">
+      <span class="day-num">{day.num}</span>
+      <div>
+        <p class="day-kicker">{day.kicker}</p>
+        <h2>{day.title}</h2>
+      </div>
+    </header>
+    {day.quote && <p class="day-quote reveal">{day.quote}</p>}
+    <div class={gridClass}>
+      {
+        day.exercises.map((ex) => (
+          <article class="card reveal">
+            <div class="pict">
+              <svg class="icon">
+                <use href={`#${ex.icon}`} />
+              </svg>
+              <span class="watch">⌚ {ex.watch}</span>
+            </div>
+            <div class="card-body">
+              <div class="card-top">
+                <h3>{ex.title}</h3>
+                <span class="reps">{ex.reps}</span>
+              </div>
+              <p set:html={ex.desc} />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+---
+const changes = [
+  {
+    title: "1 · Potencia primero",
+    body: "El trabajo explosivo (pliométricas, saco, velocidad de manos) va <b>al inicio, en fresco</b>. Hacerlo después de prensa al fallo arruina justo la velocidad que buscas para el golpeo.",
+  },
+  {
+    title: "2 · Fuera el shadow con mancuernas",
+    body: "Golpear al aire con peso fuerza codo/hombro al final del recorrido (riesgo de lesión) y <b>no aumenta velocidad</b>. Reemplazado por shadow sin peso + golpes con banda elástica.",
+  },
+  {
+    title: "3 · Bisagra de cadera + core rotacional",
+    body: "La potencia del knockout nace de la <b>cadera y la rotación</b>. Entran peso muerto rumano / hip thrust y leñador + Pallof; la extensión de pierna baja a accesorio.",
+  },
+  {
+    title: "4 · RIR, no siempre al fallo",
+    body: "Entrenar todo al fallo acumula fatiga que mata la potencia. Deja <b>1–3 reps en reserva</b> en compuestos; el fallo se reserva para aislamientos.",
+  },
+  {
+    title: "5 · Salud de hombro",
+    body: "Tanto empuje + tanto golpe sin trabajo de manguito = receta de lesión. Se añaden <b>face pulls y rotaciones externas</b>.",
+  },
+  {
+    title: "6 · Progresión explícita",
+    body: "Nada de subir peso al azar. Usa <b>doble progresión</b> y registra peso y reps en cada sesión.",
+  },
+];
+---
+
+<section class="wrap" id="cambios">
+  <div class="sec-head reveal">
+    <h2>Claves de la rutina</h2><span class="tag">y por qué</span>
+  </div>
+  <div class="changes">
+    {
+      changes.map((c) => (
+        <article class="change reveal">
+          <h3>{c.title}</h3>
+          <p set:html={c.body} />
+        </article>
+      ))
+    }
+  </div>
+</section>

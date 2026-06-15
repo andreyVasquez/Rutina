@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutina V3 — Hipertrofia + Striking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0b0d;
+  --panel:#141417;
+  --panel-2:#191920;
+  --ink:#f4f1ea;
+  --mut:#9d988e;
+  --red:#ff4438;
+  --red-deep:#c4271d;
+  --amber:#ffc53d;
+  --line:#26262c;
+  --accent:var(--red);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:'Barlow',sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  overflow-x:hidden;
+  background-image:
+    radial-gradient(1200px 600px at 80% -10%, rgba(255,68,56,.07), transparent 60%),
+    radial-gradient(900px 500px at -10% 30%, rgba(255,197,61,.04), transparent 60%);
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:999;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.035 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection{background:var(--red);color:#fff}
+
+/* ---------- NAV ---------- */
+.topnav{
+  position:sticky;top:0;z-index:100;
+  display:flex;align-items:center;gap:18px;
+  padding:14px 28px;
+  background:rgba(11,11,13,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.brand{font-family:'Anton',sans-serif;font-size:18px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink);text-decoration:none;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.brand i{display:inline-block;width:14px;height:14px;background:var(--red);transform:skewX(-12deg)}
+.topnav nav{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
+.topnav nav a{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mut);text-decoration:none;padding:6px 12px;border:1px solid transparent;transition:.18s;
+}
+.topnav nav a:hover{color:var(--ink);border-color:var(--line);background:var(--panel)}
+
+/* ---------- HERO ---------- */
+.hero{position:relative;padding:96px 28px 80px;max-width:1180px;margin:0 auto}
+.hero::after{
+  content:"";position:absolute;right:-40px;top:60px;width:280px;height:280px;opacity:.16;pointer-events:none;
+  background:repeating-linear-gradient(135deg,var(--red) 0 10px,transparent 10px 26px);
+  clip-path:polygon(100% 0,100% 100%,0 100%);
+}
+.kicker{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.32em;text-transform:uppercase;
+  font-size:14px;color:var(--red);display:flex;align-items:center;gap:14px;
+}
+.kicker::before{content:"";width:42px;height:2px;background:var(--red)}
+.hero h1{
+  font-family:'Anton',sans-serif;text-transform:uppercase;
+  font-size:clamp(54px,10vw,128px);line-height:.92;letter-spacing:.005em;
+  margin:22px 0 10px;
+}
+.hero h1 .ghost{
+  display:block;color:transparent;
+  -webkit-text-stroke:2px rgba(244,241,234,.45);
+}
+.hero h1 .hit{display:block;color:var(--ink)}
+.hero h1 .hit em{font-style:normal;color:var(--red)}
+.hero .sub{max-width:640px;color:var(--mut);font-size:17px;margin-top:18px}
+.hero .sub strong{color:var(--ink)}
+.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:30px}
+.chip{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--line);background:var(--panel);padding:8px 14px;color:var(--ink);
+}
+.chip b{color:var(--red);font-weight:700}
+
+/* ---------- SECCIONES ---------- */
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+section{padding:64px 0}
+.sec-head{display:flex;align-items:baseline;gap:18px;margin-bottom:34px;flex-wrap:wrap}
+.sec-head h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(28px,4vw,44px);letter-spacing:.01em}
+.sec-head .tag{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--red);
+}
+
+/* Cambios V3 */
+.changes{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.change{
+  border:1px solid var(--line);background:var(--panel);padding:20px 20px 18px;position:relative;overflow:hidden;
+}
+.change::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--red)}
+.change h3{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;margin-bottom:6px}
+.change p{color:var(--mut);font-size:14.5px}
+.change p b{color:var(--ink)}
+
+/* Reglas de oro */
+.rules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px}
+.rule{display:flex;gap:16px;border:1px solid var(--line);background:var(--panel);padding:20px}
+.rule .n{
+  font-family:'Anton',sans-serif;font-size:30px;color:transparent;-webkit-text-stroke:1.5px var(--amber);
+  line-height:1;min-width:42px;
+}
+.rule h3{font-family:'Barlow Condensed',sans-serif;font-size:18px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px}
+.rule p{color:var(--mut);font-size:14.5px}
+.rule p b{color:var(--ink)}
+
+/* Nota cardio */
+.callout{
+  border:1px solid var(--line);border-left:4px solid var(--amber);background:var(--panel);
+  padding:24px 26px;margin-top:28px;
+}
+.callout h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--amber)}
+.callout p{color:var(--mut);font-size:15px;max-width:900px}
+.callout p+p{margin-top:10px}
+.callout p b,.callout p strong{color:var(--ink)}
+
+/* ---------- DÍAS ---------- */
+.day{border-top:1px solid var(--line)}
+.day-head{display:flex;align-items:center;gap:24px;margin-bottom:14px}
+.day-num{
+  font-family:'Anton',sans-serif;font-size:clamp(72px,9vw,110px);line-height:1;
+  color:transparent;-webkit-text-stroke:2px rgba(244,241,234,.28);
+  user-select:none;
+}
+.day-head .day-kicker{
+  font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);
+}
+.day-head h2{font-family:'Anton',sans-serif;text-transform:uppercase;font-size:clamp(26px,3.6vw,40px);line-height:1.05;margin-top:4px}
+.day-quote{
+  color:var(--mut);font-style:italic;font-size:15px;border-left:3px solid var(--red);
+  padding:4px 0 4px 16px;margin:6px 0 26px;max-width:760px;
+}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px;margin-top:26px}
+.card{
+  border:1px solid var(--line);background:var(--panel);display:flex;flex-direction:column;
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;position:relative;
+}
+.card:hover{transform:translateY(-4px);border-color:rgba(255,68,56,.55);box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.pict{
+  position:relative;display:flex;align-items:center;justify-content:center;height:170px;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.02),transparent),
+    var(--panel-2);
+  border-bottom:1px solid var(--line);overflow:hidden;
+}
+.pict::after{
+  content:"";position:absolute;right:-14px;bottom:-14px;width:74px;height:74px;opacity:.18;
+  background:repeating-linear-gradient(135deg,var(--red) 0 5px,transparent 5px 13px);
+  clip-path:polygon(100% 0,100% 100%,0 100%);
+}
+.icon{width:96px;height:96px;color:var(--ink)}
+.icon *{vector-effect:non-scaling-stroke}
+.new{
+  position:absolute;top:12px;left:12px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:12px;letter-spacing:.18em;
+  background:var(--amber);color:#161408;padding:3px 9px;transform:rotate(-3deg);
+}
+.card-body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.card-top h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.03em;text-transform:uppercase;line-height:1.15}
+.reps{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:16px;letter-spacing:.04em;white-space:nowrap;
+  color:var(--red);border:1px solid rgba(255,68,56,.4);padding:3px 10px;background:rgba(255,68,56,.06);
+}
+.card-body p{color:var(--mut);font-size:14.5px}
+.card-body p b{color:var(--ink)}
+
+/* Día 4 — recuperación */
+.recov{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:26px}
+.recov .card .pict{height:150px}
+
+/* ---------- SUPLEMENTOS ---------- */
+.supps{border-top:1px solid var(--line)}
+.supps .intro{color:var(--mut);max-width:820px;margin-bottom:30px;font-size:16px}
+.supps .intro b{color:var(--ink)}
+.tier-label{
+  display:inline-block;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.18em;text-transform:uppercase;
+  padding:5px 12px;margin:26px 0 14px;
+}
+.tier-1{background:var(--red);color:#fff}
+.tier-2{background:transparent;color:var(--amber);border:1px solid var(--amber)}
+.supp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(330px,1fr));gap:14px}
+.supp{border:1px solid var(--line);background:var(--panel);padding:22px}
+.supp h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:20px;letter-spacing:.04em;text-transform:uppercase}
+.dose{
+  display:inline-block;margin:8px 0 10px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:14px;letter-spacing:.06em;
+  color:var(--amber);border:1px solid rgba(255,197,61,.4);padding:2px 10px;
+}
+.supp p{color:var(--mut);font-size:14.5px}
+.supp p b{color:var(--ink)}
+.bands{
+  border:1px solid rgba(255,197,61,.5);background:linear-gradient(180deg,rgba(255,197,61,.05),transparent);
+  padding:24px 26px;margin-top:26px;
+}
+.bands h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;letter-spacing:.06em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.bands p{color:var(--mut);font-size:15px;max-width:900px}
+.bands p b{color:var(--ink)}
+.buy{margin-top:26px;border:1px solid var(--line);background:var(--panel);padding:24px 26px}
+.buy h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+.buy p{color:var(--mut);font-size:15px;margin-top:8px}
+.buy p b{color:var(--ink)}
+.buy a{color:var(--red);text-decoration:none;border-bottom:1px solid rgba(255,68,56,.4)}
+.buy a:hover{color:#ff6a60;border-color:#ff6a60}
+.buy .warn{font-style:italic;color:var(--mut)}
+
+/* ---------- FOOTER ---------- */
+footer{border-top:1px solid var(--line);padding:40px 28px 60px;text-align:center}
+footer p{color:var(--mut);font-size:13.5px;max-width:680px;margin:0 auto}
+footer .sig{margin-top:14px;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.25em;text-transform:uppercase;font-size:12px;color:#5c594f}
+
+/* ---------- REVEAL ---------- */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+@media (max-width:640px){
+  .hero{padding:64px 22px 56px}
+  .wrap{padding:0 22px}
+  .topnav{padding:12px 18px}
+  .topnav nav a{padding:6px 8px;font-size:13px}
+  .day-head{gap:16px}
+}
+</style>
+</head>
+<body>
+<!-- ============ SPRITE DE PICTOGRAMAS (SVG inline, sin dependencias externas) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<style>
+  .f{fill:none;stroke:currentColor;stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+  .h{fill:currentColor;stroke:none}
+  .a{fill:none;stroke:var(--accent,#ff4438);stroke-width:6;stroke-linecap:round;stroke-linejoin:round}
+  .ah{fill:var(--accent,#ff4438);stroke:none}
+</style>
+
+<symbol id="i-rope" viewBox="0 0 120 120">
+  <circle class="h" cx="60" cy="22" r="8"/>
+  <path class="f" d="M60 30 L60 60"/>
+  <path class="f" d="M60 38 L42 48 L30 58 M60 38 L78 48 L90 58"/>
+  <path class="f" d="M60 60 L48 76 L54 92 M60 60 L72 76 L66 92"/>
+  <path class="a" d="M30 58 Q60 116 90 58"/>
+</symbol>
+
+<symbol id="i-shadow" viewBox="0 0 120 120">
+  <circle class="h" cx="42" cy="26" r="8"/>
+  <path class="f" d="M42 34 L48 64"/>
+  <path class="f" d="M42 40 L66 36 L90 32"/>
+  <path class="f" d="M43 42 L33 52 L41 58"/>
+  <path class="f" d="M48 64 L34 94 M48 64 L64 90 L70 96"/>
+  <path class="a" d="M98 24 L110 21 M99 32 L114 32 M98 40 L110 43"/>
+</symbol>
+
+<symbol id="i-pulldown" viewBox="0 0 120 120">
+  <path class="a" d="M60 6 L60 20 M28 22 L92 22"/>
+  <circle class="h" cx="60" cy="46" r="8"/>
+  <path class="f" d="M60 54 L60 78"/>
+  <path class="f" d="M60 56 L42 42 L32 26 M60 56 L78 42 L88 26"/>
+  <path class="f" d="M60 78 L82 82 L82 102"/>
+  <path class="f" d="M60 78 L70 86 L70 104"/>
+</symbol>
+
+<symbol id="i-row" viewBox="0 0 120 120">
+  <path class="a" d="M14 80 L56 80 M20 80 L20 96 M50 80 L50 96"/>
+  <circle class="h" cx="96" cy="38" r="8"/>
+  <path class="f" d="M46 60 L86 44"/>
+  <path class="f" d="M80 46 L66 80"/>
+  <path class="f" d="M86 48 L90 70"/>
+  <path class="a" d="M80 76 L100 72 M80 70 L80 82 M100 66 L100 78"/>
+  <path class="f" d="M46 60 L32 94 M46 60 L52 96"/>
+</symbol>
+
+<symbol id="i-curl" viewBox="0 0 120 120">
+  <circle class="h" cx="58" cy="20" r="8"/>
+  <path class="f" d="M58 28 L58 72"/>
+  <path class="f" d="M58 36 L44 58"/>
+  <path class="f" d="M58 36 L74 58 L72 40"/>
+  <path class="a" d="M62 42 L84 36 M62 36 L62 48 M84 30 L84 42"/>
+  <path class="f" d="M58 72 L46 104 M58 72 L70 104"/>
+</symbol>
+
+<symbol id="i-facepull" viewBox="0 0 120 120">
+  <path class="a" d="M110 16 L66 38 M110 16 L110 28"/>
+  <circle class="h" cx="36" cy="34" r="8"/>
+  <path class="f" d="M36 42 L40 76"/>
+  <path class="f" d="M38 48 L52 42 L64 36"/>
+  <path class="f" d="M39 54 L53 52 L65 46"/>
+  <path class="f" d="M40 76 L28 104 M40 76 L54 100"/>
+</symbol>
+
+<symbol id="i-plyo" viewBox="0 0 120 120">
+  <circle class="h" cx="24" cy="42" r="8"/>
+  <path class="f" d="M32 48 L86 70 L104 76"/>
+  <path class="f" d="M38 51 L36 70"/>
+  <path class="a" d="M12 88 L108 88"/>
+  <path class="a" d="M28 76 L24 82 M36 77 L36 83 M44 76 L48 82"/>
+</symbol>
+
+<symbol id="i-chestpress" viewBox="0 0 120 120">
+  <path class="a" d="M22 74 L96 74 M32 74 L32 92 M86 74 L86 92"/>
+  <circle class="h" cx="28" cy="62" r="8"/>
+  <path class="f" d="M38 66 L76 66"/>
+  <path class="f" d="M76 66 L92 74 L92 92"/>
+  <path class="f" d="M54 64 L54 38"/>
+  <path class="a" d="M38 34 L70 34 M38 28 L38 40 M70 28 L70 40"/>
+</symbol>
+
+<symbol id="i-lateral" viewBox="0 0 120 120">
+  <circle class="h" cx="60" cy="22" r="8"/>
+  <path class="f" d="M60 30 L60 72"/>
+  <path class="f" d="M60 40 L26 40 M60 40 L94 40"/>
+  <path class="a" d="M22 32 L22 48 M98 32 L98 48"/>
+  <path class="f" d="M60 72 L48 104 M60 72 L72 104"/>
+</symbol>
+
+<symbol id="i-triceps" viewBox="0 0 120 120">
+  <path class="a" d="M72 8 L72 44"/>
+  <circle class="h" cx="52" cy="26" r="8"/>
+  <path class="f" d="M52 34 L52 74"/>
+  <path class="f" d="M52 42 L66 52 L72 78"/>
+  <path class="a" d="M60 82 L86 76"/>
+  <path class="f" d="M52 74 L40 104 M52 74 L64 102"/>
+</symbol>
+
+<symbol id="i-extrot" viewBox="0 0 120 120">
+  <circle class="h" cx="46" cy="24" r="8"/>
+  <path class="f" d="M46 32 L46 74"/>
+  <path class="f" d="M46 42 L56 58 L84 52"/>
+  <path class="a" d="M84 52 L112 46 M112 40 L112 52"/>
+  <path class="a" d="M70 32 Q84 36 83 48"/>
+  <path class="f" d="M46 74 L34 104 M46 74 L58 102"/>
+</symbol>
+
+<symbol id="i-goblet" viewBox="0 0 120 120">
+  <circle class="h" cx="50" cy="28" r="8"/>
+  <path class="f" d="M50 36 L46 64"/>
+  <path class="f" d="M50 44 L64 52"/>
+  <path class="a" d="M66 42 L66 60 M60 42 L72 42 M60 60 L72 60"/>
+  <path class="f" d="M46 64 L70 68 L70 96 L82 96"/>
+  <path class="f" d="M46 64 L60 72 L60 98"/>
+</symbol>
+
+<symbol id="i-rdl" viewBox="0 0 120 120">
+  <circle class="h" cx="86" cy="36" r="8"/>
+  <path class="f" d="M44 52 L78 40"/>
+  <path class="f" d="M44 52 L42 74 L40 96 L52 96"/>
+  <path class="f" d="M74 42 L78 70"/>
+  <path class="a" d="M68 74 L90 72 M68 68 L68 80 M90 66 L90 78"/>
+</symbol>
+
+<symbol id="i-legext" viewBox="0 0 120 120">
+  <path class="a" d="M26 32 L26 82 M26 82 L58 82"/>
+  <circle class="h" cx="46" cy="26" r="8"/>
+  <path class="f" d="M46 34 L44 74"/>
+  <path class="f" d="M44 74 L72 76 L100 62"/>
+  <path class="a" d="M94 54 L104 68"/>
+  <path class="a" d="M96 92 Q108 80 101 66"/>
+</symbol>
+
+<symbol id="i-chop" viewBox="0 0 120 120">
+  <path class="a" d="M14 12 L42 38"/>
+  <circle class="h" cx="64" cy="28" r="8"/>
+  <path class="f" d="M64 36 L58 70"/>
+  <path class="f" d="M62 44 L42 38"/>
+  <path class="a" d="M46 46 Q82 56 90 88 M90 88 L80 84 M90 88 L92 76"/>
+  <path class="f" d="M58 70 L44 100 M58 70 L72 98"/>
+</symbol>
+
+<symbol id="i-pallof" viewBox="0 0 120 120">
+  <path class="a" d="M112 48 L30 48 M112 42 L112 54"/>
+  <circle class="h" cx="64" cy="20" r="8"/>
+  <path class="f" d="M64 28 L64 72"/>
+  <path class="f" d="M64 38 L46 44 L30 48"/>
+  <path class="f" d="M64 42 L46 48 L30 48"/>
+  <path class="f" d="M64 72 L50 102 M64 72 L78 102"/>
+</symbol>
+
+<symbol id="i-knee" viewBox="0 0 120 120">
+  <path class="a" d="M28 14 L92 14"/>
+  <path class="f" d="M48 16 L52 34 M72 16 L68 34"/>
+  <circle class="h" cx="60" cy="32" r="8"/>
+  <path class="f" d="M60 40 L60 64"/>
+  <path class="f" d="M60 64 L80 58 L78 78"/>
+  <path class="a" d="M86 80 Q94 68 86 58"/>
+</symbol>
+
+<symbol id="i-walk" viewBox="0 0 120 120">
+  <circle class="h" cx="42" cy="22" r="8"/>
+  <path class="f" d="M42 30 L46 62"/>
+  <path class="f" d="M42 38 L32 56 M42 38 L56 50"/>
+  <path class="f" d="M46 62 L30 96 M46 62 L62 92 L70 96"/>
+  <path class="a" d="M56 50 Q74 62 84 78"/>
+  <path class="a" d="M82 84 L104 84 M86 84 L86 96 M100 84 L100 96 M82 84 L76 76"/>
+  <circle class="ah" cx="108" cy="78" r="5"/>
+</symbol>
+
+<symbol id="i-bag" viewBox="0 0 120 120">
+  <path class="a" d="M90 6 L90 18"/>
+  <rect class="a" x="76" y="18" width="28" height="58" rx="9"/>
+  <circle class="h" cx="34" cy="30" r="8"/>
+  <path class="f" d="M34 38 L40 68"/>
+  <path class="f" d="M34 44 L76 40"/>
+  <path class="f" d="M36 46 L26 56 L34 62"/>
+  <path class="f" d="M40 68 L28 98 M40 68 L54 94"/>
+</symbol>
+
+<symbol id="i-ohp" viewBox="0 0 120 120">
+  <circle class="h" cx="60" cy="36" r="8"/>
+  <path class="f" d="M60 44 L60 78"/>
+  <path class="f" d="M60 50 L44 36 L44 18"/>
+  <path class="f" d="M60 50 L76 36 L76 18"/>
+  <path class="a" d="M36 14 L52 14 M68 14 L84 14"/>
+  <path class="f" d="M60 78 L48 106 M60 78 L72 106"/>
+</symbol>
+
+<symbol id="i-stretch" viewBox="0 0 120 120">
+  <circle class="h" cx="56" cy="28" r="8"/>
+  <path class="f" d="M56 36 Q60 56 54 72"/>
+  <path class="f" d="M56 40 L34 28 M56 40 L86 24"/>
+  <path class="a" d="M34 28 Q60 8 86 24"/>
+  <path class="f" d="M54 72 L42 102 M54 72 L66 100"/>
+</symbol>
+</defs>
+</svg>
+<!-- ============ NAV ============ -->
+<header class="topnav">
+  <a class="brand" href="#top"><i></i>Rutina V3</a>
+  <nav>
+    <a href="#reglas">Reglas</a>
+    <a href="#dia1">D1</a>
+    <a href="#dia2">D2</a>
+    <a href="#dia3">D3</a>
+    <a href="#dia4">D4</a>
+    <a href="#dia5">D5</a>
+    <a href="#suplementos">Suplementos</a>
+  </nav>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="top">
+  <p class="kicker reveal">Plan de entrenamiento · Versión 3</p>
+  <h1>
+    <span class="ghost reveal">Hipertrofia</span>
+    <span class="hit reveal">+ Striking<em>.</em></span>
+  </h1>
+  <p class="sub reveal">Reordenada para <strong>potencia primero</strong>, equilibrada y con <strong>progresión explícita</strong>. Lo explosivo va en fresco, la cadera manda y el hombro se cuida cada sesión.</p>
+  <div class="chips reveal">
+    <span class="chip"><b>5</b> días / semana</span>
+    <span class="chip">RIR <b>1–3</b> en compuestos</span>
+    <span class="chip">Doble <b>progresión</b></span>
+    <span class="chip">⌚ Apple Watch ready</span>
+  </div>
+</section>
+
+<!-- ============ QUÉ CAMBIÓ ============ -->
+<section class="wrap" id="cambios">
+  <div class="sec-head reveal">
+    <h2>Qué cambió vs. V2</h2><span class="tag">y por qué</span>
+  </div>
+  <div class="changes">
+    <article class="change reveal"><h3>1 · Potencia primero</h3><p>El trabajo explosivo (pliométricas, saco, velocidad de manos) va <b>al inicio, en fresco</b>. Hacerlo después de prensa al fallo arruina justo la velocidad que buscas para el golpeo.</p></article>
+    <article class="change reveal"><h3>2 · Fuera el shadow con mancuernas</h3><p>Golpear al aire con peso fuerza codo/hombro al final del recorrido (riesgo de lesión) y <b>no aumenta velocidad</b>. Reemplazado por shadow sin peso + golpes con banda elástica.</p></article>
+    <article class="change reveal"><h3>3 · Bisagra de cadera + core rotacional</h3><p>La potencia del knockout nace de la <b>cadera y la rotación</b>. Entran peso muerto rumano / hip thrust y leñador + Pallof; la extensión de pierna baja a accesorio.</p></article>
+    <article class="change reveal"><h3>4 · RIR, no siempre al fallo</h3><p>Entrenar todo al fallo acumula fatiga que mata la potencia. Deja <b>1–3 reps en reserva</b> en compuestos; el fallo se reserva para aislamientos.</p></article>
+    <article class="change reveal"><h3>5 · Salud de hombro</h3><p>Tanto empuje + tanto golpe sin trabajo de manguito = receta de lesión. Se añaden <b>face pulls y rotaciones externas</b>.</p></article>
+    <article class="change reveal"><h3>6 · Progresión explícita</h3><p>La V2 no decía cómo subir. Ahora usas <b>doble progresión</b> y registras peso y reps en cada sesión.</p></article>
+  </div>
+</section>
+
+<!-- ============ REGLAS DE ORO ============ -->
+<section class="wrap" id="reglas">
+  <div class="sec-head reveal">
+    <h2>Reglas de Oro</h2><span class="tag">no negociables</span>
+  </div>
+  <div class="rules-grid">
+    <article class="rule reveal"><span class="n">01</span><div><h3>Intensidad inteligente</h3><p>En compuestos pesados deja <b>1–3 reps en reserva (RIR)</b>. Reserva el fallo para aislamientos seguros (curl, elevaciones, extensión de tríceps).</p></div></article>
+    <article class="rule reveal"><span class="n">02</span><div><h3>Tempo</h3><p><b>Explosivo</b> al empujar/jalar (como un golpe), <b>2–3 s</b> controlando la bajada (excéntrica).</p></div></article>
+    <article class="rule reveal"><span class="n">03</span><div><h3>Potencia primero</h3><p>Lo explosivo y el trabajo de manos van <b>al inicio</b> de la sesión, nunca al final.</p></div></article>
+    <article class="rule reveal"><span class="n">04</span><div><h3>Descanso</h3><p><b>90 s</b> en compuestos pesados; <b>45–60 s</b> en aislamientos; <b>60–90 s</b> entre rounds.</p></div></article>
+    <article class="rule reveal"><span class="n">05</span><div><h3>Doble progresión</h3><p>Sube reps hasta el tope del rango; al llegar al tope en todas las series, <b>sube peso</b> y vuelve al piso del rango. Anota peso y reps cada sesión.</p></div></article>
+    <article class="rule reveal"><span class="n">06</span><div><h3>Movilidad / prehab</h3><p><b>2–3 min de banda</b> para hombro y cadera antes de empujar o golpear. ⌚ En el Apple Watch usa "+" para encadenar bloques: Cuerda, Boxeo y Fuerza tradicional.</p></div></article>
+  </div>
+  <div class="callout reveal">
+    <h3>Cardio: cuerda vs. elíptica</h3>
+    <p>Si no haces cuerda, en la elíptica: <b>12–15 min a ritmo moderado-alto</b>, o <b>10–12 min por intervalos</b> (1 min fuerte / 1 min suave). Esto iguala el estímulo cardiovascular de 10 min de cuerda.</p>
+    <p><em>Honestidad de mentor: la elíptica NO entrena el juego de pies ni la coordinación que sí da la cuerda — y ese era uno de tus objetivos de MMA. Si puedes, dedica 5 min a aprender cuerda + 8 min de elíptica, o compensa con desplazamientos y pivotes en el shadow boxing.</em></p>
+  </div>
+</section>
+
+<!-- ============ DÍA 1 ============ -->
+<section class="day" id="dia1">
+  <div class="wrap">
+    <header class="day-head reveal">
+      <span class="day-num">01</span>
+      <div><p class="day-kicker">Día 1</p><h2>Espalda, Bíceps y Velocidad de Manos</h2></div>
+    </header>
+    <div class="cards">
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-rope"/></svg></div><div class="card-body"><div class="card-top"><h3>Cardio + movilidad</h3><span class="reps">12–15 min</span></div><p>Elíptica (o cuerda 10 min) + 2 min de banda para hombro.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-shadow"/></svg><span class="new">Nuevo</span></div><div class="card-body"><div class="card-top"><h3>Velocidad de manos (shadow sin peso)</h3><span class="reps">3 rds × 3 min</span></div><p><b>En fresco.</b> Foco en 1-2 (jab, cross), extiende bien y rota el torso. Sin mancuernas.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-pulldown"/></svg></div><div class="card-body"><div class="card-top"><h3>Jalón al pecho</h3><span class="reps">4 × 8–10</span></div><p><b>RIR 1–2.</b> Jala con los codos, no con las manos.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-row"/></svg></div><div class="card-body"><div class="card-top"><h3>Remo con mancuerna / máquina</h3><span class="reps">4 × 10</span></div><p>Jala fuerte hacia el ombligo; controla la bajada.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-curl"/></svg></div><div class="card-body"><div class="card-top"><h3>Curl de bíceps</h3><span class="reps">3 × 10–12</span></div><p>Última serie cerca del fallo.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-facepull"/></svg><span class="new">Nuevo</span></div><div class="card-body"><div class="card-top"><h3>Face pull / band pull-apart</h3><span class="reps">3 × 15</span></div><p>Salud del hombro y postura de guardia.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DÍA 2 ============ -->
+<section class="day" id="dia2">
+  <div class="wrap">
+    <header class="day-head reveal">
+      <span class="day-num">02</span>
+      <div><p class="day-kicker">Día 2</p><h2>Empuje, Hombros y Striking Frontal</h2></div>
+    </header>
+    <div class="cards">
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-rope"/></svg></div><div class="card-body"><div class="card-top"><h3>Cardio + movilidad</h3><span class="reps">12–15 min</span></div><p>Elíptica / cuerda + banda de hombro.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-plyo"/></svg><span class="new">Nuevo</span></div><div class="card-body"><div class="card-top"><h3>Flexiones explosivas (pliometría)</h3><span class="reps">4 × 6–8</span></div><p><b>Primero, en fresco.</b> NO al fallo: busca velocidad, no agotamiento. Empuja el piso fuerte.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-chestpress"/></svg></div><div class="card-body"><div class="card-top"><h3>Press de pecho (máquina / mancuerna)</h3><span class="reps">4 × 8–10</span></div><p><b>RIR 1–2.</b></p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-lateral"/></svg></div><div class="card-body"><div class="card-top"><h3>Elevaciones laterales</h3><span class="reps">3 × 12–15</span></div><p>Resistencia para no bajar la guardia en rounds finales.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-triceps"/></svg></div><div class="card-body"><div class="card-top"><h3>Extensión de tríceps en polea</h3><span class="reps">3 × 10–12</span></div><p>Aprieta arriba; última serie cerca del fallo.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-extrot"/></svg><span class="new">Nuevo</span></div><div class="card-body"><div class="card-top"><h3>Rotación externa con banda</h3><span class="reps">2 × 15 / lado</span></div><p>Manguito rotador. Codo pegado al costado.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DÍA 3 ============ -->
+<section class="day" id="dia3">
+  <div class="wrap">
+    <header class="day-head reveal">
+      <span class="day-num">03</span>
+      <div><p class="day-kicker">Día 3</p><h2>Piernas, Cadera y Core Rotacional</h2></div>
+    </header>
+    <p class="day-quote reveal">La base del poder de Topuria está en la cadera y la rotación, no en la extensión de pierna.</p>
+    <div class="cards">
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-rope"/></svg></div><div class="card-body"><div class="card-top"><h3>Cardio + movilidad</h3><span class="reps">12–15 min</span></div><p>Elíptica / cuerda + movilidad de cadera.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-goblet"/></svg></div><div class="card-body"><div class="card-top"><h3>Sentadilla goblet</h3><span class="reps">4 × 10–12</span></div><p>Mancuerna pesada al pecho; profundidad cómoda.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-rdl"/></svg><span class="new">Nuevo</span></div><div class="card-body"><div class="card-top"><h3>Peso muerto rumano / hip thrust</h3><span class="reps">4 × 8–10</span></div><p>Cadena posterior: <b>el motor real de la potencia rotacional</b>.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-legext"/></svg></div><div class="card-body"><div class="card-top"><h3>Extensión de piernas (accesorio)</h3><span class="reps">3 × 12</span></div><p>Degradado a accesorio; aprieta arriba.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-chop"/></svg><span class="new">Nuevo</span></div><div class="card-body"><div class="card-top"><h3>Leñador con polea / banda (woodchop)</h3><span class="reps">3 × 12 / lado</span></div><p>Potencia de golpeo, más amable con la lumbar que el russian twist.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-pallof"/></svg><span class="new">Nuevo</span></div><div class="card-body"><div class="card-top"><h3>Pallof press (anti-rotación)</h3><span class="reps">3 × 12 / lado</span></div><p>Enseña a transferir fuerza sin fugas de energía.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-knee"/></svg></div><div class="card-body"><div class="card-top"><h3>Elevación de rodillas</h3><span class="reps">3 × 12–15</span></div><p>Controla, no balancees.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DÍA 4 ============ -->
+<section class="day" id="dia4">
+  <div class="wrap">
+    <header class="day-head reveal">
+      <span class="day-num">04</span>
+      <div><p class="day-kicker">Día 4</p><h2>Recuperación Activa y Técnica</h2></div>
+    </header>
+    <div class="recov">
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-walk"/></svg></div><div class="card-body"><div class="card-top"><h3>Sin pesas pesadas</h3><span class="reps">Paseo largo</span></div><p>Caminata a buen ritmo con los perros para sumar pasos y mantener piernas activas.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-shadow"/></svg></div><div class="card-body"><div class="card-top"><h3>Técnica</h3><span class="reps">15 min</span></div><p>Shadow boxing libre frente al espejo: postura, esquivas, manos arriba.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-stretch"/></svg></div><div class="card-body"><div class="card-top"><h3>Extra</h3><span class="reps">5–8 min</span></div><p>Movilidad de hombro, cadera y columna torácica. <b>Esto es lo que te mantiene sin lesiones</b> golpeando 3–4 días por semana.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DÍA 5 ============ -->
+<section class="day" id="dia5">
+  <div class="wrap">
+    <header class="day-head reveal">
+      <span class="day-num">05</span>
+      <div><p class="day-kicker">Día 5</p><h2>Empuje Vertical y Saco</h2></div>
+    </header>
+    <div class="cards">
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-rope"/></svg></div><div class="card-body"><div class="card-top"><h3>Cardio</h3><span class="reps">10 min</span></div><p>Cuerda o elíptica, suave (es calentamiento).</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-bag"/></svg><span class="new">Nuevo</span></div><div class="card-body"><div class="card-top"><h3>Saco / shadow alta intensidad</h3><span class="reps">5 rds × 3 min</span></div><p><b>Primero, en fresco:</b> rectos, ganchos, combinaciones. Es la prioridad del día.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-ohp"/></svg></div><div class="card-body"><div class="card-top"><h3>Press de hombros</h3><span class="reps">4 × 8–10</span></div><p>Algo más ligero que en V2: el saco ya pre-fatigó el hombro (compromiso del híbrido).</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-pulldown"/></svg></div><div class="card-body"><div class="card-top"><h3>Jalón al pecho</h3><span class="reps">3 × 8–10</span></div><p>Equilibra todo el empuje de la semana.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-lateral"/></svg></div><div class="card-body"><div class="card-top"><h3>Elevaciones laterales</h3><span class="reps">3 × 12–15</span></div><p>Volumen moderado; ya hubo bastante hombro.</p></div></article>
+      <article class="card reveal"><div class="pict"><svg class="icon"><use href="#i-facepull"/></svg><span class="new">Nuevo</span></div><div class="card-body"><div class="card-top"><h3>Face pull</h3><span class="reps">3 × 15</span></div><p>Cierra la semana cuidando el manguito.</p></div></article>
+    </div>
+  </div>
+</section>
+<!-- ============ SUPLEMENTOS ============ -->
+<section class="supps" id="suplementos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Suplementos</h2><span class="tag">qué comprar y qué no</span>
+    </div>
+    <p class="intro reveal">Orden de impacto real, de mayor a menor. No compres una pila de polvos: <b>el 90% del resultado son entrenamiento, proteína total, calorías y sueño.</b></p>
+
+    <span class="tier-label tier-1 reveal">Nivel 1 — vale la pena</span>
+    <div class="supp-grid">
+      <article class="supp reveal">
+        <h3>Creatina monohidrato</h3>
+        <span class="dose">3–5 g/día · todos los días, incluido descanso</span>
+        <p><b>EL suplemento con más evidencia</b> para fuerza, hipertrofia y potencia. No necesitas "cargar". Compra monohidrato micronizado simple: <b>no pagues de más por HCL o kre-alkalyn</b>, no tienen ventaja probada.</p>
+      </article>
+      <article class="supp reveal">
+        <h3>Cafeína (pre-entreno)</h3>
+        <span class="dose">100–200 mg · 30–45 min antes</span>
+        <p>Mejora rendimiento y enfoque, sobre todo en días de boxeo. Barata. <b>Evítala tarde</b> para no afectar el sueño.</p>
+      </article>
+    </div>
+
+    <span class="tier-label tier-2 reveal">Nivel 2 — marginal / opcional</span>
+    <div class="supp-grid">
+      <article class="supp reveal">
+        <h3>Beta-alanina</h3>
+        <span class="dose">2–5 g/día</span>
+        <p>Resistencia muscular en esfuerzos de 1–4 min, justo el rango de tus rounds. Da un hormigueo inofensivo.</p>
+      </article>
+      <article class="supp reveal">
+        <h3>Electrolitos / sales</h3>
+        <span class="dose">según sudoración</span>
+        <p>Relevante en Cali (calor) con tanto cardio + boxeo. Hidrátate bien con la creatina.</p>
+      </article>
+      <article class="supp reveal">
+        <h3>Vitamina D3 + Omega-3</h3>
+        <span class="dose">según dieta / sol</span>
+        <p>Salud general y recuperación si tu dieta o exposición al sol es baja.</p>
+      </article>
+    </div>
+
+    <div class="bands reveal">
+      <h3>Bandas de resistencia — la compra clave (y barata)</h3>
+      <p>No es suplemento, pero es lo que más <b>desbloquea esta rutina</b>: habilita los golpes con banda (potencia sin castigar la articulación), face pulls, rotaciones externas, Pallof y woodchops si tu gimnasio no tiene polea. Un set con anclaje de puerta cuesta poco y <b>vale más que cualquier polvo del Nivel 2</b>.</p>
+    </div>
+
+    <div class="callout reveal">
+      <h3>Sobre tu proteína (gainer alto en calorías)</h3>
+      <p>Un "Smart Gainer" es mayormente carbohidrato (maltodextrina) + algo de proteína. Diluirlo a 2–3 scoops es sensato. Pero si te importa mantenerte ágil para el striking, te conviene más una <b>whey limpia + carbohidratos de comida real que tú controlas</b>, en vez de un gainer azucarado. El gainer sirve si te cuesta comer suficiente; si comes bien, no lo necesitas.</p>
+      <p><b>Cuándo:</b> días de pesas/boxeo pesado (1, 3 y 5). 300–400 ml de agua, sin leche. <b>Proteína total del día:</b> apunta a ~1.6–2.2 g por kg de peso corporal sumando comida + batido. <b>Eso, no la marca del polvo, es lo que construye músculo.</b></p>
+    </div>
+
+    <div class="buy reveal">
+      <h3>Dónde comprar la creatina (Colombia)</h3>
+      <p><b>Mejor por pureza verificada:</b> <a href="https://www.sinintermediarios.co/products/creatina-monohidrato-300g" target="_blank" rel="noopener">Creatina Monohidrato 300 g — Sin Intermediarios</a> — 1 solo ingrediente, 3 g/porción, certificación Informed Choice y registro Invima.</p>
+      <p><b>Más popular / disponible:</b> MuscleTech Platinum (monohidrato micronizado), p. ej. en <a href="https://suplementoscolombia.co/tienda/creatinas" target="_blank" rel="noopener">Suplementos Colombia</a> o <a href="https://www.falabella.com.co/falabella-co/category/CATG33730/Creatinas" target="_blank" rel="noopener">Falabella</a>. Alternativa sólida: Optimum Nutrition Micronized.</p>
+      <p class="warn">Regla anti-estafa: compra solo con registro Invima y lote visible. No ahorres comprando a vendedores de marketplace sin verificación — el riesgo de producto adulterado no compensa.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>No soy médico ni nutricionista. Si tienes alguna condición o tomas medicación, consulta antes de empezar suplementos.</p>
+  <p class="sig">Rutina Hipertrofia + Striking · V3 · Potencia primero</p>
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(e){ e.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  },{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+  els.forEach(function(e,i){
+    e.style.transitionDelay = Math.min((i%6)*55,330)+'ms';
+    io.observe(e);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+---
+const links = [
+  { href: "#reglas", label: "Reglas" },
+  { href: "#dia1", label: "D1" },
+  { href: "#dia2", label: "D2" },
+  { href: "#dia3", label: "D3" },
+  { href: "#dia4", label: "D4" },
+  { href: "#dia5", label: "D5" },
+  { href: "#suplementos", label: "Suplementos" },
+];
+---
+
+<header class="topnav">
+  <a class="brand" href="#top"><i></i>Rutina</a>
+  <nav>
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+  </nav>
+</header>
