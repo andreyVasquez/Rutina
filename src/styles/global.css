@@ -11,14 +11,16 @@
   --accent:var(--red);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:84px;overflow-x:hidden}
+/* overflow-x:clip (no hidden): hidden crea un contenedor de scroll y rompe
+   position:sticky del header en iOS Safari; clip solo recorta. */
+html{scroll-behavior:smooth;scroll-padding-top:84px;overflow-x:clip}
 body{
   background:var(--bg);
   color:var(--ink);
   font-family:'Barlow',sans-serif;
   font-size:16px;
   line-height:1.55;
-  overflow-x:hidden;
+  overflow-x:clip;
   background-image:
     radial-gradient(1200px 600px at 80% -10%, rgba(255,68,56,.07), transparent 60%),
     radial-gradient(900px 500px at -10% 30%, rgba(255,197,61,.04), transparent 60%);
@@ -31,7 +33,7 @@ body::before{
 
 /* ---------- NAV ---------- */
 .topnav{
-  position:sticky;top:0;z-index:100;
+  position:sticky;position:-webkit-sticky;top:0;z-index:100;
   display:flex;align-items:center;gap:18px;
   padding:max(14px,env(safe-area-inset-top)) 28px 14px 28px;
   background:rgba(11,11,13,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
@@ -225,7 +227,13 @@ footer .sig{margin-top:14px;font-family:'Barlow Condensed',sans-serif;font-weigh
 @media (max-width:640px){
   .hero{padding:64px 22px 56px}
   .wrap{padding:0 22px}
-  .topnav{padding:max(12px,env(safe-area-inset-top)) 18px 12px 18px}
-  .topnav nav a{padding:6px 8px;font-size:13px}
+  .topnav{padding:max(12px,env(safe-area-inset-top)) 14px 12px 18px;gap:12px}
+  /* Una sola fila deslizable: el header sticky queda compacto en el celular */
+  .topnav nav{
+    flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+  }
+  .topnav nav::-webkit-scrollbar{display:none}
+  .topnav nav a{padding:8px 9px;font-size:13px;white-space:nowrap}
   .day-head{gap:16px}
 }
