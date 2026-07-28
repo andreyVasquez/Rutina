@@ -20,16 +20,16 @@ export interface DayData {
 }
 
 /**
- * Versión Smart Fit: máquinas y poleas disponibles. No hubo cupo en las
- * sesiones de boxeo, así que el golpeo se entrena con shadow (sin saco):
- * velocidad de manos (D1), rounds fuertes (D5) y técnica (D4).
+ * Versión Smart Fit centrada en máquinas y poleas: prensa, curl femoral,
+ * jalón, remo en polea, pec deck inverso, crunch en máquina. Los rounds
+ * de shadow salen del gym; queda la técnica del día 4 en casa.
  */
 export const days: DayData[] = [
   {
     id: "dia1",
     num: "01",
     kicker: "Día 1",
-    title: "Espalda, Bíceps y Velocidad de Manos",
+    title: "Espalda y Bíceps",
     exercises: [
       {
         icon: "i-rope",
@@ -37,13 +37,6 @@ export const days: DayData[] = [
         reps: "12–15 min",
         desc: "Elíptica a ritmo moderado-alto + 2 min de banda para hombro.",
         watch: "Elíptica",
-      },
-      {
-        icon: "i-shadow",
-        title: "Velocidad de manos (shadow sin peso)",
-        reps: "3 rds × 3 min",
-        desc: "<b>En fresco.</b> Foco en 1-2 (jab, cross), extiende bien y rota el torso. En la zona funcional del Smart Fit o en casa antes de salir.",
-        watch: "Kickboxing",
       },
       {
         icon: "i-pulldown",
@@ -54,9 +47,16 @@ export const days: DayData[] = [
       },
       {
         icon: "i-row",
-        title: "Remo en máquina / mancuerna",
+        title: "Remo sentado en polea baja",
         reps: "4 × 10",
-        desc: "Jala fuerte hacia el ombligo; controla la bajada.",
+        desc: "Agarre estrecho; jala fuerte hacia el ombligo y controla la vuelta.",
+        watch: "Fuerza tradicional",
+      },
+      {
+        icon: "i-triceps",
+        title: "Pull-over en polea alta (brazos rectos)",
+        reps: "3 × 12",
+        desc: "De pie frente a la polea, brazos casi rectos: baja la barra a la cadera sintiendo el dorsal.",
         watch: "Fuerza tradicional",
       },
       {
@@ -68,10 +68,10 @@ export const days: DayData[] = [
       },
       {
         icon: "i-facepull",
-        title: "Face pull en polea",
+        title: "Deltoide posterior en pec deck inverso",
         reps: "3 × 15",
-        desc: "Salud del hombro y postura de guardia.",
-        watch: "Fuerza funcional",
+        desc: "Misma función que el face pull: hombro sano y postura, ahora en máquina.",
+        watch: "Fuerza tradicional",
       },
     ],
   },
@@ -89,24 +89,24 @@ export const days: DayData[] = [
         watch: "Elíptica",
       },
       {
-        icon: "i-plyo",
-        title: "Flexiones explosivas (pliometría)",
-        reps: "4 × 6–8",
-        desc: "<b>Primero, en fresco.</b> NO al fallo: busca velocidad, no agotamiento. Empuja el piso fuerte.",
-        watch: "Fuerza funcional",
+        icon: "i-chestpress",
+        title: "Press de pecho en máquina",
+        reps: "4 × 8–10",
+        desc: "<b>RIR 1–2.</b> Empuja explosivo, baja en 2–3 s.",
+        watch: "Fuerza tradicional",
       },
       {
-        icon: "i-chestpress",
-        title: "Press de pecho (máquina / mancuernas)",
-        reps: "4 × 8–10",
-        desc: "<b>RIR 1–2.</b>",
+        icon: "i-plyo",
+        title: "Press inclinado en máquina / multipower",
+        reps: "3 × 8–10",
+        desc: "Pecho superior. Reemplaza las flexiones: mismo empuje, carga medible.",
         watch: "Fuerza tradicional",
       },
       {
         icon: "i-lateral",
         title: "Elevaciones laterales",
         reps: "3 × 12–15",
-        desc: "Resistencia para no bajar la guardia en rounds finales.",
+        desc: "Resistencia de hombro; controla la bajada.",
         watch: "Fuerza tradicional",
       },
       {
@@ -118,9 +118,9 @@ export const days: DayData[] = [
       },
       {
         icon: "i-extrot",
-        title: "Rotación externa con banda",
+        title: "Rotación externa en polea baja",
         reps: "2 × 15 / lado",
-        desc: "Manguito rotador. Codo pegado al costado.",
+        desc: "Manguito rotador con carga constante de la polea. Codo pegado al costado.",
         watch: "Fuerza funcional",
       },
     ],
@@ -142,23 +142,23 @@ export const days: DayData[] = [
       },
       {
         icon: "i-goblet",
-        title: "Sentadilla goblet",
+        title: "Prensa de piernas",
         reps: "4 × 10–12",
-        desc: "Mancuerna pesada al pecho; profundidad cómoda.",
+        desc: "<b>RIR 1–2.</b> Pies a media altura, baja profundo sin despegar la lumbar del respaldo.",
         watch: "Fuerza tradicional",
       },
       {
         icon: "i-rdl",
-        title: "Peso muerto rumano / hip thrust",
-        reps: "4 × 8–10",
-        desc: "Cadena posterior: <b>el motor real de la potencia rotacional</b>.",
+        title: "Curl femoral en máquina",
+        reps: "4 × 10–12",
+        desc: "Cadena posterior: <b>el motor real de la potencia rotacional</b>. Controla la vuelta.",
         watch: "Fuerza tradicional",
       },
       {
         icon: "i-legext",
         title: "Extensión de piernas (accesorio)",
         reps: "3 × 12",
-        desc: "De vuelta a la máquina; aprieta arriba.",
+        desc: "Aprieta arriba 1 s.",
         watch: "Fuerza tradicional",
       },
       {
@@ -170,16 +170,16 @@ export const days: DayData[] = [
       },
       {
         icon: "i-pallof",
-        title: "Pallof press en polea (anti-rotación)",
-        reps: "3 × 12 / lado",
-        desc: "Enseña a transferir fuerza sin fugas de energía.",
+        title: "Crunch abdominal en máquina",
+        reps: "3 × 12–15",
+        desc: "Carga progresiva para el core: sube peso como en cualquier máquina.",
         watch: "Core",
       },
       {
         icon: "i-knee",
-        title: "Elevación de rodillas",
+        title: "Elevación de piernas en silla romana",
         reps: "3 × 12–15",
-        desc: "Controla, no balancees.",
+        desc: "En el soporte de codos (capitán). Controla, no balancees.",
         watch: "Core",
       },
     ],
@@ -209,7 +209,7 @@ export const days: DayData[] = [
         icon: "i-stretch",
         title: "Extra",
         reps: "5–8 min",
-        desc: "Movilidad de hombro, cadera y columna torácica. <b>Esto es lo que te mantiene sin lesiones</b> golpeando varias veces por semana.",
+        desc: "Movilidad de hombro, cadera y columna torácica. <b>Esto es lo que te mantiene sin lesiones.</b>",
         watch: "Flexibilidad",
       },
     ],
@@ -218,7 +218,7 @@ export const days: DayData[] = [
     id: "dia5",
     num: "05",
     kicker: "Día 5",
-    title: "Empuje Vertical y Shadow",
+    title: "Empuje Vertical y Espalda",
     exercises: [
       {
         icon: "i-rope",
@@ -228,24 +228,17 @@ export const days: DayData[] = [
         watch: "Elíptica",
       },
       {
-        icon: "i-bag",
-        title: "Shadow alta intensidad",
-        reps: "5 rds × 3 min",
-        desc: "<b>Primero, en fresco:</b> rectos, ganchos, combinaciones a máxima velocidad. En la zona funcional o en casa. Es la prioridad del día.",
-        watch: "Kickboxing",
-      },
-      {
         icon: "i-ohp",
-        title: "Press de hombros",
+        title: "Press de hombros en máquina",
         reps: "4 × 8–10",
-        desc: "Algo más ligero: los rounds ya pre-fatigaron el hombro (compromiso del híbrido).",
+        desc: "<b>RIR 1–2.</b> Ahora va en fresco: empuja de verdad y progresa la placa.",
         watch: "Fuerza tradicional",
       },
       {
         icon: "i-pulldown",
-        title: "Jalón al pecho",
-        reps: "3 × 8–10",
-        desc: "Equilibra todo el empuje de la semana.",
+        title: "Jalón al pecho (agarre cerrado)",
+        reps: "3 × 10–12",
+        desc: "Variante del día 1; equilibra todo el empuje de la semana.",
         watch: "Fuerza tradicional",
       },
       {
@@ -256,11 +249,18 @@ export const days: DayData[] = [
         watch: "Fuerza tradicional",
       },
       {
+        icon: "i-rdl",
+        title: "Encogimientos de trapecio (multipower)",
+        reps: "3 × 12–15",
+        desc: "Sube los hombros a las orejas, pausa 1 s arriba. Cuello fuerte que aguanta golpes.",
+        watch: "Fuerza tradicional",
+      },
+      {
         icon: "i-facepull",
-        title: "Face pull",
+        title: "Deltoide posterior en pec deck inverso",
         reps: "3 × 15",
-        desc: "Cierra la semana cuidando el manguito.",
-        watch: "Fuerza funcional",
+        desc: "Cierra la semana cuidando el manguito, en máquina.",
+        watch: "Fuerza tradicional",
       },
     ],
   },
