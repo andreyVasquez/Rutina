@@ -158,6 +158,22 @@ section{padding:64px 0}
 }
 .icon{width:96px;height:96px;color:var(--ink)}
 .icon *{vector-effect:non-scaling-stroke}
+/* Tarjetas con foto real del ejercicio (free-exercise-db): dos cuadros,
+   posición inicial y final, alternando para "animar" el movimiento. */
+.pict.photo{background:#fff;height:190px}
+.pict.photo::after{display:none}
+.pict.photo .frame{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:8px;
+}
+.pict.photo .f2{opacity:0;animation:frame-swap 2.6s ease-in-out infinite}
+@keyframes frame-swap{
+  0%,38%{opacity:0}
+  50%,88%{opacity:1}
+  100%{opacity:0}
+}
+@media (prefers-reduced-motion:reduce){
+  .pict.photo .f2{animation:none}
+}
 .watch{
   position:absolute;top:10px;left:10px;display:inline-flex;align-items:center;gap:4px;
   font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;

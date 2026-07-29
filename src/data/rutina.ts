@@ -1,11 +1,14 @@
 export interface Exercise {
-  icon: string;
+  /** Par de fotos del ejercicio (posición inicial / final), en /public/exercises. */
+  images?: [string, string];
+  /** Icono SVG de respaldo cuando no hay foto (ver IconSprite). */
+  icon?: string;
   title: string;
   reps: string;
   /** May contain inline HTML (e.g. <b>). Rendered with set:html. */
   desc: string;
   /** Tipo de entrenamiento a seleccionar en el Apple Watch. */
-  watch: string;
+  watch?: string;
 }
 
 export interface DayData {
@@ -14,113 +17,135 @@ export interface DayData {
   kicker: string;
   title: string;
   quote?: string;
-  /** Día 4 usa una grilla compacta (.recov) en vez de .cards. */
+  /** El jueves usa una grilla compacta (.recov) en vez de .cards. */
   recovery?: boolean;
   exercises: Exercise[];
 }
 
+/** Fotos de free-exercise-db (dominio público), descargadas a /public/exercises. */
+const img = (id: string): [string, string] => [
+  `/exercises/${id}_0.jpg`,
+  `/exercises/${id}_1.jpg`,
+];
+
 /**
- * Versión Smart Fit centrada en máquinas y poleas: prensa, curl femoral,
- * jalón, remo en polea, pec deck inverso, crunch en máquina. Los rounds
- * de shadow salen del gym; queda la técnica del día 4 en casa.
+ * Semana definitiva, construida alrededor del boxeo:
+ *  - Lun, Mar, Mié y Vie: Smart Fit Éxito La Flora (fuerza + cardio).
+ *  - Jueves: sesión de boxeo en Fight House Granada — ese día no hay nada más.
  */
 export const days: DayData[] = [
   {
     id: "dia1",
     num: "01",
-    kicker: "Día 1",
-    title: "Espalda y Bíceps",
+    kicker: "Lunes",
+    title: "Potencia de Piernas y Cadera",
+    quote:
+      "El knockout no nace en el brazo: nace en el piso, sube por la cadera y sale por el puño.",
     exercises: [
       {
-        icon: "i-rope",
-        title: "Cardio + movilidad",
-        reps: "12–15 min",
-        desc: "Elíptica a ritmo moderado-alto + 2 min de banda para hombro.",
+        images: img("Elliptical_Trainer"),
+        title: "Calentamiento",
+        reps: "8–10 min",
+        desc: "Elíptica progresiva + 2 min de movilidad de cadera.",
         watch: "Elíptica",
       },
       {
-        icon: "i-pulldown",
-        title: "Jalón al pecho",
+        images: img("Front_Box_Jump"),
+        title: "Salto al cajón",
+        reps: "4 × 5",
+        desc: "<b>Primero, en fresco.</b> Explota hacia arriba y aterriza suave. Baja del cajón caminando. Potencia pura de cadera y tobillo.",
+        watch: "Fuerza funcional",
+      },
+      {
+        images: img("Goblet_Squat"),
+        title: "Sentadilla goblet",
         reps: "4 × 8–10",
-        desc: "<b>RIR 1–2.</b> Jala con los codos, no con las manos.",
+        desc: "<b>RIR 1–2.</b> Mancuerna pesada al pecho: sube explosivo, baja en 2–3 s.",
         watch: "Fuerza tradicional",
       },
       {
-        icon: "i-row",
-        title: "Remo sentado en polea baja",
-        reps: "4 × 10",
-        desc: "Agarre estrecho; jala fuerte hacia el ombligo y controla la vuelta.",
+        images: img("Romanian_Deadlift"),
+        title: "Peso muerto rumano",
+        reps: "4 × 8–10",
+        desc: "Glúteo y femoral: <b>el motor del golpe</b>. Barra o mancuernas, espalda neutra siempre.",
         watch: "Fuerza tradicional",
       },
       {
-        icon: "i-triceps",
-        title: "Pull-over en polea alta (brazos rectos)",
-        reps: "3 × 12",
-        desc: "De pie frente a la polea, brazos casi rectos: baja la barra a la cadera sintiendo el dorsal.",
+        images: img("Dumbbell_Lunges"),
+        title: "Zancadas con mancuernas",
+        reps: "3 × 10 / lado",
+        desc: "Fuerza unilateral: cada golpe empuja desde una sola pierna.",
         watch: "Fuerza tradicional",
       },
       {
-        icon: "i-curl",
-        title: "Curl de bíceps",
-        reps: "3 × 10–12",
-        desc: "Última serie cerca del fallo.",
-        watch: "Fuerza tradicional",
+        images: img("Standing_Cable_Wood_Chop"),
+        title: "Leñador en polea (woodchop)",
+        reps: "3 × 12 / lado",
+        desc: "El patrón exacto del cruzado: rota desde la cadera con los brazos casi rectos.",
+        watch: "Core",
       },
       {
-        icon: "i-facepull",
-        title: "Deltoide posterior en pec deck inverso",
-        reps: "3 × 15",
-        desc: "Misma función que el face pull: hombro sano y postura, ahora en máquina.",
-        watch: "Fuerza tradicional",
+        images: img("Bicycling_Stationary"),
+        title: "Finisher: sprints en bici",
+        reps: "6 × (30 s / 60 s)",
+        desc: "30 s a tope, 60 s suave. Cardio de rounds sin castigar las articulaciones.",
+        watch: "Bicicleta estática",
       },
     ],
   },
   {
     id: "dia2",
     num: "02",
-    kicker: "Día 2",
-    title: "Pecho, Hombros y Tríceps",
+    kicker: "Martes",
+    title: "Fuerza de Golpeo — Torso",
     exercises: [
       {
-        icon: "i-rope",
-        title: "Cardio + movilidad",
-        reps: "12–15 min",
-        desc: "Elíptica + banda de hombro.",
+        images: img("Elliptical_Trainer"),
+        title: "Calentamiento",
+        reps: "8–10 min",
+        desc: "Elíptica + 2 min de banda para hombro.",
         watch: "Elíptica",
       },
       {
-        icon: "i-chestpress",
-        title: "Press de pecho en máquina",
+        images: img("Medicine_Ball_Chest_Pass"),
+        title: "Pase de pecho con balón medicinal",
+        reps: "4 × 6",
+        desc: "<b>Primero, en fresco.</b> En la zona funcional: lanza el balón contra la pared como un jab, a máxima velocidad y sin frenar el brazo.",
+        watch: "Fuerza funcional",
+      },
+      {
+        images: img("Dumbbell_Bench_Press"),
+        title: "Press de banca con mancuernas",
         reps: "4 × 8–10",
-        desc: "<b>RIR 1–2.</b> Empuja explosivo, baja en 2–3 s.",
+        desc: "<b>RIR 1–2.</b> Sube explosivo (como un golpe), baja en 2–3 s.",
         watch: "Fuerza tradicional",
       },
       {
-        icon: "i-plyo",
-        title: "Press inclinado en máquina / multipower",
-        reps: "3 × 8–10",
-        desc: "Pecho superior. Reemplaza las flexiones: mismo empuje, carga medible.",
+        images: img("One-Arm_Dumbbell_Row"),
+        title: "Remo con mancuerna a una mano",
+        reps: "4 × 10 / lado",
+        desc: "La espalda trae la mano de vuelta a la guardia y protege el hombro que golpea.",
         watch: "Fuerza tradicional",
       },
       {
-        icon: "i-lateral",
-        title: "Elevaciones laterales",
-        reps: "3 × 12–15",
-        desc: "Resistencia de hombro; controla la bajada.",
-        watch: "Fuerza tradicional",
-      },
-      {
-        icon: "i-triceps",
-        title: "Extensión de tríceps en polea",
+        images: img("Wide-Grip_Lat_Pulldown"),
+        title: "Jalón al pecho",
         reps: "3 × 10–12",
-        desc: "Aprieta arriba; última serie cerca del fallo.",
+        desc: "Dorsal fuerte = golpes con más snap y mejor clinch.",
         watch: "Fuerza tradicional",
       },
       {
-        icon: "i-extrot",
-        title: "Rotación externa en polea baja",
+        images: img("Face_Pull"),
+        title: "Face pull en polea",
+        reps: "3 × 15",
+        desc: "El seguro del hombro de un boxeador. Jala hacia la cara, codos altos.",
+        watch: "Fuerza funcional",
+      },
+      {
+        images: img("External_Rotation_with_Cable"),
+        title: "Rotación externa en polea",
         reps: "2 × 15 / lado",
-        desc: "Manguito rotador con carga constante de la polea. Codo pegado al costado.",
+        desc: "Manguito rotador: pega hoy y sigue pegando en 10 años.",
         watch: "Fuerza funcional",
       },
     ],
@@ -128,88 +153,80 @@ export const days: DayData[] = [
   {
     id: "dia3",
     num: "03",
-    kicker: "Día 3",
-    title: "Piernas, Cadera y Core Rotacional",
+    kicker: "Miércoles",
+    title: "Cardio de Rounds y Core",
     quote:
-      "La base del poder de Topuria está en la cadera y la rotación, no en la extensión de pierna.",
+      "Sin pesas pesadas hoy: mañana es día de boxeo y la velocidad se entrena fresco.",
     exercises: [
       {
-        icon: "i-rope",
-        title: "Cardio + movilidad",
-        reps: "12–15 min",
-        desc: "Elíptica + movilidad de cadera.",
-        watch: "Elíptica",
+        images: img("Rope_Jumping"),
+        title: "Cuerda",
+        reps: "4 rds × 3 min",
+        desc: "El cardio clásico del boxeo: juego de pies, muñecas y ritmo. 1 min de descanso entre rounds.",
+        watch: "Cuerda",
       },
       {
-        icon: "i-goblet",
-        title: "Prensa de piernas",
-        reps: "4 × 10–12",
-        desc: "<b>RIR 1–2.</b> Pies a media altura, baja profundo sin despegar la lumbar del respaldo.",
-        watch: "Fuerza tradicional",
+        images: img("Running_Treadmill"),
+        title: "Rounds en caminadora",
+        reps: "5 × (3 min / 1 min)",
+        desc: "3 min a ritmo fuerte + 1 min caminando = un round con su descanso. Sube la velocidad cada semana.",
+        watch: "Correr (cinta)",
       },
       {
-        icon: "i-rdl",
-        title: "Curl femoral en máquina",
-        reps: "4 × 10–12",
-        desc: "Cadena posterior: <b>el motor real de la potencia rotacional</b>. Controla la vuelta.",
-        watch: "Fuerza tradicional",
-      },
-      {
-        icon: "i-legext",
-        title: "Extensión de piernas (accesorio)",
-        reps: "3 × 12",
-        desc: "Aprieta arriba 1 s.",
-        watch: "Fuerza tradicional",
-      },
-      {
-        icon: "i-chop",
-        title: "Leñador en polea (woodchop)",
-        reps: "3 × 12 / lado",
-        desc: "Potencia de golpeo, más amable con la lumbar que el russian twist.",
+        images: img("Plank"),
+        title: "Plancha",
+        reps: "3 × 45–60 s",
+        desc: "Core rígido: transfiere la fuerza de la cadera al puño sin fugas.",
         watch: "Core",
       },
       {
-        icon: "i-pallof",
-        title: "Crunch abdominal en máquina",
+        images: img("Russian_Twist"),
+        title: "Russian twist",
+        reps: "3 × 15 / lado",
+        desc: "Rotación con control; el torso gira, la lumbar no sufre.",
+        watch: "Core",
+      },
+      {
+        images: img("Flat_Bench_Lying_Leg_Raise"),
+        title: "Elevación de piernas en banco",
         reps: "3 × 12–15",
-        desc: "Carga progresiva para el core: sube peso como en cualquier máquina.",
+        desc: "Abdomen bajo que aguanta golpes al cuerpo.",
         watch: "Core",
       },
       {
-        icon: "i-knee",
-        title: "Elevación de piernas en silla romana",
-        reps: "3 × 12–15",
-        desc: "En el soporte de codos (capitán). Controla, no balancees.",
-        watch: "Core",
+        icon: "i-stretch",
+        title: "Movilidad",
+        reps: "5–8 min",
+        desc: "Hombro, cadera y columna torácica. <b>Esto es lo que te mantiene sin lesiones.</b>",
+        watch: "Flexibilidad",
       },
     ],
   },
   {
     id: "dia4",
     num: "04",
-    kicker: "Día 4",
-    title: "Recuperación Activa y Técnica",
+    kicker: "Jueves",
+    title: "Boxeo — Fight House Granada",
     recovery: true,
     exercises: [
       {
         icon: "i-walk",
-        title: "Sin pesas pesadas",
-        reps: "Paseo largo",
-        desc: "Caminata a buen ritmo con los perros para sumar pasos y mantener piernas activas.",
-        watch: "Caminar",
+        title: "Prepárate",
+        reps: "Durante el día",
+        desc: "Hidrátate desde la mañana, come 2 h antes y lleva vendas, guantes y toalla. <b>Hoy no entrenas nada más: todo se deja en la clase.</b>",
       },
       {
-        icon: "i-shadow",
-        title: "Técnica",
-        reps: "15 min",
-        desc: "Shadow boxing libre frente al espejo en casa: postura, esquivas, desplazamientos y pivotes, manos arriba.",
+        icon: "i-bag",
+        title: "La sesión",
+        reps: "1 clase",
+        desc: "<b>Todo el golpeo de la semana es aquí.</b> Escucha al coach, técnica antes que fuerza, y sparring solo si toca.",
         watch: "Kickboxing",
       },
       {
         icon: "i-stretch",
-        title: "Extra",
+        title: "Después",
         reps: "5–8 min",
-        desc: "Movilidad de hombro, cadera y columna torácica. <b>Esto es lo que te mantiene sin lesiones.</b>",
+        desc: "Estira hombros y cadera al salir; agua con electrolitos y proteína al llegar a casa.",
         watch: "Flexibilidad",
       },
     ],
@@ -217,50 +234,57 @@ export const days: DayData[] = [
   {
     id: "dia5",
     num: "05",
-    kicker: "Día 5",
-    title: "Empuje Vertical y Espalda",
+    kicker: "Viernes",
+    title: "Potencia Total y Cuello",
     exercises: [
       {
-        icon: "i-rope",
-        title: "Cardio",
-        reps: "10 min",
-        desc: "Elíptica suave (es calentamiento).",
+        images: img("Elliptical_Trainer"),
+        title: "Calentamiento",
+        reps: "8–10 min",
+        desc: "Elíptica + 2 min de banda para hombro.",
         watch: "Elíptica",
       },
       {
-        icon: "i-ohp",
-        title: "Press de hombros en máquina",
+        images: img("Push_Press"),
+        title: "Push press",
+        reps: "4 × 5",
+        desc: "<b>Primero, en fresco.</b> Piernas + brazo en un solo impulso: la mecánica exacta de golpear con la cadera. Barra o mancuernas.",
+        watch: "Fuerza funcional",
+      },
+      {
+        images: img("Barbell_Hip_Thrust"),
+        title: "Hip thrust",
         reps: "4 × 8–10",
-        desc: "<b>RIR 1–2.</b> Ahora va en fresco: empuja de verdad y progresa la placa.",
+        desc: "El glúteo es el músculo que rota tu cadera al golpear. Pausa 1 s arriba.",
         watch: "Fuerza tradicional",
       },
       {
-        icon: "i-pulldown",
-        title: "Jalón al pecho (agarre cerrado)",
-        reps: "3 × 10–12",
-        desc: "Variante del día 1; equilibra todo el empuje de la semana.",
+        images: img("Pullups"),
+        title: "Dominadas",
+        reps: "3 × al fallo − 1",
+        desc: "Si no llegas a 6, hazlas en la máquina asistida y progresa el peso de asistencia.",
         watch: "Fuerza tradicional",
       },
       {
-        icon: "i-lateral",
-        title: "Elevaciones laterales",
-        reps: "3 × 12–15",
-        desc: "Volumen moderado; ya hubo bastante hombro.",
+        images: img("Dumbbell_Shoulder_Press"),
+        title: "Press de hombros con mancuernas",
+        reps: "3 × 8–10",
+        desc: "Hombros que aguantan 3 minutos de guardia alta.",
         watch: "Fuerza tradicional",
       },
       {
-        icon: "i-rdl",
-        title: "Encogimientos de trapecio (multipower)",
-        reps: "3 × 12–15",
-        desc: "Sube los hombros a las orejas, pausa 1 s arriba. Cuello fuerte que aguanta golpes.",
-        watch: "Fuerza tradicional",
+        images: img("Plate_Twist"),
+        title: "Russian twist con disco",
+        reps: "3 × 12 / lado",
+        desc: "Versión cargada del giro: potencia rotacional para el cruzado.",
+        watch: "Core",
       },
       {
-        icon: "i-facepull",
-        title: "Deltoide posterior en pec deck inverso",
-        reps: "3 × 15",
-        desc: "Cierra la semana cuidando el manguito, en máquina.",
-        watch: "Fuerza tradicional",
+        images: img("Lying_Face_Up_Plate_Neck_Resistance"),
+        title: "Cuello con disco",
+        reps: "2 × 15",
+        desc: "<b>Cuello fuerte = absorbes mejor los golpes.</b> Disco liviano, movimiento lento y controlado.",
+        watch: "Fuerza funcional",
       },
     ],
   },

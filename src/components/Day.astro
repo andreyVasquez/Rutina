@@ -23,11 +23,32 @@ const gridClass = day.recovery ? "recov" : "cards";
       {
         day.exercises.map((ex) => (
           <article class="card reveal">
-            <div class="pict">
-              <svg class="icon">
-                <use href={`#${ex.icon}`} />
-              </svg>
-              <span class="watch">⌚ {ex.watch}</span>
+            <div class:list={["pict", ex.images && "photo"]}>
+              {ex.images ? (
+                <>
+                  <img
+                    class="frame"
+                    src={ex.images[0]}
+                    alt={`${ex.title} — posición inicial`}
+                    loading="lazy"
+                    width="850"
+                    height="569"
+                  />
+                  <img
+                    class="frame f2"
+                    src={ex.images[1]}
+                    alt={`${ex.title} — posición final`}
+                    loading="lazy"
+                    width="850"
+                    height="569"
+                  />
+                </>
+              ) : (
+                <svg class="icon">
+                  <use href={`#${ex.icon}`} />
+                </svg>
+              )}
+              {ex.watch && <span class="watch">⌚ {ex.watch}</span>}
             </div>
             <div class="card-body">
               <div class="card-top">

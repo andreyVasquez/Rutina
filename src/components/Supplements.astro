@@ -10,7 +10,12 @@ const daily = [
   {
     title: "Creatina monohidrato",
     dose: "3–5 g/día · todos los días, incluido descanso",
-    body: "Tu base para fuerza, hipertrofia y potencia. No cargues, no cicles. Monohidrato micronizado simple, disuelto en agua o en el batido. Hidrátate bien.",
+    body: "Tu base para fuerza y potencia de golpe. No cargues, no cicles. Monohidrato micronizado simple, disuelto en agua o en el batido. Hidrátate bien: con boxeo semanal importa el doble.",
+  },
+  {
+    title: "Beta-alanina",
+    dose: "3,2–5 g/día · todos los días, repartida en 2 tomas",
+    body: "Ahora que hay <b>rounds reales cada jueves</b>, sube a diario: retrasa el ardor muscular en esfuerzos de 1–4 min (exactamente un round). Tarda 3–4 semanas en hacer efecto; el hormigueo es normal e inofensivo.",
   },
   {
     title: "Vitamina D3",
@@ -28,25 +33,17 @@ const training = [
   {
     title: "Proteína whey",
     dose: "1 scoop (~24 g proteína) · post-entreno o para cerrar tu meta",
-    body: "<b>Cuando se acabe tu gainer, cambia a whey — no a otro gainer.</b> Mantiene la proteína alta sin el azúcar/maltodextrina que te frena para el striking. Mézclala en 300–400 ml de agua, no leche.",
+    body: "<b>Cuando se acabe tu gainer, cambia a whey — no a otro gainer.</b> Mantiene la proteína alta sin el azúcar/maltodextrina que te frena arriba del ring. Mézclala en 300–400 ml de agua, no leche. El jueves, tómala al llegar de la clase.",
   },
   {
     title: "Cafeína (pre-entreno)",
     dose: "100–200 mg · 30–45 min antes",
-    body: "Rendimiento y enfoque en los días de gym. <b>No la tomes pasadas las 4–5 pm</b> para no romper el sueño (que es donde creces).",
+    body: "Rendimiento y enfoque los días de gym. <b>El jueves solo si la clase es temprano</b>: nada de cafeína pasadas las 4–5 pm, el sueño es donde creces.",
   },
-];
-
-const contextual = [
   {
     title: "Electrolitos / sales",
-    dose: "1 sobre en días de mucho sudor",
-    body: "Cali + cardio + sesiones largas = sudas mucho. Sodio/potasio/magnesio en el agua del entreno cuando haga calor o el día sea pesado.",
-  },
-  {
-    title: "Beta-alanina",
-    dose: "3–5 g/día · a diario para que sirva",
-    body: "Resistencia muscular en esfuerzos de 1–4 min (tus rounds). Solo funciona si la tomas a diario varias semanas; el hormigueo es normal e inofensivo.",
+    dose: "1 sobre en el agua del entreno · obligatorio el jueves",
+    body: "Cali + rounds = sudas mucho. Sodio/potasio/magnesio en el termo del boxeo y en los días de cardio fuerte (lunes y miércoles).",
   },
 ];
 ---
@@ -75,7 +72,7 @@ const contextual = [
       }
     </div>
 
-    <span class="tier-label tier-1 reveal">Días de entreno (1, 2, 3 y 5)</span>
+    <span class="tier-label tier-1 reveal">Días de entreno (lunes a viernes)</span>
     <div class="supp-grid">
       {
         training.map((s) => (
@@ -88,26 +85,13 @@ const contextual = [
       }
     </div>
 
-    <span class="tier-label tier-2 reveal">Según contexto (calor / rounds largos)</span>
-    <div class="supp-grid">
-      {
-        contextual.map((s) => (
-          <article class="supp reveal">
-            <h3>{s.title}</h3>
-            <span class="dose">{s.dose}</span>
-            <p set:html={s.body} />
-          </article>
-        ))
-      }
-    </div>
-
     <div class="bands reveal">
       <h3>Bandas de resistencia — ya las tienes, úsalas así</h3>
       <p>
-        Nada que comprar aquí: ya son tuyas. En el Smart Fit úsalas para el
-        calentamiento de hombro y las <b>rotaciones externas de manguito</b>;
-        en casa, para face pulls, Pallof press y woodchops cuando no vayas al
-        gym. Ancla en la puerta y a trabajar.
+        Nada que comprar aquí: ya son tuyas. Llévalas al Smart Fit para el
+        <b>calentamiento de hombro</b> de cada día de gym (2 min antes de
+        empujar o jalar) y úsalas de plan B si la polea de rotaciones está
+        ocupada. En casa sirven para movilidad post-boxeo.
       </p>
     </div>
 

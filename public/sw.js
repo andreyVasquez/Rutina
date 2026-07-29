@@ -1,7 +1,7 @@
 // Service worker — Rutina de Entrenamiento PWA
 // Estrategia: network-first para navegación (contenido fresco, fallback offline),
 // cache-first para assets estáticos.
-const CACHE = "rutina-cache-v4";
+const CACHE = "rutina-cache-v5";
 const CORE = [
   "/",
   "/manifest.webmanifest",
