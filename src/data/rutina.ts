@@ -99,7 +99,7 @@ export const days: DayData[] = [
   {
     id: "dia2",
     num: "02",
-    kicker: "Martes · ~50 min",
+    kicker: "Martes · ~55 min",
     title: "Fuerza de Golpeo — Torso",
     exercises: [
       {
@@ -120,7 +120,7 @@ export const days: DayData[] = [
         images: img("Dumbbell_Bench_Press"),
         title: "Press de banca con mancuernas",
         reps: "4 × 8–10",
-        desc: "<b>RIR 1–2.</b> Sube explosivo (como un golpe), baja en 2–3 s.",
+        desc: "<b>RIR 1–2.</b> Sube explosivo (como un golpe), baja en 2–3 s. ¿Bancas ocupadas? Press de pecho en máquina (sentado), mismo empujón.",
         watch: "Fuerza tradicional",
       },
       {
@@ -135,6 +135,13 @@ export const days: DayData[] = [
         title: "Jalón al pecho",
         reps: "3 × 10–12",
         desc: "En la máquina Matrix: dorsal fuerte = golpes con más snap y mejor clinch.",
+        watch: "Fuerza tradicional",
+      },
+      {
+        images: img("Triceps_Pushdown_-_Rope_Attachment"),
+        title: "Tríceps en polea",
+        reps: "2 × 12–15",
+        desc: "<b>El tríceps es el final del golpe:</b> extiende el codo en el último tramo del recto. Cuerda o barra, codos pegados al cuerpo; aquí sí puedes llegar al fallo.",
         watch: "Fuerza tradicional",
       },
       {
