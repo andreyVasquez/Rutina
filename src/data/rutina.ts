@@ -60,10 +60,10 @@ export const days: DayData[] = [
         watch: "Fuerza funcional",
       },
       {
-        images: img("Goblet_Squat"),
-        title: "Sentadilla goblet",
+        images: img("Smith_Machine_Squat"),
+        title: "Sentadilla en Smith",
         reps: "4 × 8–10",
-        desc: "<b>RIR 1–2.</b> Mancuerna pesada al pecho: sube explosivo, baja en 2–3 s.",
+        desc: "<b>RIR 1–2.</b> La misma de la app del gym: pies un pasito adelante, baja profundo, sube explosivo y controla la bajada 2–3 s. ¿Smith ocupado? Goblet con mancuerna pesada o prensa (Leg Press).",
         watch: "Fuerza tradicional",
       },
       {
@@ -76,8 +76,15 @@ export const days: DayData[] = [
       {
         images: img("Dumbbell_Lunges"),
         title: "Zancadas con mancuernas",
-        reps: "3 × 10 / lado",
-        desc: "Fuerza unilateral: cada golpe empuja desde una sola pierna.",
+        reps: "2 × 10 / lado",
+        desc: "Fuerza unilateral: cada golpe empuja desde una sola pierna. Dos series duras bastan hoy.",
+        watch: "Fuerza tradicional",
+      },
+      {
+        images: img("Calf_Press_On_The_Leg_Press_Machine"),
+        title: "Pantorrilla en máquina",
+        reps: "2 × 12–15",
+        desc: "<b>Pantorrillas fuertes = juego de pies vivo</b> y tres rounds en la punta de los pies. En la máquina de pantorrilla del gym (o en la prensa): sube lento y aprieta 1 s arriba.",
         watch: "Fuerza tradicional",
       },
       {
@@ -250,7 +257,7 @@ export const days: DayData[] = [
         images: img("Barbell_Hip_Thrust"),
         title: "Hip thrust",
         reps: "4 × 8–10",
-        desc: "El glúteo es el músculo que rota tu cadera al golpear. Pausa 1 s arriba.",
+        desc: "El glúteo es el músculo que rota tu cadera al golpear. Pausa 1 s arriba. <b>Usa la máquina de hip thrust del gym</b> (montaje en segundos); si está ocupada, barra sobre banco.",
         watch: "Fuerza tradicional",
       },
       {
