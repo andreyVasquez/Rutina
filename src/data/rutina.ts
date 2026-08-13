@@ -141,7 +141,14 @@ export const days: DayData[] = [
         images: img("Triceps_Pushdown_-_Rope_Attachment"),
         title: "Tríceps en polea",
         reps: "2 × 12–15",
-        desc: "<b>El tríceps es el final del golpe:</b> extiende el codo en el último tramo del recto. Cuerda o barra, codos pegados al cuerpo; aquí sí puedes llegar al fallo.",
+        desc: "<b>El tríceps es el final del golpe:</b> extiende el codo en el último tramo del recto. Cuerda o barra, codos pegados al cuerpo; aquí sí puedes llegar al fallo. <b>En superserie con el curl</b> de abajo.",
+        watch: "Fuerza tradicional",
+      },
+      {
+        images: img("Hammer_Curls"),
+        title: "Curl martillo",
+        reps: "2 × 10–12",
+        desc: "Justo después de cada serie de tríceps, sin descanso extra: agarre neutro, codos quietos. <b>Antebrazo y bíceps que sostienen el gancho</b> y cierran fuerte el guante.",
         watch: "Fuerza tradicional",
       },
       {
@@ -163,7 +170,7 @@ export const days: DayData[] = [
   {
     id: "dia3",
     num: "03",
-    kicker: "Miércoles · ~45 min",
+    kicker: "Miércoles · ~50 min",
     title: "Rounds de Saco y Core",
     quote:
       "Sin pesas hoy: cuerda, saco y core. Mañana entrenas con el profe — llega con piernas vivas y hombros frescos.",
@@ -201,6 +208,13 @@ export const days: DayData[] = [
         title: "Elevación de piernas en banco",
         reps: "3 × 12–15",
         desc: "Abdomen bajo que aguanta golpes al cuerpo.",
+        watch: "Core",
+      },
+      {
+        images: img("Hyperextensions_Back_Extensions"),
+        title: "Hiperextensión lumbar",
+        reps: "2 × 12–15",
+        desc: "En el banco romano del gym. <b>La lumbar es la otra mitad del core</b>: sostiene la postura round tras round y protege la espalda cuando rotas fuerte. Sube controlado, sin hiperextender.",
         watch: "Core",
       },
       {
