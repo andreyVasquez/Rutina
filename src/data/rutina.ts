@@ -29,12 +29,13 @@ const img = (id: string): [string, string] => [
 ];
 
 /**
- * Semana definitiva, construida alrededor del boxeo:
+ * Semana definitiva, construida alrededor del MMA:
  *  - Lun, Mar, Mié y Vie: gym (máquinas Matrix, pesas, saco de boxeo y zona
  *    cardio: caminadoras, elípticas, escaladora y bici de aire).
- *    Cada sesión cabe en máximo 1 hora.
- *  - Jueves: sesión de boxeo personalizada, solo tú y el profe. Él dirige
- *    calentamiento, estiramiento y todo el trabajo — ese día no hay nada más.
+ *    Cada sesión cabe en máximo 1 hora: potencia de cadera, agarre, rotación,
+ *    cuello y cardio de rounds.
+ *  - Jueves: sesión personalizada 1 a 1 con el profe. Él dirige calentamiento,
+ *    estiramiento y todo el trabajo — ese día no hay nada más.
  */
 export const days: DayData[] = [
   {
@@ -43,7 +44,7 @@ export const days: DayData[] = [
     kicker: "Lunes · ~55 min",
     title: "Potencia de Piernas y Cadera",
     quote:
-      "El knockout no nace en el brazo: nace en el piso, sube por la cadera y sale por el puño.",
+      "La potencia nace en el piso: sube por la cadera y sale por el puño — o se convierte en el derribo.",
     exercises: [
       {
         images: img("Elliptical_Trainer"),
@@ -70,15 +71,15 @@ export const days: DayData[] = [
         images: img("Romanian_Deadlift"),
         title: "Peso muerto rumano",
         reps: "4 × 8–10",
-        desc: "Glúteo y femoral: <b>el motor del golpe</b>. Barra o mancuernas, espalda neutra siempre.",
+        desc: "Glúteo y femoral: <b>el motor del golpe y del derribo</b>. Barra o mancuernas, espalda neutra siempre — es la misma bisagra del sprawl.",
         watch: "Fuerza tradicional",
       },
       {
-        images: img("Dumbbell_Lunges"),
-        title: "Zancadas con mancuernas",
-        reps: "2 × 10 / lado",
-        desc: "Fuerza unilateral: cada golpe empuja desde una sola pierna. Dos series duras bastan hoy.",
-        watch: "Fuerza tradicional",
+        images: img("Farmers_Walk"),
+        title: "Acarreo del granjero",
+        reps: "3 × 30–40 m",
+        desc: "Mancuernas pesadas, pecho arriba, pasos cortos. <b>El agarre es la moneda del MMA</b>: controlar el clinch, cerrar el derribo y no soltar jamás.",
+        watch: "Fuerza funcional",
       },
       {
         images: img("Calf_Press_On_The_Leg_Press_Machine"),
@@ -100,7 +101,7 @@ export const days: DayData[] = [
     id: "dia2",
     num: "02",
     kicker: "Martes · ~55 min",
-    title: "Fuerza de Golpeo — Torso",
+    title: "Golpeo y Agarre — Torso",
     exercises: [
       {
         images: img("Elliptical_Trainer"),
@@ -155,7 +156,7 @@ export const days: DayData[] = [
         images: img("Face_Pull"),
         title: "Face pull en polea",
         reps: "3 × 15",
-        desc: "El seguro del hombro de un boxeador. Jala hacia la cara, codos altos.",
+        desc: "El seguro del hombro de un peleador. Jala hacia la cara, codos altos.",
         watch: "Fuerza funcional",
       },
       {
@@ -171,7 +172,7 @@ export const days: DayData[] = [
     id: "dia3",
     num: "03",
     kicker: "Miércoles · ~50 min",
-    title: "Rounds de Saco y Core",
+    title: "Rounds MMA y Core",
     quote:
       "Sin pesas hoy: cuerda, saco y core. Mañana entrenas con el profe — llega con piernas vivas y hombros frescos.",
     exercises: [
@@ -179,14 +180,14 @@ export const days: DayData[] = [
         images: img("Rope_Jumping"),
         title: "Cuerda",
         reps: "3 rds × 3 min",
-        desc: "El cardio clásico del boxeo: juego de pies, muñecas y ritmo. 1 min de descanso entre rounds; el primero, suave, es tu calentamiento.",
+        desc: "El cardio clásico del combate: juego de pies, muñecas y ritmo. 1 min de descanso entre rounds; el primero, suave, es tu calentamiento.",
         watch: "Cuerda",
       },
       {
         icon: "i-bag",
-        title: "Rounds de saco",
+        title: "Rounds de saco + sprawls",
         reps: "3 rds × 3 min",
-        desc: "<b>Técnica y flow, no potencia máxima:</b> combinaciones limpias, guardia arriba y muévete alrededor del saco. 1 min entre rounds. Si el saco está ocupado: rounds en caminadora (3 min fuerte / 1 min caminando).",
+        desc: "<b>Formato MMA:</b> combinaciones limpias y, en cada cambio de minuto, cambio de nivel + sprawl y sigues golpeando. Técnica y flow, no potencia máxima; 1 min entre rounds. ¿Saco ocupado? Shadow con sprawls o rounds de caminadora.",
         watch: "Kickboxing",
       },
       {
@@ -230,7 +231,7 @@ export const days: DayData[] = [
     id: "dia4",
     num: "04",
     kicker: "Jueves · solo la sesión",
-    title: "Boxeo 1 a 1 con el Profe",
+    title: "Sesión 1 a 1 con el Profe",
     recovery: true,
     exercises: [
       {
@@ -244,7 +245,7 @@ export const days: DayData[] = [
         title: "La sesión (tú y el profe)",
         reps: "1 a 1",
         desc: "<b>Personalizada: el profe dirige calentamiento, estiramiento, técnica y todo el trabajo.</b> Tu único trabajo es llegar fresco, escuchar y dejarlo todo adentro.",
-        watch: "Kickboxing",
+        watch: "Artes marciales",
       },
       {
         icon: "i-stretch",
@@ -278,7 +279,7 @@ export const days: DayData[] = [
         images: img("Barbell_Hip_Thrust"),
         title: "Hip thrust",
         reps: "4 × 8–10",
-        desc: "El glúteo es el músculo que rota tu cadera al golpear. Pausa 1 s arriba. <b>Usa la máquina de hip thrust del gym</b> (montaje en segundos); si está ocupada, barra sobre banco.",
+        desc: "El glúteo rota tu cadera al golpear y es <b>el puente (upa) con el que escapas cuando te montan</b>. Pausa 1 s arriba. Usa la máquina de hip thrust del gym; si está ocupada, barra sobre banco.",
         watch: "Fuerza tradicional",
       },
       {
@@ -306,7 +307,7 @@ export const days: DayData[] = [
         images: img("Lying_Face_Up_Plate_Neck_Resistance"),
         title: "Cuello con disco",
         reps: "2 × 15",
-        desc: "<b>Cuello fuerte = absorbes mejor los golpes.</b> Disco liviano, movimiento lento y controlado.",
+        desc: "<b>En MMA el cuello no es opcional:</b> absorbe golpes y pelea la guillotina y el clinch. Disco liviano, movimiento lento y controlado.",
         watch: "Fuerza funcional",
       },
     ],
