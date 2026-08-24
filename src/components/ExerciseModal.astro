@@ -2,8 +2,12 @@
 /**
  * Popup de ejercicio: al tocar una tarjeta .card.openable se clona su
  * <template class="card-detail"> (gif arriba, paso a paso, alternativas)
- * dentro de este <dialog> nativo. Esc, la ✕ o tocar el fondo lo cierran.
+ * dentro de este <dialog> nativo. Cada alternativa listada es a su vez
+ * clickeable: abre su mini-guía desde el catálogo (templates .alt-detail
+ * de abajo) con un botón para volver al ejercicio. Esc, la ✕ o tocar el
+ * fondo cierran el popup.
  */
+import { altCatalog } from "../data/rutina";
 ---
 
 <dialog class="ex-modal" id="ex-modal" aria-label="Guía del ejercicio">
@@ -11,30 +15,107 @@
   <div class="ex-body"></div>
 </dialog>
 
+{
+  Object.entries(altCatalog).map(([id, alt]) => (
+    <template class="alt-detail" data-alt-id={id}>
+      <div class:list={["pict", "ex-pict", alt.images && "photo"]}>
+        {alt.images ? (
+          <>
+            <img
+              class="frame"
+              src={alt.images[0]}
+              alt={`${alt.title} — posición inicial`}
+              width="850"
+              height="569"
+            />
+            <img
+              class="frame f2"
+              src={alt.images[1]}
+              alt={`${alt.title} — posición final`}
+              width="850"
+              height="569"
+            />
+          </>
+        ) : (
+          <svg class="icon">
+            <use href={`#${alt.icon}`} />
+          </svg>
+        )}
+      </div>
+      <div class="ex-info">
+        <button class="ex-back" type="button">← Volver al ejercicio</button>
+        <div class="ex-top">
+          <h3>{alt.title}</h3>
+          <span class="reps">{alt.reps}</span>
+        </div>
+        <p class="ex-desc" set:html={alt.desc} />
+        <h4 class="ex-sec">Cómo hacerlo</h4>
+        <ol class="ex-steps">
+          {alt.steps.map((s) => (
+            <li set:html={s} />
+          ))}
+        </ol>
+      </div>
+    </template>
+  ))
+}
+
 <script>
   const modal = document.getElementById("ex-modal") as HTMLDialogElement | null;
 
   if (modal && typeof modal.showModal === "function") {
     const body = modal.querySelector(".ex-body")!;
     const closeBtn = modal.querySelector(".ex-close")!;
+    /** Template del ejercicio actualmente abierto (para "volver"). */
+    let currentTpl: HTMLTemplateElement | null = null;
 
-    const open = (tpl: HTMLTemplateElement) => {
+    const show = (tpl: HTMLTemplateElement) => {
       body.replaceChildren(tpl.content.cloneNode(true));
-      modal.showModal();
+      if (!modal.open) modal.showModal();
       modal.scrollTop = 0;
       document.body.style.overflow = "hidden";
+    };
+
+    const showAlt = (id: string) => {
+      const tpl = document.querySelector<HTMLTemplateElement>(
+        `template.alt-detail[data-alt-id="${id}"]`,
+      );
+      if (tpl) show(tpl);
     };
 
     document.querySelectorAll<HTMLElement>(".card.openable").forEach((card) => {
       const tpl = card.querySelector<HTMLTemplateElement>("template.card-detail");
       if (!tpl) return;
-      card.addEventListener("click", () => open(tpl));
+      const open = () => {
+        currentTpl = tpl;
+        show(tpl);
+      };
+      card.addEventListener("click", open);
       card.addEventListener("keydown", (e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          open(tpl);
+          open();
         }
       });
+    });
+
+    // Delegación dentro del popup: alternativas y botón de volver.
+    body.addEventListener("click", (e) => {
+      const t = e.target as HTMLElement;
+      const alt = t.closest<HTMLElement>("[data-alt]");
+      if (alt) {
+        showAlt(alt.dataset.alt!);
+        return;
+      }
+      if (t.closest(".ex-back") && currentTpl) show(currentTpl);
+    });
+    body.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      const alt = (e.target as HTMLElement).closest<HTMLElement>("[data-alt]");
+      if (alt) {
+        e.preventDefault();
+        showAlt(alt.dataset.alt!);
+      }
     });
 
     closeBtn.addEventListener("click", () => modal.close());

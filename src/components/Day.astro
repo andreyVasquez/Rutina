@@ -1,5 +1,6 @@
 ---
 import type { DayData } from "../data/rutina";
+import { altCatalog } from "../data/rutina";
 
 interface Props {
   day: DayData;
@@ -112,11 +113,18 @@ const gridClass = day.recovery ? "recov" : "cards";
                     {ex.alternatives?.length && (
                       <>
                         <h4 class="ex-sec">Alternativas</h4>
+                        <p class="ex-alts-hint">Toca una alternativa para ver su guía.</p>
                         <ul class="ex-alts">
                           {ex.alternatives.map((a) => (
-                            <li>
-                              <b>{a.title}</b>
+                            <li
+                              data-alt={a.id}
+                              tabindex="0"
+                              role="button"
+                              aria-label={`Ver guía: ${altCatalog[a.id].title}`}
+                            >
+                              <b>{altCatalog[a.id].title}</b>
                               {a.note && <span> — {a.note}</span>}
+                              <span class="alt-go" aria-hidden="true">›</span>
                             </li>
                           ))}
                         </ul>
