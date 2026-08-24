@@ -447,28 +447,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Baja lento. Si la velocidad cae, termina la serie.",
     ],
   },
-  "press-hombro-mancuernas": {
-    title: "Press de hombro con mancuernas",
-    reps: "3 × 8–10",
-    images: img("Seated_Dumbbell_Press"),
-    desc: "Sentado con respaldo: más estabilización que la máquina, si hay banco libre.",
-    steps: [
-      "Respaldo casi vertical, mancuernas a la altura de las orejas.",
-      "Empuja arriba sin chocarlas ni bloquear los codos.",
-      "Baja en 2 s a las orejas; lumbar pegada al respaldo.",
-    ],
-  },
-  "elevacion-lateral-maquina": {
-    title: "Elevación lateral en máquina",
-    reps: "3 × 12–15",
-    icon: "i-lateral",
-    desc: "Estación 55: hombro medio sin carga axial, para días en que el hombro pide algo liviano.",
-    steps: [
-      "Ajusta el asiento: hombros alineados con el eje de la máquina.",
-      "Sube los brazos hasta la horizontal, sin encoger los hombros.",
-      "Baja en 2 s resistiendo el peso.",
-    ],
-  },
 
   /* ---- Jalón ---- */
   "remo-mancuerna": {
@@ -535,39 +513,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Triángulo o agarre estrecho en la polea alta.",
       "Pecho arriba: jala el agarre al esternón.",
       "Aprieta 1 s abajo y sube controlado.",
-    ],
-  },
-  "jalon-pesado": {
-    title: "Jalón al pecho pesado",
-    reps: "4 × 6–8",
-    images: img("Wide-Grip_Lat_Pulldown"),
-    desc: "El reemplazo directo de la dominada cuando la asistida está ocupada.",
-    steps: [
-      "Más peso que tu jalón normal: rango de 6–8 repeticiones.",
-      "Jala a la clavícula con el pecho afuera.",
-      "Controla la subida en 2–3 s: ahí se construye la dominada.",
-    ],
-  },
-  "dominada-neutra": {
-    title: "Dominada agarre neutro",
-    reps: "3 × al fallo − 1",
-    images: img("Pullups"),
-    desc: "Palmas enfrentadas: la versión más amable con hombros y codos.",
-    steps: [
-      "Toma las manijas paralelas de la barra.",
-      "Jala hasta pasar la barbilla, codos hacia las costillas.",
-      "Baja en 2–3 s; deja 1 repetición en reserva.",
-    ],
-  },
-  "remo-invertido": {
-    title: "Remo invertido",
-    reps: "3 × 8–12",
-    images: img("Inverted_Row"),
-    desc: "En la Smith con la barra baja: tu peso corporal hace de remo.",
-    steps: [
-      "Barra de la Smith a la altura de la cadera; cuélgate debajo, cuerpo recto.",
-      "Jala el pecho a la barra apretando las escápulas.",
-      "Más difícil: pies más adelante o en un banco.",
     ],
   },
 
@@ -673,28 +618,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Baja lento sin dar impulso con el torso.",
     ],
   },
-  "rotacion-banda": {
-    title: "Rotación externa con banda",
-    reps: "2 × 15 / lado",
-    icon: "i-extrot",
-    desc: "El mismo seguro del manguito, con tu banda en cualquier lugar.",
-    steps: [
-      "Banda anclada a la altura del codo; codo pegado a 90°.",
-      "Gira el antebrazo hacia afuera sin despegar el codo.",
-      "Regresa lento. Tensión suave y constante.",
-    ],
-  },
-  "rotacion-acostado": {
-    title: "Rotación acostado con mancuernita",
-    reps: "2 × 12 / lado",
-    icon: "i-extrot",
-    desc: "De lado en un banco con 1–3 kg: el manguito no necesita más.",
-    steps: [
-      "Acostado de lado, codo pegado a las costillas a 90°.",
-      "Gira el antebrazo hacia el techo, lento.",
-      "Baja en 2 s. Si pesa más de 3 kg, es demasiado.",
-    ],
-  },
 
   /* ---- Core y cuello ---- */
   "russian-twist-disco": {
@@ -706,17 +629,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Sentado, tronco atrás 45°, disco al pecho.",
       "Gira desde las costillas llevando el disco a cada lado.",
       "Sin encorvar la espalda; pies arriba para el nivel pro.",
-    ],
-  },
-  "twist-sin-disco": {
-    title: "Twist sin peso",
-    reps: "3 × 20 / lado",
-    images: img("Russian_Twist"),
-    desc: "Si el disco te encorva: el mismo giro, más repeticiones, técnica perfecta.",
-    steps: [
-      "Tronco atrás 45° con la espalda larga.",
-      "Gira tocando el piso a cada lado con las manos.",
-      "Ritmo constante: 20 toques por lado.",
     ],
   },
   "pallof": {
@@ -739,17 +651,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Banda anclada arriba; párate de lado.",
       "Gira desde la cadera llevando la banda a la rodilla contraria.",
       "Controla la vuelta: la banda no te gana.",
-    ],
-  },
-  "lenador-polea": {
-    title: "Leñador en polea",
-    reps: "3 × 12 / lado",
-    images: img("Standing_Cable_Wood_Chop"),
-    desc: "De pie y con polea: la rotación más parecida al golpe.",
-    steps: [
-      "Polea arriba, pies al ancho de hombros, de lado.",
-      "Brazos casi rectos: gira desde la cadera en diagonal.",
-      "El torso gira, los brazos acompañan.",
     ],
   },
   "plancha-toques": {
@@ -844,12 +745,14 @@ export const altCatalog: Record<string, AltDetail> = {
 
 /**
  * Semana definitiva, construida alrededor del MMA:
- *  - Lun, Mar, Mié y Vie: gym (máquinas Matrix, pesas, saco de boxeo y zona
+ *  - Lun, Mar y Mié: gym (máquinas Matrix, pesas, saco de boxeo y zona
  *    cardio: caminadoras, elípticas, escaladora y bici de aire).
  *    Cada sesión cabe en máximo 1 hora: potencia de cadera, agarre, rotación,
  *    cuello y cardio de rounds.
  *  - Jueves: sesión personalizada 1 a 1 con el profe. Él dirige calentamiento,
  *    estiramiento y todo el trabajo — ese día no hay nada más.
+ *  - Viernes: descanso obligado (pico y placa) — y cae perfecto tras 4 días.
+ *  - Sábado o domingo: pádel 1–2 h; el otro día del finde, descanso total.
  *
  * Cada ejercicio trae `steps` (paso a paso) y `alternatives` (ids del catálogo
  * de arriba); al tocar la tarjeta se abren en un popup, y cada alternativa
@@ -884,7 +787,7 @@ export const days: DayData[] = [
       {
         images: img("Freehand_Jump_Squat"),
         title: "Sentadilla con salto",
-        reps: "4 × 5",
+        reps: "3 × 5",
         desc: "<b>Primero, en fresco.</b> Sin peso: baja rápido, explota hacia arriba y aterriza suave. Descansa 2 min entre series — es potencia, no cardio.",
         watch: "Fuerza funcional",
         steps: [
@@ -921,7 +824,7 @@ export const days: DayData[] = [
       {
         images: img("Smith_Machine_Stiff-Legged_Deadlift"),
         title: "Peso muerto rumano en Smith",
-        reps: "4 × 8–10",
+        reps: "3 × 8–10",
         desc: "En la misma Smith de la sentadilla: caderas atrás, espalda neutra, la barra rozando las piernas. Glúteo y femoral: <b>el motor del golpe y del derribo</b> — la misma bisagra del sprawl.",
         watch: "Fuerza tradicional",
         steps: [
@@ -937,9 +840,27 @@ export const days: DayData[] = [
         ],
       },
       {
+        images: img("Barbell_Hip_Thrust"),
+        title: "Hip thrust",
+        reps: "3 × 8–10",
+        desc: "El glúteo rota tu cadera al golpear y es <b>el puente (upa) con el que escapas cuando te montan</b>. Pausa 1 s arriba. Usa la máquina de hip thrust del gym; si está ocupada, barra sobre banco.",
+        watch: "Fuerza tradicional",
+        steps: [
+          "En la máquina: espalda alta apoyada, cojín sobre la cadera, pies al ancho de hombros.",
+          "Empuja con los talones y sube la cadera hasta quedar recto de rodillas a hombros.",
+          "<b>Aprieta el glúteo 1 s arriba</b> — es tu puente (upa) cuando te montan.",
+          "Baja controlado sin que la lumbar se arquee.",
+        ],
+        alternatives: [
+          { id: "hip-thrust-barra", note: "el clásico si la máquina está ocupada." },
+          { id: "puente-una-pierna", note: "en el piso, 12 por lado." },
+          { id: "patada-gluteo-polea", note: "del día A de tu app, pierna flexionada." },
+        ],
+      },
+      {
         images: img("Farmers_Walk"),
         title: "Acarreo del granjero",
-        reps: "3 × 30–40 m",
+        reps: "2 × 30–40 m",
         desc: "Mancuernas pesadas, pecho arriba, pasos cortos. <b>El agarre es la moneda del MMA</b>: controlar el clinch, cerrar el derribo y no soltar jamás.",
         watch: "Fuerza funcional",
         steps: [
@@ -975,14 +896,14 @@ export const days: DayData[] = [
       {
         images: img("Bicycling_Stationary"),
         title: "Finisher: sprints en bici de aire",
-        reps: "6 × (30 s / 60 s)",
+        reps: "5 × (30 s / 60 s)",
         desc: "La del ventilador: 30 s a tope con brazos y piernas, 60 s suave. <b>Mientras más fuerte pedaleas, más resiste</b> — cardio de rounds perfecto. Si está ocupada, cualquier bici estática sirve.",
         watch: "Bicicleta estática",
         steps: [
           "Ajusta el asiento: rodilla casi extendida en el punto más bajo del pedaleo.",
           "2 min de pedaleo suave para entrar en calor.",
           "<b>30 s a TODO</b>: brazos y piernas al máximo, como el último intercambio del round.",
-          "60 s suave sin parar. Repite 6 veces.",
+          "60 s suave sin parar. Repite 5 veces.",
           "Anota distancia o calorías para superarlas la próxima semana.",
         ],
         alternatives: [
@@ -1034,9 +955,28 @@ export const days: DayData[] = [
         ],
       },
       {
+        images: img("Push_Press"),
+        title: "Push press",
+        reps: "3 × 5",
+        desc: "<b>Todavía en fresco.</b> Piernas + brazo en un solo impulso: la mecánica exacta de golpear con la cadera. Barra o mancuernas.",
+        watch: "Fuerza funcional",
+        steps: [
+          "Barra en las clavículas (o mancuernas a los hombros); haz 5 con la barra vacía antes de cargar.",
+          "Mini-flexión de rodillas — unos 10 cm, tronco recto.",
+          "<b>Extiende todo a la vez</b>: piernas y brazos, la barra sale disparada arriba.",
+          "Es la mecánica del golpe: el piso empuja, la cadera transmite, el puño llega.",
+          "Baja controlado a los hombros. 5 potentes; 2 min de descanso.",
+        ],
+        alternatives: [
+          { id: "press-militar", note: "sin impulso de piernas: más hombro puro." },
+          { id: "push-press-mancuernas", note: "si el rack está ocupado." },
+          { id: "press-maquina-explosivo", note: "último recurso: empuja rápido, baja lento." },
+        ],
+      },
+      {
         images: img("Leverage_Chest_Press"),
         title: "Press de pecho en máquina",
-        reps: "4 × 8–10",
+        reps: "3 × 8–10",
         desc: "<b>RIR 1–2.</b> La máquina de press sentado (Matrix): empuja explosivo como un golpe, vuelve en 2–3 s. ¿Ocupada? Mancuernas en banco plano.",
         watch: "Fuerza tradicional",
         steps: [
@@ -1141,29 +1081,13 @@ export const days: DayData[] = [
           { id: "posteriores-mancuernas", note: "inclinado, abriendo los brazos." },
         ],
       },
-      {
-        images: img("External_Rotation_with_Cable"),
-        title: "Rotación externa en polea",
-        reps: "2 × 15 / lado",
-        desc: "Manguito rotador: pega hoy y sigue pegando en 10 años.",
-        watch: "Fuerza funcional",
-        steps: [
-          "Polea a la altura del codo; codo pegado al cuerpo y flexionado 90°.",
-          "Gira el antebrazo hacia afuera <b>sin despegar el codo</b>.",
-          "Vuelve lento. Peso mínimo: esto es un seguro, no un ego lift.",
-        ],
-        alternatives: [
-          { id: "rotacion-banda", note: "igual de efectivo si la polea está ocupada." },
-          { id: "rotacion-acostado", note: "1–3 kg bastan." },
-        ],
-      },
     ],
   },
   {
     id: "dia3",
     num: "03",
-    kicker: "Miércoles · ~50 min",
-    title: "Rounds MMA y Core",
+    kicker: "Miércoles · ~55 min",
+    title: "Rounds MMA, Core y Cuello",
     quote:
       "Sin pesas hoy: cuerda, saco y core. Mañana entrenas con el profe — llega con piernas vivas y hombros frescos.",
     exercises: [
@@ -1271,6 +1195,23 @@ export const days: DayData[] = [
         ],
       },
       {
+        images: img("Lying_Face_Up_Plate_Neck_Resistance"),
+        title: "Cuello con disco",
+        reps: "2 × 15",
+        desc: "<b>En MMA el cuello no es opcional:</b> absorbe golpes y pelea la guillotina y el clinch. Disco liviano, movimiento lento y controlado.",
+        watch: "Fuerza funcional",
+        steps: [
+          "Boca arriba en un banco, cabeza por fuera del borde, disco liviano sobre la frente (con toalla).",
+          "Baja la cabeza lento y súbela hasta llevar la barbilla al pecho.",
+          "15 controladas; <b>nada de rebotes ni prisa</b>.",
+          "Es lo que te deja recibir un golpe y pelear la guillotina: trátalo en serio.",
+        ],
+        alternatives: [
+          { id: "cuello-isometricos", note: "empuja contra tu mano: sirve en cualquier lugar." },
+          { id: "cuello-banda", note: "banda en un poste, 4 direcciones." },
+        ],
+      },
+      {
         icon: "i-stretch",
         title: "Movilidad",
         reps: "5–8 min",
@@ -1316,129 +1257,50 @@ export const days: DayData[] = [
   {
     id: "dia5",
     num: "05",
-    kicker: "Viernes · ~55 min",
-    title: "Potencia Total y Cuello",
+    kicker: "Viernes · pico y placa",
+    title: "Descanso Programado",
+    recovery: true,
     exercises: [
       {
-        images: img("Elliptical_Trainer"),
-        title: "Calentamiento",
-        reps: "8 min",
-        desc: "6 min de elíptica + 2 min de banda para hombro.",
-        watch: "Elíptica",
-        steps: [
-          "6 min de elíptica subiendo el ritmo poco a poco.",
-          "Banda: 15 pull-aparts + 15 rotaciones externas por lado.",
-          "Antes de cargar el push press: 5 repeticiones con la barra vacía.",
-        ],
-        alternatives: [
-          { id: "escaladora", note: "mismos 6 min." },
-          { id: "bici-suave", note: "si prefieres pedalear." },
-        ],
+        icon: "i-walk",
+        title: "Hoy no hay gym — y está bien",
+        reps: "Descanso",
+        desc: "El pico y placa lo decide por ti, y cae perfecto: después de 4 días seguidos de entreno, <b>hoy el cuerpo absorbe y construye</b>. Camina algo, come tu proteína y duerme 7–9 h.",
       },
       {
-        images: img("Push_Press"),
-        title: "Push press",
-        reps: "4 × 5",
-        desc: "<b>Primero, en fresco.</b> Piernas + brazo en un solo impulso: la mecánica exacta de golpear con la cadera. Barra o mancuernas.",
-        watch: "Fuerza funcional",
-        steps: [
-          "Barra en las clavículas (o mancuernas a los hombros), agarre al ancho de hombros.",
-          "Mini-flexión de rodillas — unos 10 cm, tronco recto.",
-          "<b>Extiende todo a la vez</b>: piernas y brazos, la barra sale disparada arriba.",
-          "Es la mecánica del golpe: el piso empuja, la cadera transmite, el puño llega.",
-          "Baja controlado a los hombros. 5 potentes; 2 min de descanso.",
-        ],
-        alternatives: [
-          { id: "press-militar", note: "sin impulso de piernas: más hombro puro." },
-          { id: "push-press-mancuernas", note: "si el rack está ocupado." },
-          { id: "press-maquina-explosivo", note: "último recurso: empuja rápido, baja lento." },
-        ],
+        icon: "i-stretch",
+        title: "Movilidad suave (opcional)",
+        reps: "10 min",
+        desc: "Solo si el cuerpo lo pide: hombros y cadera con tus bandas, en casa. Nada intenso — <b>mañana o pasado hay pádel</b>.",
+        watch: "Flexibilidad",
+      },
+    ],
+  },
+  {
+    id: "dia6",
+    num: "06",
+    kicker: "Sábado o Domingo · 1–2 h",
+    title: "Pádel",
+    recovery: true,
+    exercises: [
+      {
+        icon: "i-walk",
+        title: "Antes del partido",
+        reps: "5 min",
+        desc: "El pádel arranca explosivo: trote suave, tobillos y hombro con banda. <b>No entres frío</b> — las pantorrillas y el codo lo agradecen.",
       },
       {
-        images: img("Barbell_Hip_Thrust"),
-        title: "Hip thrust",
-        reps: "4 × 8–10",
-        desc: "El glúteo rota tu cadera al golpear y es <b>el puente (upa) con el que escapas cuando te montan</b>. Pausa 1 s arriba. Usa la máquina de hip thrust del gym; si está ocupada, barra sobre banco.",
-        watch: "Fuerza tradicional",
-        steps: [
-          "En la máquina: espalda alta apoyada, cojín sobre la cadera, pies al ancho de hombros.",
-          "Empuja con los talones y sube la cadera hasta quedar recto de rodillas a hombros.",
-          "<b>Aprieta el glúteo 1 s arriba</b> — es tu puente (upa) cuando te montan.",
-          "Baja controlado sin que la lumbar se arquee.",
-        ],
-        alternatives: [
-          { id: "hip-thrust-barra", note: "el clásico si la máquina está ocupada." },
-          { id: "puente-una-pierna", note: "en el piso, 12 por lado." },
-          { id: "patada-gluteo-polea", note: "del día A de tu app, pierna flexionada." },
-        ],
+        icon: "i-padel",
+        title: "El partido",
+        reps: "1–2 h",
+        desc: "<b>Tu cardio del fin de semana, jugado:</b> arranques, frenadas y giros — juego de pies gratis para el MMA. Hidrátate entre sets y, si van a ser 2 h, come algo liviano a la mitad.",
+        watch: "Pádel",
       },
       {
-        images: img("Pullups"),
-        title: "Dominadas",
-        reps: "3 × al fallo − 1",
-        desc: "En la máquina asistida (Matrix): ajusta el contrapeso para sacar 6–8 limpias y ve bajando la asistencia semana a semana; sin contrapeso cuando puedas.",
-        watch: "Fuerza tradicional",
-        steps: [
-          "En la asistida: rodillas al cojín, contrapeso que te deje sacar 6–8 limpias.",
-          "Desde brazos estirados, jala hasta pasar la barbilla — <b>pecho a la barra</b>.",
-          "Baja en 2–3 s: ahí está la mitad del ejercicio.",
-          "Cada semana, un poco menos de contrapeso. El día que salgan 6 sin ayuda, celebra.",
-        ],
-        alternatives: [
-          { id: "jalon-pesado", note: "si la asistida está ocupada." },
-          { id: "dominada-neutra", note: "más amable con hombros y codos." },
-          { id: "remo-invertido", note: "en la Smith con la barra baja." },
-        ],
-      },
-      {
-        images: img("Leverage_Shoulder_Press"),
-        title: "Press de hombro en máquina",
-        reps: "3 × 8–10",
-        desc: "Hombros que aguantan 3 minutos de guardia alta. En la máquina (Matrix) empujas seguro aun con la fatiga del push press; ¿ocupada? mancuernas.",
-        watch: "Fuerza tradicional",
-        steps: [
-          "Asiento ajustado: manijas a la altura de las orejas.",
-          "Empuja arriba <b>sin bloquear los codos</b>; baja controlado a las orejas.",
-          "Espalda pegada al respaldo, sin arquear la lumbar.",
-        ],
-        alternatives: [
-          { id: "press-hombro-mancuernas", note: "más estabilización si hay banco libre." },
-          { id: "elevacion-lateral-maquina", note: "estación 55: si el hombro pide algo liviano hoy." },
-        ],
-      },
-      {
-        images: img("Plate_Twist"),
-        title: "Russian twist con disco",
-        reps: "3 × 12 / lado",
-        desc: "Versión cargada del giro: potencia rotacional para el cruzado.",
-        watch: "Core",
-        steps: [
-          "Sentado, tronco atrás 45°, disco al pecho.",
-          "Gira el torso llevando el disco a un lado y al otro: <b>el giro nace en las costillas</b>, no en los brazos.",
-          "Pies apoyados si lo necesitas; elévalos para el nivel pro.",
-          "12 toques por lado sin encorvar la espalda.",
-        ],
-        alternatives: [
-          { id: "lenador-polea", note: "de pie, más parecido al golpe." },
-          { id: "twist-sin-disco", note: "si el disco te encorva." },
-        ],
-      },
-      {
-        images: img("Lying_Face_Up_Plate_Neck_Resistance"),
-        title: "Cuello con disco",
-        reps: "2 × 15",
-        desc: "<b>En MMA el cuello no es opcional:</b> absorbe golpes y pelea la guillotina y el clinch. Disco liviano, movimiento lento y controlado.",
-        watch: "Fuerza funcional",
-        steps: [
-          "Boca arriba en un banco, cabeza por fuera del borde, disco liviano sobre la frente (con toalla).",
-          "Baja la cabeza lento y súbela hasta llevar la barbilla al pecho.",
-          "15 controladas; <b>nada de rebotes ni prisa</b>.",
-          "Es lo que te deja recibir un golpe y pelear la guillotina: trátalo en serio.",
-        ],
-        alternatives: [
-          { id: "cuello-isometricos", note: "empuja contra tu mano: sirve en cualquier lugar." },
-          { id: "cuello-banda", note: "banda en un poste, 4 direcciones." },
-        ],
+        icon: "i-stretch",
+        title: "Después + el otro día",
+        reps: "5 min",
+        desc: "Estira pantorrillas, antebrazos y hombro al terminar. El otro día del fin de semana es <b>descanso total</b>: el lunes se arranca de nuevo.",
       },
     ],
   },
