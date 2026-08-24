@@ -233,6 +233,70 @@ footer{border-top:1px solid var(--line);padding:40px 28px max(60px,calc(40px + e
 footer p{color:var(--mut);font-size:13.5px;max-width:680px;margin:0 auto}
 footer .sig{margin-top:14px;font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.25em;text-transform:uppercase;font-size:12px;color:#5c594f}
 
+/* ---------- POPUP DE EJERCICIO ---------- */
+.card.openable{cursor:pointer}
+.card.openable:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.hint{
+  position:absolute;top:10px;right:10px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;
+  background:rgba(11,11,13,.78);color:var(--ink);border:1px solid var(--line);
+  padding:3px 8px;backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+}
+.hint::first-letter{color:var(--red)}
+.ex-modal{
+  margin:auto;padding:0;border:1px solid var(--line);background:var(--panel);color:var(--ink);
+  width:min(560px,calc(100% - 28px));max-height:min(88dvh,880px);
+  box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+.ex-modal::backdrop{background:rgba(5,5,7,.66);backdrop-filter:blur(3px)}
+.ex-modal[open]{animation:modal-in .22s ease}
+@keyframes modal-in{from{opacity:0;transform:translateY(14px)}}
+.ex-close{
+  position:absolute;top:10px;right:10px;z-index:3;width:34px;height:34px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Barlow Condensed',sans-serif;font-size:17px;line-height:1;cursor:pointer;
+  background:rgba(11,11,13,.8);color:var(--ink);border:1px solid var(--line);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+}
+.ex-close:hover{border-color:var(--red);color:var(--red)}
+.ex-modal .ex-pict{height:150px}
+.ex-modal .ex-pict.photo{height:250px}
+.ex-info{padding:20px 22px calc(24px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:10px}
+.ex-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.ex-top h3{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:23px;letter-spacing:.03em;text-transform:uppercase;line-height:1.12;
+}
+.ex-desc{color:var(--mut);font-size:14.5px}
+.ex-desc b{color:var(--ink)}
+.ex-sec{
+  display:flex;align-items:center;gap:12px;margin-top:10px;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--red);
+}
+.ex-sec::after{content:"";height:1px;background:var(--line);flex:1}
+.ex-steps{list-style:none;counter-reset:step;display:flex;flex-direction:column;gap:9px}
+.ex-steps li{
+  counter-increment:step;position:relative;padding-left:40px;
+  color:var(--mut);font-size:14.5px;
+}
+.ex-steps li::before{
+  content:counter(step,decimal-leading-zero);
+  position:absolute;left:0;top:1px;
+  font-family:'Anton',sans-serif;font-size:17px;line-height:1.2;
+  color:transparent;-webkit-text-stroke:1px var(--amber);
+}
+.ex-steps li b{color:var(--ink)}
+.ex-alts{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ex-alts li{
+  border:1px solid var(--line);border-left:3px solid var(--red);background:var(--panel-2);
+  padding:10px 14px;font-size:14px;color:var(--mut);
+}
+.ex-alts li b{
+  color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15.5px;letter-spacing:.04em;text-transform:uppercase;
+}
+@media (prefers-reduced-motion:reduce){
+  .ex-modal[open]{animation:none}
+}
+
 /* ---------- REVEAL ---------- */
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
 .reveal.in{opacity:1;transform:none}

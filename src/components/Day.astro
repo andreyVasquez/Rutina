@@ -21,44 +21,113 @@ const gridClass = day.recovery ? "recov" : "cards";
     {day.quote && <p class="day-quote reveal">{day.quote}</p>}
     <div class={gridClass}>
       {
-        day.exercises.map((ex) => (
-          <article class="card reveal">
-            <div class:list={["pict", ex.images && "photo"]}>
-              {ex.images ? (
-                <>
-                  <img
-                    class="frame"
-                    src={ex.images[0]}
-                    alt={`${ex.title} — posición inicial`}
-                    loading="lazy"
-                    width="850"
-                    height="569"
-                  />
-                  <img
-                    class="frame f2"
-                    src={ex.images[1]}
-                    alt={`${ex.title} — posición final`}
-                    loading="lazy"
-                    width="850"
-                    height="569"
-                  />
-                </>
-              ) : (
-                <svg class="icon">
-                  <use href={`#${ex.icon}`} />
-                </svg>
-              )}
-              {ex.watch && <span class="watch">⌚ {ex.watch}</span>}
-            </div>
-            <div class="card-body">
-              <div class="card-top">
-                <h3>{ex.title}</h3>
-                <span class="reps">{ex.reps}</span>
+        day.exercises.map((ex) => {
+          const openable = !!(ex.steps?.length || ex.alternatives?.length);
+          return (
+            <article
+              class:list={["card", "reveal", openable && "openable"]}
+              tabindex={openable ? 0 : undefined}
+              role={openable ? "button" : undefined}
+              aria-haspopup={openable ? "dialog" : undefined}
+              aria-label={openable ? `${ex.title}: ver guía y alternativas` : undefined}
+            >
+              <div class:list={["pict", ex.images && "photo"]}>
+                {ex.images ? (
+                  <>
+                    <img
+                      class="frame"
+                      src={ex.images[0]}
+                      alt={`${ex.title} — posición inicial`}
+                      loading="lazy"
+                      width="850"
+                      height="569"
+                    />
+                    <img
+                      class="frame f2"
+                      src={ex.images[1]}
+                      alt={`${ex.title} — posición final`}
+                      loading="lazy"
+                      width="850"
+                      height="569"
+                    />
+                  </>
+                ) : (
+                  <svg class="icon">
+                    <use href={`#${ex.icon}`} />
+                  </svg>
+                )}
+                {ex.watch && <span class="watch">⌚ {ex.watch}</span>}
+                {openable && <span class="hint">+ guía</span>}
               </div>
-              <p set:html={ex.desc} />
-            </div>
-          </article>
-        ))
+              <div class="card-body">
+                <div class="card-top">
+                  <h3>{ex.title}</h3>
+                  <span class="reps">{ex.reps}</span>
+                </div>
+                <p set:html={ex.desc} />
+              </div>
+              {openable && (
+                <template class="card-detail">
+                  <div class:list={["pict", "ex-pict", ex.images && "photo"]}>
+                    {ex.images ? (
+                      <>
+                        <img
+                          class="frame"
+                          src={ex.images[0]}
+                          alt={`${ex.title} — posición inicial`}
+                          width="850"
+                          height="569"
+                        />
+                        <img
+                          class="frame f2"
+                          src={ex.images[1]}
+                          alt={`${ex.title} — posición final`}
+                          width="850"
+                          height="569"
+                        />
+                      </>
+                    ) : (
+                      <svg class="icon">
+                        <use href={`#${ex.icon}`} />
+                      </svg>
+                    )}
+                    {ex.watch && <span class="watch">⌚ {ex.watch}</span>}
+                  </div>
+                  <div class="ex-info">
+                    <div class="ex-top">
+                      <h3>{ex.title}</h3>
+                      <span class="reps">{ex.reps}</span>
+                    </div>
+                    <p class="ex-desc" set:html={ex.desc} />
+                    {ex.steps?.length && (
+                      <>
+                        <h4 class="ex-sec">Cómo hacerlo</h4>
+                        <ol class="ex-steps">
+                          {ex.steps.map((s) => (
+                            <li set:html={s} />
+                          ))}
+                        </ol>
+                      </>
+                    )}
+                    {ex.alternatives?.length && (
+                      <>
+                        <h4 class="ex-sec">Alternativas</h4>
+                        <ul class="ex-alts">
+                          {ex.alternatives.map((a) => (
+                            <li>
+                              <b>{a.title}</b>
+                              {a.note && <span> — {a.note}</span>}
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </div>
+                </template>
+              )}
+            </article>
+          );
+        })
       }
     </div>
   </div>

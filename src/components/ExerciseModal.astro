@@ -1,0 +1,50 @@
+---
+/**
+ * Popup de ejercicio: al tocar una tarjeta .card.openable se clona su
+ * <template class="card-detail"> (gif arriba, paso a paso, alternativas)
+ * dentro de este <dialog> nativo. Esc, la ✕ o tocar el fondo lo cierran.
+ */
+---
+
+<dialog class="ex-modal" id="ex-modal" aria-label="Guía del ejercicio">
+  <button class="ex-close" type="button" aria-label="Cerrar">✕</button>
+  <div class="ex-body"></div>
+</dialog>
+
+<script>
+  const modal = document.getElementById("ex-modal") as HTMLDialogElement | null;
+
+  if (modal && typeof modal.showModal === "function") {
+    const body = modal.querySelector(".ex-body")!;
+    const closeBtn = modal.querySelector(".ex-close")!;
+
+    const open = (tpl: HTMLTemplateElement) => {
+      body.replaceChildren(tpl.content.cloneNode(true));
+      modal.showModal();
+      modal.scrollTop = 0;
+      document.body.style.overflow = "hidden";
+    };
+
+    document.querySelectorAll<HTMLElement>(".card.openable").forEach((card) => {
+      const tpl = card.querySelector<HTMLTemplateElement>("template.card-detail");
+      if (!tpl) return;
+      card.addEventListener("click", () => open(tpl));
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          open(tpl);
+        }
+      });
+    });
+
+    closeBtn.addEventListener("click", () => modal.close());
+    // Clic en el fondo (el target es el propio dialog, no su contenido).
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.close();
+    });
+    modal.addEventListener("close", () => {
+      body.replaceChildren();
+      document.body.style.overflow = "";
+    });
+  }
+</script>
