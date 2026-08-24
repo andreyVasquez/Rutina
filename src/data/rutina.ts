@@ -1,6 +1,17 @@
-export interface Alternative {
+export interface AltDetail {
   title: string;
-  /** Cuándo o por qué usar esta alternativa. */
+  /** Series × reps sugeridas al usarla como reemplazo. */
+  reps: string;
+  images?: [string, string];
+  icon?: string;
+  /** Una línea: por qué / cuándo. */
+  desc: string;
+  steps: string[];
+}
+
+/** Referencia a una alternativa del catálogo, con nota contextual opcional. */
+export interface AltRef {
+  id: string;
   note?: string;
 }
 
@@ -17,8 +28,8 @@ export interface Exercise {
   watch?: string;
   /** Cómo hacerlo, paso a paso. Abre el popup al tocar la tarjeta. */
   steps?: string[];
-  /** Alternativas si la máquina está ocupada o quieres variar. */
-  alternatives?: Alternative[];
+  /** Alternativas (ids de altCatalog) si la máquina está ocupada o quieres variar. */
+  alternatives?: AltRef[];
 }
 
 export interface DayData {
@@ -39,6 +50,799 @@ const img = (id: string): [string, string] => [
 ];
 
 /**
+ * Catálogo de alternativas: cada tarjeta del popup de un ejercicio lista sus
+ * alternativas por id; al tocarlas se abre esta mini-guía (foto + pasos).
+ */
+export const altCatalog: Record<string, AltDetail> = {
+  /* ---- Cardio / calentamiento ---- */
+  "escaladora": {
+    title: "Escaladora",
+    reps: "6–8 min",
+    images: img("Stairmaster"),
+    desc: "Cardio de piernas sin impacto: activa glúteo y sube el pulso más rápido que la elíptica.",
+    steps: [
+      "Pisa el escalón completo, sin quedarte en la punta.",
+      "Ritmo constante y postura erguida: no te cuelgues de las manijas.",
+      "Sube un nivel de velocidad cada 2 min si vas cómodo.",
+    ],
+  },
+  "bici-suave": {
+    title: "Bici estática suave",
+    reps: "6–8 min",
+    images: img("Bicycling_Stationary"),
+    desc: "Calentamiento sin impacto cuando las elípticas están ocupadas.",
+    steps: [
+      "Asiento a la altura de la cadera; rodilla casi extendida abajo.",
+      "Pedalea suave los primeros 2 min y sube la resistencia poco a poco.",
+      "Termina sudando ligero, sin agitarte.",
+    ],
+  },
+  "caminadora-cuesta": {
+    title: "Caminadora en cuesta",
+    reps: "6–8 min",
+    images: img("Running_Treadmill"),
+    desc: "Caminar rápido con inclinación calienta piernas y cadera sin castigar rodillas.",
+    steps: [
+      "Inclinación 8–10, velocidad de caminata rápida (5.5–6.5 km/h).",
+      "Camina erguido, sin agarrarte de las barandas.",
+      "Sube un punto de velocidad cada 2 min.",
+    ],
+  },
+  "rounds-caminadora": {
+    title: "Rounds en caminadora",
+    reps: "3–5 × (3 min / 1 min)",
+    images: img("Running_Treadmill"),
+    desc: "El formato de round llevado a la caminadora: 3 min fuertes, 1 min caminando.",
+    steps: [
+      "3 min a ritmo fuerte (o con inclinación) = un round.",
+      "1 min caminando suave = el descanso entre rounds.",
+      "Sube velocidad o inclinación cada semana; anota la del último round.",
+    ],
+  },
+  "eliptica-rapida": {
+    title: "Elíptica rápida",
+    reps: "3–5 × (3 min / 1 min)",
+    images: img("Elliptical_Trainer"),
+    desc: "Mismos bloques de round, cero impacto en tobillos y rodillas.",
+    steps: [
+      "3 min a resistencia alta y ritmo fuerte.",
+      "1 min suave sin soltar el movimiento.",
+      "Piernas y brazos empujan a la vez: úsala completa.",
+    ],
+  },
+  "bici-sprints": {
+    title: "Bici estática (sprints)",
+    reps: "6 × (30 s / 60 s)",
+    images: img("Bicycling_Stationary"),
+    desc: "El mismo finisher de rounds cuando la bici de aire está ocupada.",
+    steps: [
+      "Sube la resistencia a un nivel que te cueste de verdad.",
+      "30 s pedaleando a tope, de pie si hace falta.",
+      "60 s suave con poca resistencia. Repite 6 veces.",
+    ],
+  },
+  "remo-suave-polea": {
+    title: "Remo suave en polea",
+    reps: "2 × 15 livianas",
+    images: img("Seated_Cable_Rows"),
+    desc: "Activa espalda y hombro antes de empujar: sangre donde va a haber trabajo.",
+    steps: [
+      "Peso liviano: la mitad de tu remo normal.",
+      "15 repeticiones lentas apretando las escápulas 1 s.",
+      "Sin fatigarte: esto es calentamiento, no serie efectiva.",
+    ],
+  },
+
+  /* ---- Pierna y cadera ---- */
+  "salto-cajon": {
+    title: "Salto al cajón",
+    reps: "4 × 5",
+    images: img("Front_Box_Jump"),
+    desc: "Mismo patrón explosivo que la sentadilla con salto, con aterrizaje más amable.",
+    steps: [
+      "Cajón estable a la altura de la rodilla o menos.",
+      "Baja rápido a media sentadilla y salta al centro del cajón.",
+      "Aterriza suave y completo; <b>baja caminando</b>, nunca de salto.",
+      "2 min de descanso entre series: velocidad máxima.",
+    ],
+  },
+  "desplante-pliometrico": {
+    title: "Desplante pliométrico",
+    reps: "3 × 6 / lado",
+    icon: "i-plyo",
+    desc: "Zancada con cambio de pierna en el aire: potencia unilateral, como empujas al golpear.",
+    steps: [
+      "Posición de zancada, ambas rodillas a 90°.",
+      "Salta vertical y <b>cambia de pierna en el aire</b>.",
+      "Aterriza suave directo en la zancada del otro lado.",
+      "Si es mucho, alterna zancadas explosivas sin salto.",
+    ],
+  },
+  "goblet-explosiva": {
+    title: "Sentadilla goblet explosiva",
+    reps: "4 × 6",
+    images: img("Goblet_Squat"),
+    desc: "Potencia de pierna sin impacto: sube a máxima velocidad, sin despegar del piso.",
+    steps: [
+      "Mancuerna media al pecho, codos abajo.",
+      "Baja controlado hasta romper la paralela.",
+      "<b>Sube lo más rápido que puedas</b>, como si fueras a saltar — sin saltar.",
+    ],
+  },
+  "goblet": {
+    title: "Sentadilla goblet",
+    reps: "4 × 8–10",
+    images: img("Goblet_Squat"),
+    desc: "La sentadilla libre más segura entrenando solo: la mancuerna te endereza el torso.",
+    steps: [
+      "Mancuerna pesada vertical al pecho, codos apuntando abajo.",
+      "Baja en 2–3 s hasta que los codos pasen entre las rodillas.",
+      "Sube explosivo con el pecho arriba. RIR 1–2.",
+    ],
+  },
+  "prensa": {
+    title: "Prensa (Leg Press)",
+    reps: "3–4 × 8–10",
+    images: img("Leg_Press"),
+    desc: "El empujón de pierna con cero técnica que vigilar: ideal con el gym lleno.",
+    steps: [
+      "Pies al centro de la plataforma, al ancho de hombros.",
+      "Baja controlado hasta que las rodillas casi toquen el pecho, sin despegar la cadera.",
+      "Empuja fuerte sin bloquear las rodillas arriba.",
+    ],
+  },
+  "hack-squat": {
+    title: "Hack squat inclinado",
+    reps: "3 × 8–10",
+    images: img("Hack_Squat"),
+    desc: "Sentadilla guiada que carga el cuádriceps sin pedirle nada a la espalda.",
+    steps: [
+      "Hombros bajo las almohadillas, pies un paso adelante.",
+      "Baja profundo en 2–3 s con la espalda pegada al respaldo.",
+      "Sube explosivo sin bloquear las rodillas.",
+    ],
+  },
+  "leg-curl": {
+    title: "Femoral en máquina (leg curl)",
+    reps: "3 × 10–12",
+    images: img("Seated_Leg_Curl"),
+    desc: "Aísla el femoral — el freno de tus sprints y derribos — sin cargar la espalda.",
+    steps: [
+      "Ajusta el respaldo: la rodilla alineada con el eje de la máquina.",
+      "Flexiona con fuerza hasta la máxima contracción.",
+      "Vuelve en 2–3 s resistiendo; no dejes que el peso rebote.",
+    ],
+  },
+  "rumano-mancuernas": {
+    title: "Rumano con mancuernas",
+    reps: "4 × 8–10",
+    images: img("Romanian_Deadlift"),
+    desc: "La bisagra de cadera con libertad total de movimiento.",
+    steps: [
+      "Mancuernas al frente de los muslos, rodillas apenas flexionadas.",
+      "Cadera atrás: las mancuernas bajan <b>rozando las piernas</b>.",
+      "Al sentir el estirón del femoral, aprieta el glúteo y sube.",
+    ],
+  },
+  "hiperextension-disco": {
+    title: "Hiperextensión con disco",
+    reps: "3 × 10–12",
+    images: img("Hyperextensions_Back_Extensions"),
+    desc: "El banco romano cargado: glúteo, femoral y lumbar en un solo movimiento.",
+    steps: [
+      "Abraza un disco al pecho en el banco romano.",
+      "Baja controlado con la espalda larga.",
+      "Sube hasta la línea recta apretando glúteo — sin pasarte arriba.",
+    ],
+  },
+  "acarreo-maleta": {
+    title: "Acarreo tipo maleta",
+    reps: "3 × 30 m / mano",
+    images: img("Farmers_Walk"),
+    desc: "Una sola mancuerna: el core pelea para que no te tuerzas — anti-flexión lateral pura.",
+    steps: [
+      "Una mancuerna pesada en una mano, postura perfecta.",
+      "Camina 30 m <b>sin inclinarte hacia ningún lado</b>.",
+      "Cambia de mano y vuelve. Eso es una serie.",
+    ],
+  },
+  "dead-hang": {
+    title: "Colgado de barra (dead hang)",
+    reps: "3 × 30–45 s",
+    images: img("Pullups"),
+    desc: "Agarre puro y descompresión de hombros: cuélgate y aguanta.",
+    steps: [
+      "Cuélgate de la barra de dominadas con agarre completo.",
+      "Hombros activos (no orejas): aguanta 30–45 s.",
+      "Cuando 45 s sean fáciles, cuelga una mano a la vez por 10 s.",
+    ],
+  },
+  "encogimientos-pausa": {
+    title: "Encogimientos con pausa",
+    reps: "3 × 12",
+    images: img("Dumbbell_Shrug"),
+    desc: "Trapecio y agarre: sostener pesado es la mitad del ejercicio.",
+    steps: [
+      "Mancuernas pesadas a los lados, brazos largos.",
+      "Encoge los hombros hacia las orejas y <b>aguanta 2 s arriba</b>.",
+      "Baja lento. El agarre no se suelta en toda la serie.",
+    ],
+  },
+  "pantorrilla-prensa": {
+    title: "Pantorrilla en la prensa",
+    reps: "2 × 12–15",
+    images: img("Calf_Press_On_The_Leg_Press_Machine"),
+    desc: "La misma pantorrilla, empujando la plataforma de la prensa con la punta del pie.",
+    steps: [
+      "Piernas casi extendidas, solo la punta del pie en la plataforma.",
+      "Empuja hasta la máxima extensión y aprieta 1 s.",
+      "Baja en 2 s hasta el estiramiento completo.",
+    ],
+  },
+  "talones-smith": {
+    title: "Talones en la Smith",
+    reps: "2 × 12–15",
+    images: img("Smith_Machine_Calf_Raise"),
+    desc: "Elevación de talones con barra guiada: carga pesado sin equilibrio que vigilar.",
+    steps: [
+      "Barra en los trapecios, punta de pies sobre un disco.",
+      "Sube a la punta de los pies y aprieta 1 s.",
+      "Baja lento hasta que el talón quede por debajo del disco.",
+    ],
+  },
+  "pantorrilla-una-pierna": {
+    title: "A una pierna con mancuerna",
+    reps: "2 × 12 / lado",
+    images: img("Standing_Dumbbell_Calf_Raise"),
+    desc: "Empareja izquierda y derecha: el juego de pies no tiene lado débil.",
+    steps: [
+      "Punta del pie en un escalón, mancuerna del mismo lado.",
+      "La otra mano se apoya para el equilibrio.",
+      "Sube y baja lento con rango completo.",
+    ],
+  },
+  "puente-una-pierna": {
+    title: "Puente a una pierna",
+    reps: "3 × 12 / lado",
+    images: img("Butt_Lift_Bridge"),
+    desc: "El puente (upa) en el piso: glúteo unilateral sin ninguna máquina.",
+    steps: [
+      "Boca arriba, un pie plantado y la otra pierna estirada.",
+      "Empuja con el talón y sube la cadera hasta la línea recta.",
+      "1 s arriba apretando; baja controlado. Empieza con las dos piernas si hace falta.",
+    ],
+  },
+  "patada-gluteo-polea": {
+    title: "Patada de glúteo en polea",
+    reps: "3 × 12 / lado",
+    images: img("Glute_Kickback"),
+    desc: "Del día A de tu app: glúteo aislado con la pierna flexionada.",
+    steps: [
+      "Tobillera en la polea baja, apóyate del marco.",
+      "Patea atrás y arriba con la rodilla flexionada.",
+      "Aprieta 1 s al final; no arquees la lumbar.",
+    ],
+  },
+  "hip-thrust-barra": {
+    title: "Hip thrust con barra",
+    reps: "4 × 8–10",
+    images: img("Barbell_Hip_Thrust"),
+    desc: "El clásico sobre banco cuando la máquina está ocupada.",
+    steps: [
+      "Espalda alta en el banco, barra (con almohadilla) sobre la cadera.",
+      "Empuja con los talones hasta quedar recto de rodillas a hombros.",
+      "1 s arriba apretando el glúteo; baja controlado.",
+    ],
+  },
+
+  /* ---- Empuje ---- */
+  "shadow-velocidad": {
+    title: "Shadow con mancuernitas",
+    reps: "4 × 15 s",
+    icon: "i-shadow",
+    desc: "Golpes al aire con 1–2 kg: el mismo trabajo de velocidad cuando el saco está ocupado.",
+    steps: [
+      "Mancuernitas de 1–2 kg (no más), guardia arriba.",
+      "15 s de rectos a máxima velocidad con técnica limpia.",
+      "Suelta las mancuernas y lanza 5 golpes al aire: sentirás las manos volar.",
+    ],
+  },
+  "shadow-sprawls": {
+    title: "Shadow con sprawls",
+    reps: "3 rds × 3 min",
+    icon: "i-shadow",
+    desc: "El round completo sin saco: combinaciones al aire con los mismos sprawls por minuto.",
+    steps: [
+      "Pelea contra tu sombra: combinaciones limpias moviéndote como en el ring.",
+      "En cada cambio de minuto: <b>cambio de nivel + sprawl</b> y sigues.",
+      "Guardia arriba y golpes con intención — que alguien crea que peleas de verdad.",
+    ],
+  },
+  "flexiones-palmada": {
+    title: "Flexiones con palmada",
+    reps: "4 × 5",
+    images: img("Pushups"),
+    desc: "Potencia de empuje sin ningún equipo: el piso es tu saco.",
+    steps: [
+      "Posición de flexión firme, core apretado.",
+      "Baja rápido y <b>empuja tan fuerte que las manos despeguen</b>.",
+      "Aplaude y recibe el piso con los codos suaves.",
+      "¿Muy difícil? Flexiones explosivas sin palmada, manos en un banco.",
+    ],
+  },
+  "pase-balon": {
+    title: "Pase de pecho con balón",
+    reps: "4 × 6",
+    images: img("Medicine_Ball_Chest_Pass"),
+    desc: "Si algún día hay balón medicinal: lánzalo como un jab, sin frenar el brazo.",
+    steps: [
+      "Balón al pecho, frente a una pared firme.",
+      "Paso corto y <b>lanza a máxima velocidad</b>.",
+      "Recibe, resetea y repite. Nada de lanzar cansado.",
+    ],
+  },
+  "press-mancuernas": {
+    title: "Press con mancuernas",
+    reps: "4 × 8–10",
+    images: img("Dumbbell_Bench_Press"),
+    desc: "Más rango y estabilización que la máquina, si hay banca libre.",
+    steps: [
+      "Mancuernas a los lados del pecho, pies firmes en el piso.",
+      "Empuja explosivo hasta juntarlas arriba sin chocarlas.",
+      "Baja en 2–3 s hasta un estiramiento cómodo. RIR 1–2.",
+    ],
+  },
+  "press-inclinado-barra": {
+    title: "Press inclinado con barra",
+    reps: "3 × 8–10",
+    images: img("Barbell_Incline_Bench_Press_-_Medium_Grip"),
+    desc: "Del día B de tu app: pega más al pecho alto y al hombro frontal.",
+    steps: [
+      "Banco a 30–45°, agarre un poco más ancho que los hombros.",
+      "Baja la barra a la parte alta del pecho en 2 s.",
+      "Empuja fuerte sin despegar la cadera del banco.",
+    ],
+  },
+  "peck-fly": {
+    title: "Aperturas en peck fly",
+    reps: "3 × 10–12",
+    images: img("Butterfly"),
+    desc: "Estación 26: aísla el pectoral con el hombro protegido por la máquina.",
+    steps: [
+      "Asiento ajustado: manijas a la altura del pecho.",
+      "Junta las manijas al frente con los codos apenas flexionados.",
+      "Aprieta 1 s y abre lento hasta el estiramiento cómodo.",
+    ],
+  },
+  "press-militar": {
+    title: "Press militar estricto",
+    reps: "4 × 5–6",
+    images: img("Standing_Military_Press"),
+    desc: "Sin impulso de piernas: hombro puro y core que aguanta la carga arriba.",
+    steps: [
+      "Barra en las clavículas, pies al ancho de cadera, glúteo apretado.",
+      "Empuja vertical sin ayudarte con las rodillas.",
+      "Cabeza pasa 'a través' al final; baja controlado.",
+    ],
+  },
+  "push-press-mancuernas": {
+    title: "Push press con mancuernas",
+    reps: "4 × 5",
+    images: img("Standing_Dumbbell_Press"),
+    desc: "El mismo gesto explosivo si el rack está ocupado.",
+    steps: [
+      "Mancuernas a los hombros, codos al frente.",
+      "Mini-flexión de rodillas y <b>extiende todo a la vez</b>.",
+      "Baja controlado a los hombros y resetea.",
+    ],
+  },
+  "press-maquina-explosivo": {
+    title: "Press en máquina explosivo",
+    reps: "4 × 6",
+    images: img("Leverage_Shoulder_Press"),
+    desc: "Último recurso de potencia: empuja rápido con la máquina de hombro.",
+    steps: [
+      "Peso moderado: 60–70% de tu press normal.",
+      "<b>Empuja lo más rápido posible</b> en cada repetición.",
+      "Baja lento. Si la velocidad cae, termina la serie.",
+    ],
+  },
+  "press-hombro-mancuernas": {
+    title: "Press de hombro con mancuernas",
+    reps: "3 × 8–10",
+    images: img("Seated_Dumbbell_Press"),
+    desc: "Sentado con respaldo: más estabilización que la máquina, si hay banco libre.",
+    steps: [
+      "Respaldo casi vertical, mancuernas a la altura de las orejas.",
+      "Empuja arriba sin chocarlas ni bloquear los codos.",
+      "Baja en 2 s a las orejas; lumbar pegada al respaldo.",
+    ],
+  },
+  "elevacion-lateral-maquina": {
+    title: "Elevación lateral en máquina",
+    reps: "3 × 12–15",
+    icon: "i-lateral",
+    desc: "Estación 55: hombro medio sin carga axial, para días en que el hombro pide algo liviano.",
+    steps: [
+      "Ajusta el asiento: hombros alineados con el eje de la máquina.",
+      "Sube los brazos hasta la horizontal, sin encoger los hombros.",
+      "Baja en 2 s resistiendo el peso.",
+    ],
+  },
+
+  /* ---- Jalón ---- */
+  "remo-mancuerna": {
+    title: "Remo con mancuerna a una mano",
+    reps: "3 × 10 / lado",
+    images: img("One-Arm_Dumbbell_Row"),
+    desc: "Un lado a la vez, como jalas en el clinch: mano y rodilla en el banco.",
+    steps: [
+      "Mano y rodilla en el banco, espalda plana como una mesa.",
+      "Jala la mancuerna a la cadera llevando el codo atrás.",
+      "1 s de apretón arriba; baja hasta el estiramiento completo.",
+    ],
+  },
+  "remo-unilateral-polea": {
+    title: "Remo unilateral en polea",
+    reps: "3 × 10 / lado",
+    images: img("Seated_One-arm_Cable_Pulley_Rows"),
+    desc: "Tu app lo llama Remo Polea Unilateral: jala con un brazo mientras el core resiste el giro.",
+    steps: [
+      "Sentado frente a la polea, agarre en una mano.",
+      "Jala al abdomen <b>sin dejar que el torso rote</b>.",
+      "Regresa lento; cambia de brazo al terminar.",
+    ],
+  },
+  "remo-palanca": {
+    title: "Remo en máquina de palanca",
+    reps: "3 × 10–12",
+    images: img("Leverage_Iso_Row"),
+    desc: "La máquina de remo con apoyo al pecho: espalda sin que la lumbar trabaje de más.",
+    steps: [
+      "Pecho apoyado en la almohadilla, agarre neutro.",
+      "Jala llevando los codos atrás y aprieta 1 s.",
+      "Regresa hasta estirar del todo el dorsal.",
+    ],
+  },
+  "dominada-asistida": {
+    title: "Dominada asistida",
+    reps: "3 × 6–8",
+    images: img("Band_Assisted_Pull-Up"),
+    desc: "El patrón completo de la dominada con la ayuda justa (máquina de contrapeso o banda).",
+    steps: [
+      "En la asistida: contrapeso que te deje sacar 6–8 limpias.",
+      "Jala hasta pasar la barbilla, pecho a la barra.",
+      "Baja en 2–3 s. Cada semana, un poco menos de ayuda.",
+    ],
+  },
+  "jalon-unilateral": {
+    title: "Jalón unilateral",
+    reps: "3 × 10 / lado",
+    images: img("Wide-Grip_Lat_Pulldown"),
+    desc: "Estación 33 de tu app: un brazo a la vez, el dorsal no puede esconderse.",
+    steps: [
+      "Maneral individual en la polea alta.",
+      "Jala hacia el pecho llevando el codo a las costillas.",
+      "Controla la subida sin que el hombro se dispare a la oreja.",
+    ],
+  },
+  "jalon-cerrado": {
+    title: "Jalón agarre cerrado",
+    reps: "3 × 10–12",
+    images: img("Close-Grip_Front_Lat_Pulldown"),
+    desc: "Codos al frente: más bíceps y dorsal bajo — el jalón del clinch.",
+    steps: [
+      "Triángulo o agarre estrecho en la polea alta.",
+      "Pecho arriba: jala el agarre al esternón.",
+      "Aprieta 1 s abajo y sube controlado.",
+    ],
+  },
+  "jalon-pesado": {
+    title: "Jalón al pecho pesado",
+    reps: "4 × 6–8",
+    images: img("Wide-Grip_Lat_Pulldown"),
+    desc: "El reemplazo directo de la dominada cuando la asistida está ocupada.",
+    steps: [
+      "Más peso que tu jalón normal: rango de 6–8 repeticiones.",
+      "Jala a la clavícula con el pecho afuera.",
+      "Controla la subida en 2–3 s: ahí se construye la dominada.",
+    ],
+  },
+  "dominada-neutra": {
+    title: "Dominada agarre neutro",
+    reps: "3 × al fallo − 1",
+    images: img("Pullups"),
+    desc: "Palmas enfrentadas: la versión más amable con hombros y codos.",
+    steps: [
+      "Toma las manijas paralelas de la barra.",
+      "Jala hasta pasar la barbilla, codos hacia las costillas.",
+      "Baja en 2–3 s; deja 1 repetición en reserva.",
+    ],
+  },
+  "remo-invertido": {
+    title: "Remo invertido",
+    reps: "3 × 8–12",
+    images: img("Inverted_Row"),
+    desc: "En la Smith con la barra baja: tu peso corporal hace de remo.",
+    steps: [
+      "Barra de la Smith a la altura de la cadera; cuélgate debajo, cuerpo recto.",
+      "Jala el pecho a la barra apretando las escápulas.",
+      "Más difícil: pies más adelante o en un banco.",
+    ],
+  },
+
+  /* ---- Brazo ---- */
+  "press-frances-z": {
+    title: "Press francés con barra Z",
+    reps: "2 × 10–12",
+    images: img("EZ-Bar_Skullcrusher"),
+    desc: "Del día B de tu app: tríceps con estiramiento completo.",
+    steps: [
+      "Acostado, barra Z sobre la frente con codos al techo.",
+      "Extiende solo el codo hasta estirar los brazos.",
+      "Baja en 2 s controlando: los codos no se abren.",
+    ],
+  },
+  "maquina-triceps": {
+    title: "Máquina de tríceps",
+    reps: "2 × 12–15",
+    images: img("Machine_Triceps_Extension"),
+    desc: "La Arm Extension del catálogo: tríceps guiado si el multifuncional está lleno.",
+    steps: [
+      "Ajusta el asiento: codos alineados con el eje.",
+      "Extiende hasta el final y aprieta 1 s.",
+      "Regresa lento sin soltar la tensión.",
+    ],
+  },
+  "fondos-banco": {
+    title: "Fondos en banco",
+    reps: "2 × 10–15",
+    images: img("Bench_Dips"),
+    desc: "Tríceps sin ningún equipo: solo un banco y tu peso.",
+    steps: [
+      "Manos al borde del banco, pies adelante.",
+      "Baja hasta 90° de codo, cerca del banco.",
+      "Empuja fuerte arriba; hombros lejos de las orejas.",
+    ],
+  },
+  "curl-martillo-mancuernas": {
+    title: "Curl martillo con mancuernas",
+    reps: "2 × 10–12",
+    images: img("Hammer_Curls"),
+    desc: "El clásico: agarre neutro que construye antebrazo y bíceps a la vez.",
+    steps: [
+      "Mancuernas a los lados, palmas enfrentadas.",
+      "Sube sin girar la muñeca ni balancear el torso.",
+      "Baja en 2 s resistiendo.",
+    ],
+  },
+  "curl-scott": {
+    title: "Curl en máquina Scott",
+    reps: "2 × 10–12",
+    images: img("Machine_Preacher_Curls"),
+    desc: "Del catálogo de tu app: el banco predicador elimina el impulso — bíceps aislado.",
+    steps: [
+      "Axilas al borde del cojín, brazos completamente apoyados.",
+      "Sube hasta la contracción máxima sin despegar los codos.",
+      "Baja lento hasta casi estirar. Sin rebotes abajo.",
+    ],
+  },
+  "curl-barra-z": {
+    title: "Curl con barra Z",
+    reps: "2 × 10–12",
+    images: img("EZ-Bar_Curl"),
+    desc: "Agarre supino en barra Z: muñecas cómodas, bíceps completo.",
+    steps: [
+      "Barra Z con agarre a la anchura de los hombros.",
+      "Codos pegados: sube sin balancear el cuerpo.",
+      "Baja en 2 s hasta estirar del todo.",
+    ],
+  },
+
+  /* ---- Hombro sano ---- */
+  "facepull-banda": {
+    title: "Face pull con banda",
+    reps: "3 × 15",
+    icon: "i-facepull",
+    desc: "Tu banda en cualquier poste: idéntico al de polea.",
+    steps: [
+      "Banda anclada a la altura de la cara.",
+      "Jala hacia la frente abriendo las manos, codos altos.",
+      "Aprieta atrás 1 s y regresa lento.",
+    ],
+  },
+  "reverse-peck": {
+    title: "Aperturas invertidas en peck fly",
+    reps: "3 × 12–15",
+    images: img("Reverse_Machine_Flyes"),
+    desc: "El peck fly al revés: hombro posterior y espalda alta guiados.",
+    steps: [
+      "Siéntate de frente al respaldo con las manijas atrás.",
+      "Abre los brazos hacia atrás apretando las escápulas.",
+      "1 s de apretón y regresa lento.",
+    ],
+  },
+  "posteriores-mancuernas": {
+    title: "Posteriores con mancuernas",
+    reps: "3 × 12–15",
+    images: img("Seated_Bent-Over_Rear_Delt_Raise"),
+    desc: "Inclinado al frente: hombro posterior con mancuernas livianas.",
+    steps: [
+      "Sentado, torso inclinado casi al muslo.",
+      "Abre los brazos a los lados como alas, codos suaves.",
+      "Baja lento sin dar impulso con el torso.",
+    ],
+  },
+  "rotacion-banda": {
+    title: "Rotación externa con banda",
+    reps: "2 × 15 / lado",
+    icon: "i-extrot",
+    desc: "El mismo seguro del manguito, con tu banda en cualquier lugar.",
+    steps: [
+      "Banda anclada a la altura del codo; codo pegado a 90°.",
+      "Gira el antebrazo hacia afuera sin despegar el codo.",
+      "Regresa lento. Tensión suave y constante.",
+    ],
+  },
+  "rotacion-acostado": {
+    title: "Rotación acostado con mancuernita",
+    reps: "2 × 12 / lado",
+    icon: "i-extrot",
+    desc: "De lado en un banco con 1–3 kg: el manguito no necesita más.",
+    steps: [
+      "Acostado de lado, codo pegado a las costillas a 90°.",
+      "Gira el antebrazo hacia el techo, lento.",
+      "Baja en 2 s. Si pesa más de 3 kg, es demasiado.",
+    ],
+  },
+
+  /* ---- Core y cuello ---- */
+  "russian-twist-disco": {
+    title: "Russian twist con disco",
+    reps: "3 × 12 / lado",
+    images: img("Plate_Twist"),
+    desc: "El giro cargado sentado: rotación con control total.",
+    steps: [
+      "Sentado, tronco atrás 45°, disco al pecho.",
+      "Gira desde las costillas llevando el disco a cada lado.",
+      "Sin encorvar la espalda; pies arriba para el nivel pro.",
+    ],
+  },
+  "twist-sin-disco": {
+    title: "Twist sin peso",
+    reps: "3 × 20 / lado",
+    images: img("Russian_Twist"),
+    desc: "Si el disco te encorva: el mismo giro, más repeticiones, técnica perfecta.",
+    steps: [
+      "Tronco atrás 45° con la espalda larga.",
+      "Gira tocando el piso a cada lado con las manos.",
+      "Ritmo constante: 20 toques por lado.",
+    ],
+  },
+  "pallof": {
+    title: "Pallof press en polea",
+    reps: "3 × 10 / lado",
+    icon: "i-pallof",
+    desc: "Anti-rotación: aguanta recto lo que la polea quiere girar — el core del clinch.",
+    steps: [
+      "Polea a la altura del pecho, párate de lado y da un paso para tensar.",
+      "Extiende los brazos al frente y <b>aguanta 3 s sin girar</b>.",
+      "Regresa al pecho y repite. Cambia de lado.",
+    ],
+  },
+  "lenador-banda": {
+    title: "Leñador con banda",
+    reps: "3 × 12 / lado",
+    icon: "i-chop",
+    desc: "El mismo patrón diagonal del cruzado, con tu banda en cualquier poste.",
+    steps: [
+      "Banda anclada arriba; párate de lado.",
+      "Gira desde la cadera llevando la banda a la rodilla contraria.",
+      "Controla la vuelta: la banda no te gana.",
+    ],
+  },
+  "lenador-polea": {
+    title: "Leñador en polea",
+    reps: "3 × 12 / lado",
+    images: img("Standing_Cable_Wood_Chop"),
+    desc: "De pie y con polea: la rotación más parecida al golpe.",
+    steps: [
+      "Polea arriba, pies al ancho de hombros, de lado.",
+      "Brazos casi rectos: gira desde la cadera en diagonal.",
+      "El torso gira, los brazos acompañan.",
+    ],
+  },
+  "plancha-toques": {
+    title: "Plancha con toques de hombro",
+    reps: "3 × 20 toques",
+    images: img("Plank"),
+    desc: "Plancha alta tocando hombros: el core aprende a no mecerse — como aguantar un empujón.",
+    steps: [
+      "Plancha alta (manos), pies un poco más abiertos.",
+      "Toca el hombro contrario con una mano <b>sin que la cadera se mueva</b>.",
+      "Alterna lados a ritmo controlado.",
+    ],
+  },
+  "plancha-lateral": {
+    title: "Plancha lateral",
+    reps: "3 × 45 s / lado",
+    images: img("Side_Bridge"),
+    desc: "Oblicuos isométricos: los que sostienen tu postura en el clinch.",
+    steps: [
+      "De lado sobre el antebrazo, codo bajo el hombro.",
+      "Cadera arriba: cuerpo en línea recta de pies a cabeza.",
+      "Aguanta 45 s respirando normal; cambia de lado.",
+    ],
+  },
+  "rodillas-colgado": {
+    title: "Rodillas al pecho colgado",
+    reps: "3 × 10–12",
+    images: img("Hanging_Leg_Raise"),
+    desc: "Colgado de la barra: abdomen bajo y agarre gratis en el mismo ejercicio.",
+    steps: [
+      "Cuélgate de la barra con hombros activos.",
+      "Sube las rodillas al pecho <b>sin balancearte</b>.",
+      "Baja lento hasta estirar. Piernas rectas = nivel pro.",
+    ],
+  },
+  "crunch-polea": {
+    title: "Crunch en polea alta",
+    reps: "3 × 12–15",
+    images: img("Cable_Crunch"),
+    desc: "Abdomen con peso progresivo: arrodillado con la cuerda de la polea.",
+    steps: [
+      "Arrodillado, cuerda a los lados de la cabeza.",
+      "Encorva las costillas hacia la cadera — la cadera no se mueve.",
+      "Regresa lento manteniendo la tensión.",
+    ],
+  },
+  "superman": {
+    title: "Superman en el piso",
+    reps: "3 × 12 (2 s arriba)",
+    images: img("Superman"),
+    desc: "Lumbar sin ningún equipo: brazos y piernas al aire.",
+    steps: [
+      "Boca abajo, brazos extendidos al frente.",
+      "Despega brazos y piernas a la vez y <b>aguanta 2 s</b>.",
+      "Baja con control y repite sin rebotar.",
+    ],
+  },
+  "buenos-dias-banda": {
+    title: "Buenos días con banda",
+    reps: "3 × 15",
+    icon: "i-rdl",
+    desc: "Bisagra ligera de alta repetición: lumbar y femoral despiertos.",
+    steps: [
+      "Banda pisada y pasada por detrás del cuello.",
+      "Cadera atrás con la espalda larga hasta inclinar el torso.",
+      "Aprieta el glúteo para volver arriba.",
+    ],
+  },
+  "cuello-isometricos": {
+    title: "Isométricos de cuello",
+    reps: "2 × 10 s × 4 direcciones",
+    images: img("Lying_Face_Up_Plate_Neck_Resistance"),
+    desc: "Tu mano es la resistencia: cuello fuerte en cualquier lugar, sin equipo.",
+    steps: [
+      "Empuja la cabeza contra tu mano <b>sin que se mueva</b>: 10 s al frente.",
+      "Repite hacia atrás y a cada lado.",
+      "Presión progresiva: empieza suave y sube.",
+    ],
+  },
+  "cuello-banda": {
+    title: "Cuello con banda",
+    reps: "2 × 12 × 4 direcciones",
+    images: img("Lying_Face_Up_Plate_Neck_Resistance"),
+    desc: "Banda anclada a un poste: resistencia elástica en las 4 direcciones.",
+    steps: [
+      "Banda alrededor de la cabeza, anclada a un poste.",
+      "Aléjate hasta sentir tensión y mueve la cabeza contra la banda, lento.",
+      "12 repeticiones al frente, atrás y a cada lado.",
+    ],
+  },
+};
+
+/**
  * Semana definitiva, construida alrededor del MMA:
  *  - Lun, Mar, Mié y Vie: gym (máquinas Matrix, pesas, saco de boxeo y zona
  *    cardio: caminadoras, elípticas, escaladora y bici de aire).
@@ -47,8 +851,9 @@ const img = (id: string): [string, string] => [
  *  - Jueves: sesión personalizada 1 a 1 con el profe. Él dirige calentamiento,
  *    estiramiento y todo el trabajo — ese día no hay nada más.
  *
- * Cada ejercicio trae `steps` (paso a paso) y `alternatives` (plan B con las
- * máquinas del gym); al tocar la tarjeta se abren en un popup.
+ * Cada ejercicio trae `steps` (paso a paso) y `alternatives` (ids del catálogo
+ * de arriba); al tocar la tarjeta se abren en un popup, y cada alternativa
+ * abre a su vez su propia mini-guía.
  */
 export const days: DayData[] = [
   {
@@ -71,9 +876,9 @@ export const days: DayData[] = [
           "Remata con 2 min de movilidad de cadera: círculos amplios, zancada profunda 20 s por lado y una sentadilla profunda sin peso.",
         ],
         alternatives: [
-          { title: "Escaladora", note: "mismo tiempo; activa más glúteo y sube el pulso más rápido." },
-          { title: "Bici estática o de aire", note: "suave, si las elípticas están ocupadas." },
-          { title: "Caminadora en cuesta", note: "6 min caminando rápido con inclinación 8–10." },
+          { id: "escaladora", note: "activa más glúteo y sube el pulso más rápido." },
+          { id: "bici-suave", note: "si las elípticas están ocupadas." },
+          { id: "caminadora-cuesta", note: "caminando rápido con inclinación 8–10." },
         ],
       },
       {
@@ -90,9 +895,9 @@ export const days: DayData[] = [
           "Descansa 2 min entre series: velocidad máxima o no cuenta.",
         ],
         alternatives: [
-          { title: "Salto al cajón", note: "si consigues un cajón estable: mismo patrón, aterrizaje más amable." },
-          { title: "Desplante pliométrico", note: "zancada con cambio de pierna en el aire, del catálogo de la app." },
-          { title: "Sentadilla goblet explosiva", note: "si las rodillas se quejan hoy: sube a máxima velocidad, sin salto." },
+          { id: "salto-cajon", note: "si consigues un cajón estable: aterrizaje más amable." },
+          { id: "desplante-pliometrico", note: "zancada con cambio de pierna en el aire." },
+          { id: "goblet-explosiva", note: "si las rodillas se quejan hoy: velocidad sin salto." },
         ],
       },
       {
@@ -108,9 +913,9 @@ export const days: DayData[] = [
           "Deja 1–2 repeticiones en reserva y anota el peso en la app.",
         ],
         alternatives: [
-          { title: "Prensa (Leg Press)", note: "estación 01: el mismo empujón con cero técnica que vigilar." },
-          { title: "Sentadilla goblet", note: "mancuerna pesada al pecho si todo lo demás está ocupado." },
-          { title: "Hack squat inclinado", note: "aparece en tu app como Hack Incline Squat." },
+          { id: "prensa", note: "estación 01: el mismo empujón con cero técnica que vigilar." },
+          { id: "goblet", note: "mancuerna pesada al pecho si todo lo demás está ocupado." },
+          { id: "hack-squat", note: "aparece en tu app como Hack Incline Squat." },
         ],
       },
       {
@@ -126,9 +931,9 @@ export const days: DayData[] = [
           "Aprieta el glúteo para volver arriba; no hiperextiendas al final.",
         ],
         alternatives: [
-          { title: "Femoral en máquina (leg curl)", note: "aísla el femoral sin cargar la espalda." },
-          { title: "Rumano con mancuernas", note: "si quieres más libertad de movimiento." },
-          { title: "Hiperextensión con disco", note: "banco romano abrazando un disco al pecho." },
+          { id: "leg-curl", note: "aísla el femoral sin cargar la espalda." },
+          { id: "rumano-mancuernas", note: "si quieres más libertad de movimiento." },
+          { id: "hiperextension-disco", note: "banco romano abrazando un disco al pecho." },
         ],
       },
       {
@@ -144,9 +949,9 @@ export const days: DayData[] = [
           "Suelta, descansa 60–90 s y repite.",
         ],
         alternatives: [
-          { title: "Acarreo tipo maleta", note: "una sola mancuerna, cambia de mano por serie: core anti-flexión extra." },
-          { title: "Colgado de barra (dead hang)", note: "3 × 30–45 s si no hay espacio para caminar." },
-          { title: "Encogimientos con pausa", note: "mancuernas pesadas, aguanta 2 s arriba en cada repetición." },
+          { id: "acarreo-maleta", note: "una sola mancuerna: core anti-flexión extra." },
+          { id: "dead-hang", note: "3 × 30–45 s si no hay espacio para caminar." },
+          { id: "encogimientos-pausa", note: "mancuernas pesadas, 2 s arriba en cada repetición." },
         ],
       },
       {
@@ -162,9 +967,9 @@ export const days: DayData[] = [
           "12–15 repeticiones; el rebote no cuenta.",
         ],
         alternatives: [
-          { title: "Pantorrilla en la prensa", note: "misma mecánica empujando con la punta del pie." },
-          { title: "Talones en la Smith", note: "barra en los hombros, punta de pies sobre un disco." },
-          { title: "A una pierna con mancuerna", note: "en un escalón, para emparejar izquierda y derecha." },
+          { id: "pantorrilla-prensa", note: "misma mecánica empujando con la punta del pie." },
+          { id: "talones-smith", note: "barra en los hombros, punta de pies sobre un disco." },
+          { id: "pantorrilla-una-pierna", note: "en un escalón, para emparejar izquierda y derecha." },
         ],
       },
       {
@@ -181,9 +986,9 @@ export const days: DayData[] = [
           "Anota distancia o calorías para superarlas la próxima semana.",
         ],
         alternatives: [
-          { title: "Bici estática normal", note: "sube la resistencia en los 30 s fuertes." },
-          { title: "Escaladora", note: "30 s subiendo a tope / 60 s a paso lento." },
-          { title: "Caminadora con cuesta", note: "sprints inclinados si la bici está ocupada." },
+          { id: "bici-sprints", note: "sube la resistencia en los 30 s fuertes." },
+          { id: "escaladora", note: "30 s a tope / 60 s a paso lento." },
+          { id: "rounds-caminadora", note: "o sprints cortos con inclinación." },
         ],
       },
     ],
@@ -206,8 +1011,8 @@ export const days: DayData[] = [
           "Cierra con 10 círculos grandes de brazos hacia atrás.",
         ],
         alternatives: [
-          { title: "Escaladora o caminadora", note: "mismos 6 min si lo prefieres." },
-          { title: "Remo suave en polea", note: "activa espalda y hombro antes de empujar." },
+          { id: "escaladora", note: "mismos 6 min si lo prefieres." },
+          { id: "remo-suave-polea", note: "activa espalda y hombro antes de empujar." },
         ],
       },
       {
@@ -223,9 +1028,9 @@ export const days: DayData[] = [
           "Descansa 90 s y repite. Si la técnica se cae, ahí termina el ejercicio.",
         ],
         alternatives: [
-          { title: "Shadow con mancuernitas", note: "1–2 kg: el mismo trabajo de velocidad si el saco está ocupado." },
-          { title: "Flexiones con palmada", note: "potencia de empuje sin ningún equipo." },
-          { title: "Pase de pecho con balón", note: "si algún día aparece un balón medicinal en el gym." },
+          { id: "shadow-velocidad", note: "1–2 kg: el mismo trabajo de velocidad si el saco está ocupado." },
+          { id: "flexiones-palmada", note: "potencia de empuje sin ningún equipo." },
+          { id: "pase-balon", note: "si algún día aparece un balón medicinal en el gym." },
         ],
       },
       {
@@ -241,9 +1046,9 @@ export const days: DayData[] = [
           "Vuelve controlado en 2–3 s. Deja 1–2 en reserva y anota el peso.",
         ],
         alternatives: [
-          { title: "Press con mancuernas", note: "banco plano: más rango y estabilización." },
-          { title: "Press inclinado con barra", note: "del día B de tu app; pega más al pecho alto." },
-          { title: "Aperturas en peck fly", note: "estación 26, como extra si quieres más pecho." },
+          { id: "press-mancuernas", note: "banco plano: más rango y estabilización." },
+          { id: "press-inclinado-barra", note: "del día B de tu app; pega más al pecho alto." },
+          { id: "peck-fly", note: "estación 26, como extra si quieres más pecho." },
         ],
       },
       {
@@ -259,9 +1064,9 @@ export const days: DayData[] = [
           "Regresa controlado hasta estirar del todo el dorsal.",
         ],
         alternatives: [
-          { title: "Remo con mancuerna a una mano", note: "rodilla en banco: un lado a la vez, como jalas en el clinch." },
-          { title: "Remo unilateral en polea", note: "tu app lo sugiere como Remo Polea Unilateral." },
-          { title: "Remo en máquina de palanca", note: "si la polea está ocupada." },
+          { id: "remo-mancuerna", note: "rodilla en banco: un lado a la vez, como jalas en el clinch." },
+          { id: "remo-unilateral-polea", note: "tu app lo sugiere como Remo Polea Unilateral." },
+          { id: "remo-palanca", note: "si la polea está ocupada." },
         ],
       },
       {
@@ -277,9 +1082,9 @@ export const days: DayData[] = [
           "Sube controlado hasta estirar los brazos del todo.",
         ],
         alternatives: [
-          { title: "Dominada asistida", note: "la estación de contrapeso: mismo patrón, más transferencia." },
-          { title: "Jalón unilateral", note: "estación 33: un brazo a la vez." },
-          { title: "Jalón agarre cerrado", note: "codos al frente; más bíceps y dorsal bajo." },
+          { id: "dominada-asistida", note: "la estación de contrapeso: mismo patrón, más transferencia." },
+          { id: "jalon-unilateral", note: "estación 33: un brazo a la vez." },
+          { id: "jalon-cerrado", note: "codos al frente; más bíceps y dorsal bajo." },
         ],
       },
       {
@@ -295,9 +1100,9 @@ export const days: DayData[] = [
           "En la última serie puedes llegar al fallo — y pasas directo al curl.",
         ],
         alternatives: [
-          { title: "Press francés con barra Z", note: "del día B de tu app." },
-          { title: "Máquina de tríceps", note: "la Arm Extension, si el multifuncional está lleno." },
-          { title: "Fondos en banco", note: "pies adelante, sin equipo." },
+          { id: "press-frances-z", note: "del día B de tu app." },
+          { id: "maquina-triceps", note: "la Arm Extension, si el multifuncional está lleno." },
+          { id: "fondos-banco", note: "pies adelante, sin equipo." },
         ],
       },
       {
@@ -313,9 +1118,9 @@ export const days: DayData[] = [
           "Baja en 2 s resistiendo: el antebrazo trabaja todo el recorrido.",
         ],
         alternatives: [
-          { title: "Curl martillo con mancuernas", note: "el clásico, si la polea quedó lejos." },
-          { title: "Curl en máquina Scott", note: "del catálogo de tu app; aísla más el bíceps." },
-          { title: "Curl con barra Z", note: "agarre supino para variar el estímulo." },
+          { id: "curl-martillo-mancuernas", note: "el clásico, si la polea quedó lejos." },
+          { id: "curl-scott", note: "del catálogo de tu app; aísla más el bíceps." },
+          { id: "curl-barra-z", note: "agarre supino para variar el estímulo." },
         ],
       },
       {
@@ -331,9 +1136,9 @@ export const days: DayData[] = [
           "Regresa lento. Peso ligero: 15 repeticiones perfectas.",
         ],
         alternatives: [
-          { title: "Face pull con banda", note: "tu banda en cualquier poste; idéntico." },
-          { title: "Aperturas invertidas en peck fly", note: "el peck fly al revés trabaja lo mismo." },
-          { title: "Posteriores con mancuernas", note: "inclinado, abriendo los brazos." },
+          { id: "facepull-banda", note: "tu banda en cualquier poste; idéntico." },
+          { id: "reverse-peck", note: "el peck fly al revés trabaja lo mismo." },
+          { id: "posteriores-mancuernas", note: "inclinado, abriendo los brazos." },
         ],
       },
       {
@@ -348,8 +1153,8 @@ export const days: DayData[] = [
           "Vuelve lento. Peso mínimo: esto es un seguro, no un ego lift.",
         ],
         alternatives: [
-          { title: "Con banda", note: "igual de efectivo si la polea está ocupada." },
-          { title: "Acostado de lado con mancuernita", note: "1–3 kg bastan." },
+          { id: "rotacion-banda", note: "igual de efectivo si la polea está ocupada." },
+          { id: "rotacion-acostado", note: "1–3 kg bastan." },
         ],
       },
     ],
@@ -375,9 +1180,9 @@ export const days: DayData[] = [
           "1 min de descanso entre rounds. ¿Te enredas? Sigue: cada tropiezo también cuenta.",
         ],
         alternatives: [
-          { title: "Rounds en caminadora", note: "3 min fuerte / 1 min caminando." },
-          { title: "Elíptica rápida", note: "mismos bloques si la cuerda aún no sale." },
-          { title: "Escaladora", note: "3 min a buen paso por round." },
+          { id: "rounds-caminadora", note: "3 min fuerte / 1 min caminando." },
+          { id: "eliptica-rapida", note: "mismos bloques si la cuerda aún no sale." },
+          { id: "escaladora", note: "3 min a buen paso por round." },
         ],
       },
       {
@@ -393,8 +1198,8 @@ export const days: DayData[] = [
           "Guardia arriba SIEMPRE, incluso cansado: eso es lo que te llevas al jueves.",
         ],
         alternatives: [
-          { title: "Shadow con sprawls", note: "sin saco: mismas combinaciones al aire." },
-          { title: "Rounds en caminadora", note: "si el saco está ocupado y no quieres shadow." },
+          { id: "shadow-sprawls", note: "sin saco: mismas combinaciones al aire." },
+          { id: "rounds-caminadora", note: "si el saco está ocupado y no quieres shadow." },
         ],
       },
       {
@@ -410,9 +1215,9 @@ export const days: DayData[] = [
           "Controla la vuelta; 12 por lado con peso moderado.",
         ],
         alternatives: [
-          { title: "Russian twist con disco", note: "sentado, giro con control." },
-          { title: "Pallof press en polea", note: "anti-rotación: aguanta recto lo que la polea quiere girar." },
-          { title: "Leñador con banda", note: "si el multifuncional está lleno." },
+          { id: "russian-twist-disco", note: "sentado, giro con control." },
+          { id: "pallof", note: "anti-rotación: aguanta recto lo que la polea quiere girar." },
+          { id: "lenador-banda", note: "si el multifuncional está lleno." },
         ],
       },
       {
@@ -427,8 +1232,8 @@ export const days: DayData[] = [
           "Respira normal; cuando la forma se rompa, se acabó la serie.",
         ],
         alternatives: [
-          { title: "Plancha con toques de hombro", note: "manos al piso, toca el hombro contrario sin mecerte." },
-          { title: "Plancha lateral", note: "45 s por lado: oblicuos que aguantan el clinch." },
+          { id: "plancha-toques", note: "manos al piso, toca el hombro contrario sin mecerte." },
+          { id: "plancha-lateral", note: "45 s por lado: oblicuos que aguantan el clinch." },
         ],
       },
       {
@@ -444,8 +1249,8 @@ export const days: DayData[] = [
           "Si la lumbar se arquea, flexiona un poco las rodillas.",
         ],
         alternatives: [
-          { title: "Rodillas colgado de la barra", note: "suma agarre gratis mientras trabajas abdomen." },
-          { title: "Crunch en polea alta", note: "arrodillado con la cuerda, para cargarlo con peso." },
+          { id: "rodillas-colgado", note: "suma agarre gratis mientras trabajas abdomen." },
+          { id: "crunch-polea", note: "arrodillado con la cuerda, para cargarlo con peso." },
         ],
       },
       {
@@ -461,8 +1266,8 @@ export const days: DayData[] = [
           "2 s abajo, 1 s arriba. Cuando 15 sean fáciles, abraza un disco.",
         ],
         alternatives: [
-          { title: "Superman en el piso", note: "brazos y piernas arriba, aguanta 2 s por rep." },
-          { title: "Buenos días con banda", note: "bisagra ligera de alta repetición." },
+          { id: "superman", note: "brazos y piernas arriba, aguanta 2 s por rep." },
+          { id: "buenos-dias-banda", note: "bisagra ligera de alta repetición." },
         ],
       },
       {
@@ -526,7 +1331,8 @@ export const days: DayData[] = [
           "Antes de cargar el push press: 5 repeticiones con la barra vacía.",
         ],
         alternatives: [
-          { title: "Escaladora o bici", note: "mismos 6 min." },
+          { id: "escaladora", note: "mismos 6 min." },
+          { id: "bici-suave", note: "si prefieres pedalear." },
         ],
       },
       {
@@ -543,9 +1349,9 @@ export const days: DayData[] = [
           "Baja controlado a los hombros. 5 potentes; 2 min de descanso.",
         ],
         alternatives: [
-          { title: "Press militar estricto", note: "sin impulso de piernas: más hombro puro." },
-          { title: "Push press con mancuernas", note: "si el rack está ocupado." },
-          { title: "Press en máquina explosivo", note: "último recurso: empuja rápido, baja lento." },
+          { id: "press-militar", note: "sin impulso de piernas: más hombro puro." },
+          { id: "push-press-mancuernas", note: "si el rack está ocupado." },
+          { id: "press-maquina-explosivo", note: "último recurso: empuja rápido, baja lento." },
         ],
       },
       {
@@ -561,9 +1367,9 @@ export const days: DayData[] = [
           "Baja controlado sin que la lumbar se arquee.",
         ],
         alternatives: [
-          { title: "Con barra sobre banco", note: "el clásico si la máquina está ocupada." },
-          { title: "Puente a una pierna", note: "en el piso, 12 por lado." },
-          { title: "Patada de glúteo en polea", note: "del día A de tu app, pierna flexionada." },
+          { id: "hip-thrust-barra", note: "el clásico si la máquina está ocupada." },
+          { id: "puente-una-pierna", note: "en el piso, 12 por lado." },
+          { id: "patada-gluteo-polea", note: "del día A de tu app, pierna flexionada." },
         ],
       },
       {
@@ -579,9 +1385,9 @@ export const days: DayData[] = [
           "Cada semana, un poco menos de contrapeso. El día que salgan 6 sin ayuda, celebra.",
         ],
         alternatives: [
-          { title: "Jalón al pecho pesado", note: "si la asistida está ocupada." },
-          { title: "Dominada agarre neutro", note: "más amable con hombros y codos." },
-          { title: "Remo invertido", note: "en la Smith con la barra baja." },
+          { id: "jalon-pesado", note: "si la asistida está ocupada." },
+          { id: "dominada-neutra", note: "más amable con hombros y codos." },
+          { id: "remo-invertido", note: "en la Smith con la barra baja." },
         ],
       },
       {
@@ -596,8 +1402,8 @@ export const days: DayData[] = [
           "Espalda pegada al respaldo, sin arquear la lumbar.",
         ],
         alternatives: [
-          { title: "Con mancuernas sentado", note: "más estabilización si hay banco libre." },
-          { title: "Elevación lateral en máquina", note: "estación 55: si el hombro pide algo liviano hoy." },
+          { id: "press-hombro-mancuernas", note: "más estabilización si hay banco libre." },
+          { id: "elevacion-lateral-maquina", note: "estación 55: si el hombro pide algo liviano hoy." },
         ],
       },
       {
@@ -613,8 +1419,8 @@ export const days: DayData[] = [
           "12 toques por lado sin encorvar la espalda.",
         ],
         alternatives: [
-          { title: "Leñador en polea", note: "de pie, más parecido al golpe." },
-          { title: "Sin disco, más reps", note: "si el peso te encorva." },
+          { id: "lenador-polea", note: "de pie, más parecido al golpe." },
+          { id: "twist-sin-disco", note: "si el disco te encorva." },
         ],
       },
       {
@@ -630,8 +1436,8 @@ export const days: DayData[] = [
           "Es lo que te deja recibir un golpe y pelear la guillotina: trátalo en serio.",
         ],
         alternatives: [
-          { title: "Isométricos con la mano", note: "empuja la cabeza contra tu mano 10 s en 4 direcciones." },
-          { title: "Con banda", note: "banda en un poste, resiste en las 4 direcciones." },
+          { id: "cuello-isometricos", note: "empuja contra tu mano: sirve en cualquier lugar." },
+          { id: "cuello-banda", note: "banda en un poste, 4 direcciones." },
         ],
       },
     ],
