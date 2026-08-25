@@ -191,6 +191,17 @@ export const altCatalog: Record<string, AltDetail> = {
       "Empuja fuerte sin bloquear las rodillas arriba.",
     ],
   },
+  "prensa-explosiva": {
+    title: "Prensa explosiva",
+    reps: "4 × 6",
+    images: img("Leg_Press"),
+    desc: "Potencia de pierna en máquina: la plataforma sale disparada, tú la recibes lento.",
+    steps: [
+      "Peso moderado: 60–70% de tu prensa normal.",
+      "<b>Empuja lo más rápido posible</b> en cada repetición, sin bloquear las rodillas.",
+      "Baja en 2 s controlando. Si la velocidad cae, termina la serie.",
+    ],
+  },
   "hack-squat": {
     title: "Hack squat inclinado",
     reps: "3 × 8–10",
@@ -257,13 +268,13 @@ export const altCatalog: Record<string, AltDetail> = {
       "Cuando 45 s sean fáciles, cuelga una mano a la vez por 10 s.",
     ],
   },
-  "encogimientos-pausa": {
-    title: "Encogimientos con pausa",
+  "encogimientos-polea": {
+    title: "Encogimientos en polea",
     reps: "3 × 12",
-    images: img("Dumbbell_Shrug"),
-    desc: "Trapecio y agarre: sostener pesado es la mitad del ejercicio.",
+    images: img("Cable_Shrugs"),
+    desc: "Trapecio y agarre en el multifuncional: sostener pesado es la mitad del ejercicio.",
     steps: [
-      "Mancuernas pesadas a los lados, brazos largos.",
+      "Barra o manerales en la polea baja, brazos largos.",
       "Encoge los hombros hacia las orejas y <b>aguanta 2 s arriba</b>.",
       "Baja lento. El agarre no se suelta en toda la serie.",
     ],
@@ -356,6 +367,18 @@ export const altCatalog: Record<string, AltDetail> = {
       "Pelea contra tu sombra: combinaciones limpias moviéndote como en el ring.",
       "En cada cambio de minuto: <b>cambio de nivel + sprawl</b> y sigues.",
       "Guardia arriba y golpes con intención — que alguien crea que peleas de verdad.",
+    ],
+  },
+  "golpe-en-polea": {
+    title: "Golpe en polea",
+    reps: "4 × 8",
+    images: img("Standing_Cable_Chest_Press"),
+    desc: "La polea como saco: press de pie ligero a máxima velocidad, girando cadera y talón como en el recto.",
+    steps: [
+      "Polea a la altura del pecho, de espaldas a la torre, postura de guardia.",
+      "Peso ligero: <b>empuja como si lanzaras el recto</b>, girando cadera y talón.",
+      "La mano vuelve rápida a la guardia; alterna brazos o hazlo a dos manos.",
+      "Si la velocidad cae, ahí termina la serie.",
     ],
   },
   "flexiones-palmada": {
@@ -708,6 +731,17 @@ export const altCatalog: Record<string, AltDetail> = {
       "Baja con control y repite sin rebotar.",
     ],
   },
+  "extension-lumbar-maquina": {
+    title: "Extensión lumbar en máquina",
+    reps: "3 × 12–15",
+    icon: "i-legext",
+    desc: "La máquina selectorizada de lumbar: el mismo arco del banco romano, con el peso regulable en la torre.",
+    steps: [
+      "Ajusta el cojín a la altura de los omóplatos y fija los pies.",
+      "Empuja hacia atrás con la espalda larga hasta la extensión completa.",
+      "Aprieta 1 s y vuelve lento, sin dejar caer la placa.",
+    ],
+  },
   "buenos-dias-banda": {
     title: "Buenos días con banda",
     reps: "3 × 15",
@@ -798,6 +832,7 @@ export const days: DayData[] = [
           "Descansa 2 min entre series: velocidad máxima o no cuenta.",
         ],
         alternatives: [
+          { id: "prensa-explosiva", note: "la potencia en máquina: máxima velocidad, sin bloquear." },
           { id: "salto-cajon", note: "si consigues un cajón estable: aterrizaje más amable." },
           { id: "desplante-pliometrico", note: "zancada con cambio de pierna en el aire." },
           { id: "goblet-explosiva", note: "si las rodillas se quejan hoy: velocidad sin salto." },
@@ -870,9 +905,9 @@ export const days: DayData[] = [
           "Suelta, descansa 60–90 s y repite.",
         ],
         alternatives: [
+          { id: "encogimientos-polea", note: "la opción en máquina: pausa de 2 s arriba." },
           { id: "acarreo-maleta", note: "una sola mancuerna: core anti-flexión extra." },
           { id: "dead-hang", note: "3 × 30–45 s si no hay espacio para caminar." },
-          { id: "encogimientos-pausa", note: "mancuernas pesadas, 2 s arriba en cada repetición." },
         ],
       },
       {
@@ -949,6 +984,7 @@ export const days: DayData[] = [
           "Descansa 90 s y repite. Si la técnica se cae, ahí termina el ejercicio.",
         ],
         alternatives: [
+          { id: "golpe-en-polea", note: "la versión en máquina: la polea hace de saco." },
           { id: "shadow-velocidad", note: "1–2 kg: el mismo trabajo de velocidad si el saco está ocupado." },
           { id: "flexiones-palmada", note: "potencia de empuje sin ningún equipo." },
           { id: "pase-balon", note: "si algún día aparece un balón medicinal en el gym." },
@@ -1156,6 +1192,7 @@ export const days: DayData[] = [
           "Respira normal; cuando la forma se rompa, se acabó la serie.",
         ],
         alternatives: [
+          { id: "pallof", note: "la versión en máquina: core isométrico contra la polea." },
           { id: "plancha-toques", note: "manos al piso, toca el hombro contrario sin mecerte." },
           { id: "plancha-lateral", note: "45 s por lado: oblicuos que aguantan el clinch." },
         ],
@@ -1190,6 +1227,7 @@ export const days: DayData[] = [
           "2 s abajo, 1 s arriba. Cuando 15 sean fáciles, abraza un disco.",
         ],
         alternatives: [
+          { id: "extension-lumbar-maquina", note: "si tu gym tiene la máquina selectorizada de lumbar." },
           { id: "superman", note: "brazos y piernas arriba, aguanta 2 s por rep." },
           { id: "buenos-dias-banda", note: "bisagra ligera de alta repetición." },
         ],
@@ -1207,6 +1245,7 @@ export const days: DayData[] = [
           "Es lo que te deja recibir un golpe y pelear la guillotina: trátalo en serio.",
         ],
         alternatives: [
+          { id: "encogimientos-polea", note: "en máquina: el trapecio es la armadura del cuello." },
           { id: "cuello-isometricos", note: "empuja contra tu mano: sirve en cualquier lugar." },
           { id: "cuello-banda", note: "banda en un poste, 4 direcciones." },
         ],
