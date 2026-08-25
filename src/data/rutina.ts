@@ -99,17 +99,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Sube velocidad o inclinación cada semana; anota la del último round.",
     ],
   },
-  "eliptica-rapida": {
-    title: "Elíptica rápida",
-    reps: "3–5 × (3 min / 1 min)",
-    images: img("Elliptical_Trainer"),
-    desc: "Mismos bloques de round, cero impacto en tobillos y rodillas.",
-    steps: [
-      "3 min a resistencia alta y ritmo fuerte.",
-      "1 min suave sin soltar el movimiento.",
-      "Piernas y brazos empujan a la vez: úsala completa.",
-    ],
-  },
   "bici-sprints": {
     title: "Bici estática (sprints)",
     reps: "6 × (30 s / 60 s)",
@@ -358,17 +347,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Suelta las mancuernas y lanza 5 golpes al aire: sentirás las manos volar.",
     ],
   },
-  "shadow-sprawls": {
-    title: "Shadow con sprawls",
-    reps: "3 rds × 3 min",
-    icon: "i-shadow",
-    desc: "El round completo sin saco: combinaciones al aire con los mismos sprawls por minuto.",
-    steps: [
-      "Pelea contra tu sombra: combinaciones limpias moviéndote como en el ring.",
-      "En cada cambio de minuto: <b>cambio de nivel + sprawl</b> y sigues.",
-      "Guardia arriba y golpes con intención — que alguien crea que peleas de verdad.",
-    ],
-  },
   "golpe-en-polea": {
     title: "Golpe en polea",
     reps: "4 × 8",
@@ -584,17 +562,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Baja en 2 s resistiendo.",
     ],
   },
-  "curl-scott": {
-    title: "Curl en máquina Scott",
-    reps: "2 × 10–12",
-    images: img("Machine_Preacher_Curls"),
-    desc: "Del catálogo de tu app: el banco predicador elimina el impulso — bíceps aislado.",
-    steps: [
-      "Axilas al borde del cojín, brazos completamente apoyados.",
-      "Sube hasta la contracción máxima sin despegar los codos.",
-      "Baja lento hasta casi estirar. Sin rebotes abajo.",
-    ],
-  },
   "curl-barra-z": {
     title: "Curl con barra Z",
     reps: "2 × 10–12",
@@ -643,6 +610,72 @@ export const altCatalog: Record<string, AltDetail> = {
   },
 
   /* ---- Core y cuello ---- */
+  "curl-maquina": {
+    title: "Curl de bíceps en máquina",
+    reps: "3 × 10–12",
+    images: img("Machine_Bicep_Curl"),
+    desc: "La Bíceps Curl del catálogo de tu app: brazos apoyados, placa seleccionada, cero trampa.",
+    steps: [
+      "Ajusta el asiento: axilas sobre el cojín, brazos apoyados por completo.",
+      "Sube hasta la contracción máxima sin levantar los hombros.",
+      "Baja lento hasta casi estirar los codos.",
+    ],
+  },
+  "cruces-polea": {
+    title: "Cruces en polea",
+    reps: "3 × 12–15",
+    images: img("Cable_Crossover"),
+    desc: "El pecho en el multifuncional: abre y junta con tensión constante en todo el recorrido.",
+    steps: [
+      "Poleas altas, un paso al frente con el torso apenas inclinado.",
+      "Junta las manos al frente en arco, codos casi rectos.",
+      "Aprieta 1 s y abre lento hasta sentir el estiramiento.",
+    ],
+  },
+  "aperturas-mancuernas": {
+    title: "Aperturas con mancuernas",
+    reps: "3 × 10–12",
+    images: img("Dumbbell_Flyes"),
+    desc: "En banco plano, mancuernas livianas: el pecho se estira y se aprieta sin press.",
+    steps: [
+      "Acostado, mancuernas arriba con los codos apenas flexionados.",
+      "Abre en arco hasta un estiramiento cómodo, sin bajar de más.",
+      "Junta arriba como abrazando un tronco y aprieta 1 s.",
+    ],
+  },
+  "laterales-polea": {
+    title: "Elevación lateral en polea",
+    reps: "3 × 12–15",
+    images: img("Cable_Seated_Lateral_Raise"),
+    desc: "En el multifuncional, un brazo a la vez: tensión pareja desde abajo hasta arriba.",
+    steps: [
+      "Polea baja al costado; toma el maneral con la mano contraria.",
+      "Sube el brazo hasta la horizontal con el codo suave.",
+      "Baja en 2 s resistiendo; termina el lado y cambia.",
+    ],
+  },
+  "laterales-mancuernas": {
+    title: "Elevación lateral con mancuernas",
+    reps: "3 × 12–15",
+    images: img("Side_Lateral_Raise"),
+    desc: "El clásico de pie: mancuernas livianas y técnica limpia — el hombro medio no necesita más.",
+    steps: [
+      "De pie, mancuernas a los lados, codos apenas flexionados.",
+      "Sube hasta la horizontal <b>sin encoger los hombros</b> ni dar impulso.",
+      "Baja en 2 s. Si balanceas el cuerpo, es mucho peso.",
+    ],
+  },
+  "cuerda-rounds": {
+    title: "Rounds de cuerda",
+    reps: "3 rds × 3 min",
+    images: img("Rope_Jumping"),
+    desc: "El cardio clásico del combate: juego de pies, muñecas y ritmo, con 1 min entre rounds.",
+    steps: [
+      "Cuerda a tu medida: pisándola al centro, las manijas llegan a las axilas.",
+      "Salta bajo (2–3 cm), en la punta de los pies; giran las muñecas, no los brazos.",
+      "3 rounds de 3 min con 1 min de descanso; sube el ritmo por round.",
+    ],
+  },
   "crunch-polea": {
     title: "Crunch en polea con cuerda",
     reps: "3 × 12–15",
@@ -652,39 +685,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Arrodillado frente a la polea alta, cuerda a los lados de la cabeza.",
       "<b>Encorva las costillas hacia la cadera</b> — la cadera no se mueve.",
       "Regresa lento manteniendo la tensión.",
-    ],
-  },
-  "aduccion-polea": {
-    title: "Aducción en polea",
-    reps: "3 × 12 / lado",
-    images: img("Cable_Hip_Adduction"),
-    desc: "Tobillera en la polea baja: el aductor trabaja de pie, una pierna a la vez.",
-    steps: [
-      "Tobillera en la pierna cercana a la torre; apóyate del marco.",
-      "Cruza la pierna por delante del cuerpo contra el cable.",
-      "Regresa lento; termina el lado y cambia.",
-    ],
-  },
-  "sumo-goblet": {
-    title: "Sentadilla sumo con mancuerna",
-    reps: "3 × 10–12",
-    images: img("Plie_Dumbbell_Squat"),
-    desc: "Pies bien abiertos y una mancuerna colgando: aductores y glúteo con peso libre.",
-    steps: [
-      "Pies más anchos que los hombros, puntas hacia afuera, mancuerna colgando al frente.",
-      "Baja recto entre las piernas hasta donde la espalda se mantenga larga.",
-      "Sube apretando aductores y glúteo.",
-    ],
-  },
-  "caminata-banda": {
-    title: "Caminata lateral con banda",
-    reps: "3 × 10 pasos / lado",
-    images: img("Monster_Walk"),
-    desc: "Tu banda en los tobillos o sobre las rodillas: el glúteo medio arde a los pocos pasos.",
-    steps: [
-      "Banda en tobillos o sobre las rodillas, media sentadilla.",
-      "Da 10 pasos laterales sin que los pies se junten del todo.",
-      "Vuelve hacia el otro lado sin pararte derecho.",
     ],
   },
   "rodillas-colgado": {
@@ -886,7 +886,7 @@ export const days: DayData[] = [
   {
     id: "dia2",
     num: "02",
-    kicker: "Martes · ~55 min",
+    kicker: "Martes · ~50 min",
     title: "Golpeo y Agarre — Torso",
     exercises: [
       {
@@ -998,42 +998,6 @@ export const days: DayData[] = [
         ],
       },
       {
-        images: img("Triceps_Pushdown_-_Rope_Attachment"),
-        title: "Tríceps en polea",
-        reps: "2 × 12–15",
-        desc: "<b>El tríceps es el final del golpe:</b> extiende el codo en el último tramo del recto. Cuerda o barra, codos pegados al cuerpo; aquí sí puedes llegar al fallo. <b>En superserie con el curl</b> de abajo.",
-        watch: "Fuerza tradicional",
-        steps: [
-          "Cuerda en la polea alta; codos pegados al cuerpo.",
-          "Extiende hasta abrir la cuerda abajo y aprieta 1 s.",
-          "Sube controlado sin que los codos se despeguen.",
-          "En la última serie puedes llegar al fallo — y pasas directo al curl.",
-        ],
-        alternatives: [
-          { id: "press-frances-z", note: "del día B de tu app." },
-          { id: "maquina-triceps", note: "la Arm Extension, si el multifuncional está lleno." },
-          { id: "fondos-banco", note: "pies adelante, sin equipo." },
-        ],
-      },
-      {
-        images: img("Cable_Hammer_Curls_-_Rope_Attachment"),
-        title: "Curl martillo en polea",
-        reps: "2 × 10–12",
-        desc: "Justo después de cada serie de tríceps, con la misma cuerda pasada a la polea baja: agarre neutro, codos quietos. <b>Antebrazo y bíceps que sostienen el gancho</b> y no sueltan el agarre.",
-        watch: "Fuerza tradicional",
-        steps: [
-          "Pasa la misma cuerda a la polea baja, justo después del tríceps.",
-          "Agarre neutro (pulgares arriba), codos pegados y quietos.",
-          "Sube hasta la máxima flexión <b>sin balancear el torso</b>.",
-          "Baja en 2 s resistiendo: el antebrazo trabaja todo el recorrido.",
-        ],
-        alternatives: [
-          { id: "curl-martillo-mancuernas", note: "el clásico, si la polea quedó lejos." },
-          { id: "curl-scott", note: "del catálogo de tu app; aísla más el bíceps." },
-          { id: "curl-barra-z", note: "agarre supino para variar el estímulo." },
-        ],
-      },
-      {
         images: img("Face_Pull"),
         title: "Face pull en polea",
         reps: "3 × 15",
@@ -1056,44 +1020,129 @@ export const days: DayData[] = [
   {
     id: "dia3",
     num: "03",
-    kicker: "Miércoles · ~50 min",
-    title: "Rounds MMA y Core en Máquinas",
+    kicker: "Miércoles · ~55 min",
+    title: "Pecho, Brazos y Hombros",
     quote:
-      "Hoy se juega: rounds, poleas y un duelo final. Mañana entrenas con el profe — deja las piernas vivas y los hombros frescos.",
+      "Día de bombeo con tu parcero: máquinas, superseries y duelo final. Pesos moderados — mañana con el profe pegas tú, no las agujetas.",
     exercises: [
       {
-        images: img("Rope_Jumping"),
-        title: "Cuerda",
-        reps: "2 rds × 3 min",
-        desc: "El calentamiento del combate: juego de pies, muñecas y ritmo. Con parcero: <b>rounds alternos</b> — uno salta, el otro cronometra.",
-        watch: "Cuerda",
+        images: img("Elliptical_Trainer"),
+        title: "Calentamiento",
+        reps: "8 min",
+        desc: "6 min de elíptica o bici suave + 2 min de banda para hombro.",
+        watch: "Elíptica",
         steps: [
-          "Cuerda a tu medida: pisándola al centro, las manijas llegan a las axilas.",
-          "Salta bajo (2–3 cm), en la punta de los pies; giran las <b>muñecas</b>, no los brazos.",
-          "Round 1 suave para calentar; round 2 a ritmo de verdad.",
-          "1 min de descanso entre rounds. ¿Te enredas? Sigue: cada tropiezo también cuenta.",
+          "6 min de elíptica o bici suave, subiendo el ritmo poco a poco.",
+          "Con tu banda: 15 separaciones al frente + 15 rotaciones externas por lado.",
+          "Cierra con 10 círculos grandes de brazos hacia atrás.",
         ],
         alternatives: [
-          { id: "rounds-caminadora", note: "3 min fuerte / 1 min caminando." },
-          { id: "eliptica-rapida", note: "mismos bloques si la cuerda aún no sale." },
-          { id: "escaladora", note: "3 min a buen paso por round." },
+          { id: "escaladora", note: "mismos 6 min si lo prefieres." },
+          { id: "bici-suave", note: "si prefieres pedalear." },
         ],
       },
       {
-        icon: "i-bag",
-        title: "Rounds de saco + sprawls",
-        reps: "3 rds × 3 min",
-        desc: "<b>Formato MMA:</b> combinaciones limpias y, en cada cambio de minuto, cambio de nivel + sprawl y sigues golpeando. ¿Van dos? <b>Túrnense por round</b>: mientras uno golpea, el otro cuenta los sprawls. Técnica y flow, no potencia máxima.",
-        watch: "Kickboxing",
+        images: img("Butterfly"),
+        title: "Aperturas en peck fly",
+        reps: "3 × 10–12",
+        desc: "Estación 26: <b>el pecho que no repite el press de ayer</b> — aísla y bombea con el hombro protegido por la máquina. Con parcero se turnan sin mover nada.",
+        watch: "Fuerza tradicional",
         steps: [
-          "3 rounds de 3 min con 1 min de descanso: técnica y flow, no potencia máxima.",
-          "Combina limpio (1-2, 1-2-3, gancho al cuerpo) y muévete alrededor del saco.",
-          "En cada cambio de minuto: <b>cambio de nivel + sprawl</b>, te levantas y sigues golpeando.",
-          "Guardia arriba SIEMPRE, incluso cansado: eso es lo que te llevas al jueves.",
+          "Asiento ajustado: las manijas a la altura del pecho.",
+          "Junta las manijas al frente con los codos apenas flexionados.",
+          "<b>Aprieta 1 s</b> y abre lento hasta el estiramiento cómodo.",
+          "Cuando 12 salgan fáciles, sube una placa.",
         ],
         alternatives: [
-          { id: "shadow-sprawls", note: "sin saco: mismas combinaciones al aire." },
-          { id: "rounds-caminadora", note: "si el saco está ocupado y no quieres shadow." },
+          { id: "cruces-polea", note: "en el multifuncional, si el peck fly está ocupado." },
+          { id: "aperturas-mancuernas", note: "en banco plano, con mancuernas livianas." },
+        ],
+      },
+      {
+        images: img("Triceps_Pushdown_-_Rope_Attachment"),
+        title: "Tríceps en polea",
+        reps: "3 × 12–15",
+        desc: "<b>El tríceps es el final del golpe:</b> extiende el codo en el último tramo del recto. Cuerda o barra, codos pegados; aquí sí puedes llegar al fallo. <b>En superserie con el curl</b> de abajo.",
+        watch: "Fuerza tradicional",
+        steps: [
+          "Cuerda en la polea alta; codos pegados al cuerpo.",
+          "Extiende hasta abrir la cuerda abajo y aprieta 1 s.",
+          "Sube controlado sin que los codos se despeguen.",
+          "Pasa directo al curl martillo y luego descansa 60 s.",
+        ],
+        alternatives: [
+          { id: "maquina-triceps", note: "la Arm Extension, si el multifuncional está lleno." },
+          { id: "press-frances-z", note: "del día B de tu app." },
+          { id: "fondos-banco", note: "pies adelante, sin equipo." },
+        ],
+      },
+      {
+        images: img("Cable_Hammer_Curls_-_Rope_Attachment"),
+        title: "Curl martillo en polea",
+        reps: "3 × 10–12",
+        desc: "Con la misma cuerda pasada a la polea baja: agarre neutro, codos quietos. <b>Antebrazo y bíceps que sostienen el gancho</b> y no sueltan el agarre.",
+        watch: "Fuerza tradicional",
+        steps: [
+          "Pasa la misma cuerda a la polea baja, justo después del tríceps.",
+          "Agarre neutro (pulgares arriba), codos pegados y quietos.",
+          "Sube hasta la máxima flexión <b>sin balancear el torso</b>.",
+          "Baja en 2 s resistiendo: el antebrazo trabaja todo el recorrido.",
+        ],
+        alternatives: [
+          { id: "curl-maquina", note: "la Bíceps Curl de tu app, si la polea está lejos." },
+          { id: "curl-martillo-mancuernas", note: "el clásico con mancuernas." },
+          { id: "curl-barra-z", note: "agarre supino para variar el estímulo." },
+        ],
+      },
+      {
+        images: img("Dip_Machine"),
+        title: "Tríceps press en máquina",
+        reps: "3 × 10–12",
+        desc: "El <b>Tríceps Press de tu app</b> (fondos sentado con placas): empuja pesado sin colgarte de nada. <b>En superserie con el Scott</b> de abajo — brazos llenos en 8 minutos.",
+        watch: "Fuerza tradicional",
+        steps: [
+          "Ajusta el asiento: las manijas a la altura del pecho bajo.",
+          "Empuja hasta estirar los codos y <b>aprieta 1 s</b>.",
+          "Sube lento resistiendo la placa.",
+          "Pasa directo al curl Scott y luego descansa 60 s.",
+        ],
+        alternatives: [
+          { id: "maquina-triceps", note: "la Arm Extension: mismo músculo, otra máquina." },
+          { id: "press-frances-z", note: "con barra Z en banco." },
+          { id: "fondos-banco", note: "la versión sin máquina." },
+        ],
+      },
+      {
+        images: img("Machine_Preacher_Curls"),
+        title: "Curl en máquina Scott",
+        reps: "3 × 10–12",
+        desc: "El banco predicador en máquina, directo del catálogo de tu app: con el brazo apoyado <b>el bíceps no puede hacer trampa</b>. Justo después de cada serie de fondos.",
+        watch: "Fuerza tradicional",
+        steps: [
+          "Axilas al borde del cojín, brazos completamente apoyados.",
+          "Sube hasta la contracción máxima sin despegar los codos.",
+          "Baja lento hasta casi estirar. <b>Sin rebotes abajo.</b>",
+        ],
+        alternatives: [
+          { id: "curl-maquina", note: "la Bíceps Curl sentado, también de tu app." },
+          { id: "curl-barra-z", note: "de pie, si las máquinas están llenas." },
+          { id: "curl-martillo-mancuernas", note: "agarre neutro para variar." },
+        ],
+      },
+      {
+        icon: "i-lateral",
+        title: "Elevación lateral en máquina",
+        reps: "3 × 12–15",
+        desc: "Estación 55: <b>hombros anchos sin cargar la articulación</b> — peso moderado y repeticiones limpias. La guardia se ve mejor con hombros así.",
+        watch: "Fuerza tradicional",
+        steps: [
+          "Ajusta el asiento: hombros alineados con el eje de la máquina.",
+          "Sube los brazos hasta la horizontal, <b>sin encoger los hombros</b>.",
+          "Baja en 2 s resistiendo el peso.",
+        ],
+        alternatives: [
+          { id: "laterales-polea", note: "en el multifuncional, un brazo a la vez." },
+          { id: "laterales-mancuernas", note: "el clásico de pie con mancuernas." },
         ],
       },
       {
@@ -1115,38 +1164,6 @@ export const days: DayData[] = [
         ],
       },
       {
-        images: img("Thigh_Adductor"),
-        title: "Aductora en máquina",
-        reps: "3 × 12–15",
-        desc: "La misma de tu app (Entrenamiento A). <b>Aductores fuertes = guardia cerrada, sprawl sólido</b> y rodillas protegidas en los cambios de dirección.",
-        watch: "Fuerza tradicional",
-        steps: [
-          "Ajusta la apertura a un rango cómodo y siéntate con la espalda apoyada.",
-          "Cierra las piernas apretando fuerte y <b>aguanta 1 s</b>.",
-          "Abre lento resistiendo la placa, sin golpear el tope.",
-        ],
-        alternatives: [
-          { id: "aduccion-polea", note: "con tobillera en la polea baja, de pie." },
-          { id: "sumo-goblet", note: "sentadilla sumo con mancuerna: aductores con peso libre." },
-        ],
-      },
-      {
-        images: img("Thigh_Abductor"),
-        title: "Abductora en máquina",
-        reps: "3 × 12–15",
-        desc: "La pareja de la aductora: <b>glúteo medio para un juego de pies estable</b> — pivotes, desplazamiento lateral y cadera sana. Con parcero: uno en cada máquina y rotan.",
-        watch: "Fuerza tradicional",
-        steps: [
-          "Siéntate con la espalda pegada y las piernas por dentro de los cojines.",
-          "Abre contra la placa hasta tu rango máximo y <b>aguanta 1 s</b>.",
-          "Cierra lento, sin que las placas choquen.",
-        ],
-        alternatives: [
-          { id: "patada-gluteo-polea", note: "en la polea baja: glúteo de a un lado." },
-          { id: "caminata-banda", note: "pasos laterales con tu banda: el glúteo medio arde igual." },
-        ],
-      },
-      {
         images: img("Bicycling_Stationary"),
         title: "Finisher: duelo en bici de aire",
         reps: "3 × 10 cal",
@@ -1161,6 +1178,7 @@ export const days: DayData[] = [
         alternatives: [
           { id: "bici-sprints", note: "el formato clásico de intervalos si vas solo." },
           { id: "escaladora", note: "duelo de pisos: 30 s, gana quien suba más." },
+          { id: "cuerda-rounds", note: "si las bicis están ocupadas: 3 rounds de cuerda." },
         ],
       },
       {
