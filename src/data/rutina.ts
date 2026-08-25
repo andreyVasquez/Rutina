@@ -676,28 +676,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Controla la vuelta: la banda no te gana.",
     ],
   },
-  "plancha-toques": {
-    title: "Plancha con toques de hombro",
-    reps: "3 × 20 toques",
-    images: img("Plank"),
-    desc: "Plancha alta tocando hombros: el core aprende a no mecerse — como aguantar un empujón.",
-    steps: [
-      "Plancha alta (manos), pies un poco más abiertos.",
-      "Toca el hombro contrario con una mano <b>sin que la cadera se mueva</b>.",
-      "Alterna lados a ritmo controlado.",
-    ],
-  },
-  "plancha-lateral": {
-    title: "Plancha lateral",
-    reps: "3 × 45 s / lado",
-    images: img("Side_Bridge"),
-    desc: "Oblicuos isométricos: los que sostienen tu postura en el clinch.",
-    steps: [
-      "De lado sobre el antebrazo, codo bajo el hombro.",
-      "Cadera arriba: cuerpo en línea recta de pies a cabeza.",
-      "Aguanta 45 s respirando normal; cambia de lado.",
-    ],
-  },
   "rodillas-colgado": {
     title: "Rodillas al pecho colgado",
     reps: "3 × 10–12",
@@ -709,15 +687,15 @@ export const altCatalog: Record<string, AltDetail> = {
       "Baja lento hasta estirar. Piernas rectas = nivel pro.",
     ],
   },
-  "crunch-polea": {
-    title: "Crunch en polea alta",
+  "elevacion-piernas-banco": {
+    title: "Elevación de piernas en banco",
     reps: "3 × 12–15",
-    images: img("Cable_Crunch"),
-    desc: "Abdomen con peso progresivo: arrodillado con la cuerda de la polea.",
+    images: img("Flat_Bench_Lying_Leg_Raise"),
+    desc: "El clásico de abdomen bajo en banco plano, para cuando la polea esté llena.",
     steps: [
-      "Arrodillado, cuerda a los lados de la cabeza.",
-      "Encorva las costillas hacia la cadera — la cadera no se mueve.",
-      "Regresa lento manteniendo la tensión.",
+      "Acostado en el banco, agárrate del borde detrás de tu cabeza.",
+      "Sube las piernas casi rectas hasta la vertical.",
+      "Baja lento en 2–3 s <b>sin que la lumbar se despegue</b> del banco.",
     ],
   },
   "superman": {
@@ -1125,18 +1103,18 @@ export const days: DayData[] = [
     kicker: "Miércoles · ~55 min",
     title: "Rounds MMA, Core y Cuello",
     quote:
-      "Sin pesas hoy: cuerda, saco y core. Mañana entrenas con el profe — llega con piernas vivas y hombros frescos.",
+      "Hoy se juega: rounds, poleas y un duelo final. Mañana entrenas con el profe — deja las piernas vivas y los hombros frescos.",
     exercises: [
       {
         images: img("Rope_Jumping"),
         title: "Cuerda",
-        reps: "3 rds × 3 min",
-        desc: "El cardio clásico del combate: juego de pies, muñecas y ritmo. 1 min de descanso entre rounds; el primero, suave, es tu calentamiento.",
+        reps: "2 rds × 3 min",
+        desc: "El calentamiento del combate: juego de pies, muñecas y ritmo. Con parcero: <b>rounds alternos</b> — uno salta, el otro cronometra.",
         watch: "Cuerda",
         steps: [
           "Cuerda a tu medida: pisándola al centro, las manijas llegan a las axilas.",
           "Salta bajo (2–3 cm), en la punta de los pies; giran las <b>muñecas</b>, no los brazos.",
-          "Round 1 suave como calentamiento; sube el ritmo en el 2 y el 3.",
+          "Round 1 suave para calentar; round 2 a ritmo de verdad.",
           "1 min de descanso entre rounds. ¿Te enredas? Sigue: cada tropiezo también cuenta.",
         ],
         alternatives: [
@@ -1149,7 +1127,7 @@ export const days: DayData[] = [
         icon: "i-bag",
         title: "Rounds de saco + sprawls",
         reps: "3 rds × 3 min",
-        desc: "<b>Formato MMA:</b> combinaciones limpias y, en cada cambio de minuto, cambio de nivel + sprawl y sigues golpeando. Técnica y flow, no potencia máxima; 1 min entre rounds. ¿Saco ocupado? Shadow con sprawls o rounds de caminadora.",
+        desc: "<b>Formato MMA:</b> combinaciones limpias y, en cada cambio de minuto, cambio de nivel + sprawl y sigues golpeando. ¿Van dos? <b>Túrnense por round</b>: mientras uno golpea, el otro cuenta los sprawls. Técnica y flow, no potencia máxima.",
         watch: "Kickboxing",
         steps: [
           "3 rounds de 3 min con 1 min de descanso: técnica y flow, no potencia máxima.",
@@ -1181,50 +1159,34 @@ export const days: DayData[] = [
         ],
       },
       {
-        images: img("Plank"),
-        title: "Plancha",
-        reps: "3 × 45–60 s",
-        desc: "Core rígido: transfiere la fuerza de la cadera al puño sin fugas.",
-        watch: "Core",
-        steps: [
-          "Antebrazos al piso, codos bajo los hombros, cuerpo en línea recta.",
-          "Aprieta glúteo y abdomen: la cadera <b>ni sube ni se cae</b>.",
-          "Respira normal; cuando la forma se rompa, se acabó la serie.",
-        ],
-        alternatives: [
-          { id: "pallof", note: "la versión en máquina: core isométrico contra la polea." },
-          { id: "plancha-toques", note: "manos al piso, toca el hombro contrario sin mecerte." },
-          { id: "plancha-lateral", note: "45 s por lado: oblicuos que aguantan el clinch." },
-        ],
-      },
-      {
-        images: img("Flat_Bench_Lying_Leg_Raise"),
-        title: "Elevación de piernas en banco",
+        images: img("Cable_Crunch"),
+        title: "Crunch en polea con cuerda",
         reps: "3 × 12–15",
-        desc: "Abdomen bajo que aguanta golpes al cuerpo.",
+        desc: "Abdomen <b>con peso de verdad, no solo tu cuerpo</b>: arrodillado con la cuerda, y subes de placa cada semana como en cualquier máquina. Con parcero se turnan sin mover nada.",
         watch: "Core",
         steps: [
-          "Acostado en el banco, agárrate del borde detrás de tu cabeza.",
-          "Sube las piernas casi rectas hasta la vertical.",
-          "Baja lento en 2–3 s <b>sin que la lumbar se despegue</b> del banco.",
-          "Si la lumbar se arquea, flexiona un poco las rodillas.",
+          "Arrodillado frente a la polea alta, cuerda a los lados de la cabeza.",
+          "<b>Encorva las costillas hacia la cadera</b> — la cadera no se mueve.",
+          "Regresa lento manteniendo la tensión.",
+          "Cuando 15 salgan fáciles, sube una placa.",
         ],
         alternatives: [
+          { id: "pallof", note: "también en la polea: core isométrico anti-rotación." },
           { id: "rodillas-colgado", note: "suma agarre gratis mientras trabajas abdomen." },
-          { id: "crunch-polea", note: "arrodillado con la cuerda, para cargarlo con peso." },
+          { id: "elevacion-piernas-banco", note: "el clásico en banco si la polea está llena." },
         ],
       },
       {
         images: img("Hyperextensions_Back_Extensions"),
-        title: "Hiperextensión lumbar",
+        title: "Hiperextensión con disco",
         reps: "2 × 12–15",
-        desc: "En el banco romano del gym. <b>La lumbar es la otra mitad del core</b>: sostiene la postura round tras round y protege la espalda cuando rotas fuerte. Sube controlado, sin hiperextender.",
+        desc: "El banco romano <b>cargado</b>: abraza un disco al pecho y progresa el peso como en cualquier máquina. La lumbar es la otra mitad del core — sostiene la postura y protege la espalda al rotar.",
         watch: "Core",
         steps: [
           "Ajusta el banco romano: el borde del cojín en el pliegue de la cadera.",
-          "Baja controlado hasta donde la espalda se mantenga larga.",
+          "Abraza un disco al pecho (empieza liviano) y baja controlado con la espalda larga.",
           "Sube apretando glúteo y lumbar hasta quedar <b>en línea recta</b> — sin pasarte arriba.",
-          "2 s abajo, 1 s arriba. Cuando 15 sean fáciles, abraza un disco.",
+          "2 s abajo, 1 s arriba. Cuando salgan 15, sube de disco.",
         ],
         alternatives: [
           { id: "extension-lumbar-maquina", note: "si tu gym tiene la máquina selectorizada de lumbar." },
@@ -1248,6 +1210,23 @@ export const days: DayData[] = [
           { id: "encogimientos-polea", note: "en máquina: el trapecio es la armadura del cuello." },
           { id: "cuello-isometricos", note: "empuja contra tu mano: sirve en cualquier lugar." },
           { id: "cuello-banda", note: "banda en un poste, 4 direcciones." },
+        ],
+      },
+      {
+        images: img("Bicycling_Stationary"),
+        title: "Finisher: duelo en bici de aire",
+        reps: "3 × 10 cal",
+        desc: "<b>El juego final:</b> 10 calorías a tope y cambio — tu parcero hace las suyas mientras tú recuperas. Pierde el que tarde más y <b>el perdedor paga 5 flexiones</b>. ¿Solo? Contrarreloj contra tu propia marca.",
+        watch: "Bicicleta estática",
+        steps: [
+          "Definan el orden; la pantalla en calorías y en cero.",
+          "<b>10 calorías a TODO</b>: brazos y piernas, sin guardarse nada.",
+          "Descansa mientras el otro pedalea (o 90 s si vas solo).",
+          "3 rondas. Anota el mejor tiempo: la próxima semana se le gana.",
+        ],
+        alternatives: [
+          { id: "bici-sprints", note: "el formato clásico de intervalos si vas solo." },
+          { id: "escaladora", note: "duelo de pisos: 30 s, gana quien suba más." },
         ],
       },
       {
