@@ -621,28 +621,6 @@ export const altCatalog: Record<string, AltDetail> = {
       "Baja lento hasta casi estirar los codos.",
     ],
   },
-  "cruces-polea": {
-    title: "Cruces en polea",
-    reps: "3 × 12–15",
-    images: img("Cable_Crossover"),
-    desc: "El pecho en el multifuncional: abre y junta con tensión constante en todo el recorrido.",
-    steps: [
-      "Poleas altas, un paso al frente con el torso apenas inclinado.",
-      "Junta las manos al frente en arco, codos casi rectos.",
-      "Aprieta 1 s y abre lento hasta sentir el estiramiento.",
-    ],
-  },
-  "aperturas-mancuernas": {
-    title: "Aperturas con mancuernas",
-    reps: "3 × 10–12",
-    images: img("Dumbbell_Flyes"),
-    desc: "En banco plano, mancuernas livianas: el pecho se estira y se aprieta sin press.",
-    steps: [
-      "Acostado, mancuernas arriba con los codos apenas flexionados.",
-      "Abre en arco hasta un estiramiento cómodo, sin bajar de más.",
-      "Junta arriba como abrazando un tronco y aprieta 1 s.",
-    ],
-  },
   "laterales-polea": {
     title: "Elevación lateral en polea",
     reps: "3 × 12–15",
@@ -794,7 +772,7 @@ export const days: DayData[] = [
         images: img("Smith_Machine_Stiff-Legged_Deadlift"),
         title: "Peso muerto rumano en Smith",
         reps: "3 × 8–10",
-        desc: "En la misma Smith de la sentadilla: caderas atrás, espalda neutra, la barra rozando las piernas. Glúteo y femoral: <b>el motor del golpe y del derribo</b> — la misma bisagra del sprawl.",
+        desc: "En la misma Smith de la sentadilla: caderas atrás, espalda neutra, la barra rozando las piernas. Glúteo y femoral: <b>el motor del golpe y del derribo</b>.",
         watch: "Fuerza tradicional",
         steps: [
           "En la misma Smith: barra a la altura de la cadera, agarre al ancho de hombros.",
@@ -1021,9 +999,9 @@ export const days: DayData[] = [
     id: "dia3",
     num: "03",
     kicker: "Miércoles · ~55 min",
-    title: "Pecho, Brazos y Hombros",
+    title: "Striking, Brazos y Hombros",
     quote:
-      "Día de bombeo con tu parcero: máquinas, superseries y duelo final. Pesos moderados — mañana con el profe pegas tú, no las agujetas.",
+      "Golpeo a ritmo y bombeo de brazos: el saco pule las manos hoy, el profe las examina mañana.",
     exercises: [
       {
         images: img("Elliptical_Trainer"),
@@ -1042,20 +1020,21 @@ export const days: DayData[] = [
         ],
       },
       {
-        images: img("Butterfly"),
-        title: "Aperturas en peck fly",
-        reps: "3 × 10–12",
-        desc: "Estación 26: <b>el pecho que no repite el press de ayer</b> — aísla y bombea con el hombro protegido por la máquina. Con parcero se turnan sin mover nada.",
-        watch: "Fuerza tradicional",
+        icon: "i-bag",
+        title: "Rounds de saco — striking",
+        reps: "3 rds × 3 min",
+        desc: "<b>Puro golpeo:</b> combinaciones limpias, juego de pies alrededor del saco y la mano de vuelta a la guardia. Técnica y ritmo, no potencia máxima — mañana se pega de verdad con el profe.",
+        watch: "Kickboxing",
         steps: [
-          "Asiento ajustado: las manijas a la altura del pecho.",
-          "Junta las manijas al frente con los codos apenas flexionados.",
-          "<b>Aprieta 1 s</b> y abre lento hasta el estiramiento cómodo.",
-          "Cuando 12 salgan fáciles, sube una placa.",
+          "3 rounds de 3 min con 1 min de descanso entre rounds.",
+          "Combina limpio: 1-2, 1-2-3, gancho al cuerpo; muévete alrededor del saco entre combinaciones.",
+          "Guardia arriba SIEMPRE y <b>la mano vuelve como un resorte</b>.",
+          "Último minuto del round 3: sube el ritmo y vacía el tanque.",
         ],
         alternatives: [
-          { id: "cruces-polea", note: "en el multifuncional, si el peck fly está ocupado." },
-          { id: "aperturas-mancuernas", note: "en banco plano, con mancuernas livianas." },
+          { id: "golpe-en-polea", note: "la versión en máquina: la polea hace de saco." },
+          { id: "cuerda-rounds", note: "si el saco está ocupado: los mismos rounds con cuerda." },
+          { id: "shadow-velocidad", note: "shadow con mancuernitas de 1–2 kg." },
         ],
       },
       {
@@ -1149,7 +1128,7 @@ export const days: DayData[] = [
         images: img("Ab_Crunch_Machine"),
         title: "Crunch en máquina",
         reps: "3 × 12–15",
-        desc: "La máquina de abdominales del gym: te sientas, pones la placa y a trabajar — <b>abdomen con peso progresivo</b> que aguanta los golpes al cuerpo. Con parcero se turnan sin mover nada.",
+        desc: "La máquina de abdominales del gym: te sientas, pones la placa y a trabajar — <b>abdomen con peso progresivo</b> que aguanta los golpes al cuerpo.",
         watch: "Core",
         steps: [
           "Ajusta el asiento: el eje de giro queda a la altura del pecho.",
@@ -1161,24 +1140,6 @@ export const days: DayData[] = [
           { id: "crunch-polea", note: "en el multifuncional, si la máquina está ocupada." },
           { id: "rodillas-colgado", note: "abdomen bajo + agarre gratis." },
           { id: "elevacion-piernas-banco", note: "el clásico en banco plano." },
-        ],
-      },
-      {
-        images: img("Bicycling_Stationary"),
-        title: "Finisher: duelo en bici de aire",
-        reps: "3 × 10 cal",
-        desc: "<b>El juego final:</b> 10 calorías a tope y cambio — tu parcero hace las suyas mientras tú recuperas. Pierde el que tarde más y <b>el perdedor paga 5 flexiones</b>. ¿Solo? Contrarreloj contra tu propia marca.",
-        watch: "Bicicleta estática",
-        steps: [
-          "Definan el orden; la pantalla en calorías y en cero.",
-          "<b>10 calorías a TODO</b>: brazos y piernas, sin guardarse nada.",
-          "Descansa mientras el otro pedalea (o 90 s si vas solo).",
-          "3 rondas. Anota el mejor tiempo: la próxima semana se le gana.",
-        ],
-        alternatives: [
-          { id: "bici-sprints", note: "el formato clásico de intervalos si vas solo." },
-          { id: "escaladora", note: "duelo de pisos: 30 s, gana quien suba más." },
-          { id: "cuerda-rounds", note: "si las bicis están ocupadas: 3 rounds de cuerda." },
         ],
       },
       {
