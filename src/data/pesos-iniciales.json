@@ -1,0 +1,5 @@
+{
+  "_comentario": "Pesos iniciales por perfil y ejercicio (kg). Sirven de semilla la primera vez que se abre la app en un dispositivo; después cada registro se guarda en localStorage del navegador. La clave de cada ejercicio es `<dia>-<slug-del-titulo>` (visible en data-ex-id de cada tarjeta).",
+  "andrey": {},
+  "valeria": {}
+}

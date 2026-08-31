@@ -1,0 +1,108 @@
+---
+/**
+ * Enfriamiento y estiramiento (8 min, todos los días de entreno):
+ * 3 min de bici muy suave y luego 30 s por posición, sin rebotes.
+ * Reutiliza los estilos de la grilla .supps del diseño original.
+ */
+
+const upper = [
+  {
+    title: "Pectoral en el marco",
+    dose: "30 s por lado",
+    body: "En el marco de una puerta o la esquina de una máquina, brazo a 90°: gira el torso hacia afuera hasta sentir el pecho abrirse.",
+  },
+  {
+    title: "Deltoide posterior",
+    dose: "30 s por lado",
+    body: "Brazo cruzado al pecho, jalándolo suave con el otro brazo. Hombro abajo, sin encoger.",
+  },
+  {
+    title: "Dorsal colgada",
+    dose: "30 s",
+    body: "Agarrada de una barra fija, deja caer la cadera hacia atrás hasta sentir el costado estirarse.",
+  },
+  {
+    title: "Cuello",
+    dose: "30 s por lado",
+    body: "Oreja al hombro, dejando caer el peso de la cabeza. Sin empujar con la mano: solo gravedad.",
+  },
+  {
+    title: "Extensión torácica en rodillo",
+    dose: "60 s",
+    body: "Rodillo de espuma bajo la espalda alta, manos detrás de la cabeza: extiende suave hacia atrás y respira.",
+  },
+];
+
+const lower = [
+  {
+    title: "Isquiotibiales",
+    dose: "30 s por lado",
+    body: "Pierna estirada sobre un banco bajo, espalda recta: inclínate desde la cadera, no desde la espalda.",
+  },
+  {
+    title: "Cuádriceps de pie",
+    dose: "30 s por lado",
+    body: "Agarrando el tobillo por detrás, rodillas juntas. <b>Si molesta la rodilla, sáltalo</b> — no es obligatorio.",
+  },
+  {
+    title: "Glúteo sentada",
+    dose: "30 s por lado",
+    body: "Sentada, tobillo sobre la rodilla contraria: inclina el pecho hacia adelante con la espalda larga.",
+  },
+  {
+    title: "Gemelo en la pared",
+    dose: "30 s por lado",
+    body: "Manos en la pared, pierna atrás con el talón pegado al piso: acerca la cadera a la pared.",
+  },
+];
+---
+
+<section class="supps" id="estiramiento">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <h2>Enfriamiento y Estiramiento</h2><span class="tag">8 min · todos los días</span>
+    </div>
+    <p class="intro reveal">
+      Al terminar el cardio: <b>3 min de bici muy suave</b> y luego
+      <b>30 segundos por posición, sin rebotes</b>. Es lo que mantiene los
+      hombros móviles, la rodilla contenta y el cuerpo listo para el día
+      siguiente.
+    </p>
+
+    <span class="tier-label tier-1 reveal">Días de tren superior (lunes, jueves y viernes)</span>
+    <div class="supp-grid">
+      {
+        upper.map((s) => (
+          <article class="supp reveal">
+            <h3>{s.title}</h3>
+            <span class="dose">{s.dose}</span>
+            <p set:html={s.body} />
+          </article>
+        ))
+      }
+    </div>
+
+    <span class="tier-label tier-1 reveal">Días de pierna (martes y sábado)</span>
+    <div class="supp-grid">
+      {
+        lower.map((s) => (
+          <article class="supp reveal">
+            <h3>{s.title}</h3>
+            <span class="dose">{s.dose}</span>
+            <p set:html={s.body} />
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="bands reveal">
+      <h3>El registro: tu mejor herramienta</h3>
+      <p>
+        Anota en el celular <b>peso y repeticiones de cada ejercicio, cada
+        día</b>. En la fase 2 (días 6–14), cuando completes el rango alto de
+        reps en todas las series, sube el peso al siguiente salto de la
+        máquina y vuelve al rango bajo. <b>Sin registro no hay progresión.</b>
+      </p>
+    </div>
+  </div>
+</section>

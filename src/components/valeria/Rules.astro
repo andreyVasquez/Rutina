@@ -1,0 +1,69 @@
+---
+const rules = [
+  {
+    n: "01",
+    title: "Técnica sobre peso",
+    body: "Los primeros 5 días deja <b>3–4 repeticiones de sobra</b> en cada serie. El peso correcto es el que permite todas las reps limpias — el ego no entrena.",
+  },
+  {
+    n: "02",
+    title: "Tempo controlado",
+    body: "Sube con intención y <b>baja en 2 s</b>. Donde la tarjeta pida pausa (1–2 s apretando), la pausa es parte del ejercicio.",
+  },
+  {
+    n: "03",
+    title: "Descansos",
+    body: "Cada tarjeta trae el suyo: <b>90 s</b> en prensa e hip thrust, <b>75 s</b> en presses y jalones, <b>45–60 s</b> en aislamientos. Respetarlos es lo que hace que la sesión quepa en 75–90 min.",
+  },
+  {
+    n: "04",
+    title: "Doble progresión",
+    body: "Al completar el <b>rango alto de reps en todas las series</b> con buena técnica, sube al siguiente salto de placa y vuelve al rango bajo. Así se progresa sin adivinar.",
+  },
+  {
+    n: "05",
+    title: "Calentamiento siempre",
+    body: "Los <b>8–10 min de calentamiento no se negocian</b>: bici suave, movilidad de hombro y cuello, y la serie de aproximación con la mitad del peso.",
+  },
+  {
+    n: "06",
+    title: "Cierre con estiramiento",
+    body: "Cada sesión termina con <b>3 min de bici muy suave + 8 min de estiramiento</b> (sección al final): 30 s por posición, sin rebotes.",
+  },
+];
+---
+
+<section class="wrap" id="reglas">
+  <div class="sec-head reveal">
+    <h2>Reglas de Oro</h2><span class="tag">no negociables</span>
+  </div>
+  <div class="rules-grid">
+    {
+      rules.map((r) => (
+        <article class="rule reveal">
+          <span class="n">{r.n}</span>
+          <div>
+            <h3>{r.title}</h3>
+            <p set:html={r.body} />
+          </div>
+        </article>
+      ))
+    }
+  </div>
+  <div class="callout reveal">
+    <h3>Señales de alarma en la rodilla</h3>
+    <p>
+      Para la serie y baja el peso o el rango si aparece: <b>dolor punzante</b>
+      (no confundir con el ardor muscular), <b>chasquido con dolor</b>,
+      <b>bloqueo</b>, o <b>hinchazón que aparece horas después</b>.
+    </p>
+    <p>
+      <em
+        >Molestia leve que desaparece al calentar suele ser normal; dolor que
+        crece durante la sesión, no. Ante la duda, cambia al plan B de la
+        tarjeta (toca la tarjeta y elige una alternativa) y sigue con la
+        sesión.</em
+      >
+    </p>
+  </div>
+</section>

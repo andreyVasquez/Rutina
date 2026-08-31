@@ -1,0 +1,18 @@
+# build output
+dist/
+# generated types
+.astro/
+# dependencies
+node_modules/
+# logs
+npm-debug.log*
+# environment variables
+.env
+.env.production
+# macOS
+.DS_Store
+
+# proyectos originales pre-merge (borrar cuando la app unificada esté validada)
+andrey/
+rutina-valeria/
+Rutina_Gym_V3.html

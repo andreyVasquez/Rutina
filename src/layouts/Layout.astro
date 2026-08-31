@@ -1,0 +1,89 @@
+---
+import "../styles/global.css";
+import { profiles, type ProfileId } from "../data/types";
+
+interface Props {
+  /** Sin perfil (p. ej. el selector de "/") usa el tema neutro de Andrey. */
+  profile?: ProfileId;
+  title?: string;
+}
+
+const { profile, title } = Astro.props;
+const meta = profile ? profiles[profile] : undefined;
+const docTitle = title ?? meta?.title ?? "Rutina de Entrenamiento";
+const themeColor = meta?.themeColor ?? "#0b0b0d";
+---
+
+<!DOCTYPE html>
+<html lang="es" data-profile={profile}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <title>{docTitle}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- PWA / iconos -->
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content={themeColor} />
+    <meta name="color-scheme" content="dark" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="black-translucent"
+    />
+    <meta name="apple-mobile-web-app-title" content="Rutina" />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<script>
+  // Registra el service worker solo en producción (evita cachear en dev).
+  if (import.meta.env.PROD && "serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("/sw.js").catch(() => {});
+    });
+  }
+
+  // Recuerda el perfil de esta página para próximas visitas a "/".
+  const profile = document.documentElement.dataset.profile;
+  if (profile) {
+    try {
+      localStorage.setItem("rutina:perfil", profile);
+    } catch {}
+  }
+
+  const els = document.querySelectorAll<HTMLElement>(".reveal");
+  if (!("IntersectionObserver" in window)) {
+    els.forEach((e) => e.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add("in");
+            io.unobserve(en.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -30px 0px" },
+    );
+    els.forEach((e, i) => {
+      e.style.transitionDelay = Math.min((i % 6) * 55, 330) + "ms";
+      io.observe(e);
+    });
+  }
+</script>

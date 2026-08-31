@@ -1,0 +1,207 @@
+---
+/**
+ * Registro de peso por ejercicio: el botón "Registrar peso" de cada tarjeta
+ * abre este <dialog> con una rueda (scroll-snap) para elegir kg + fracción.
+ * Se guarda por perfil en localStorage (`rutina:pesos:<perfil>`), con
+ * historial de registros. `pesos-iniciales.json` sirve de semilla la primera
+ * vez que se abre la app en un dispositivo.
+ */
+---
+
+<dialog class="peso-modal" id="peso-modal" aria-label="Registrar peso">
+  <div class="peso-sheet">
+    <button class="peso-close" type="button" aria-label="Cerrar">✕</button>
+    <p class="peso-kicker">Registrar peso</p>
+    <h3 class="peso-title"></h3>
+    <p class="peso-last"></p>
+    <div class="peso-picker" aria-label="Selector de kilos">
+      <div class="peso-wheel" data-wheel="int" tabindex="0" aria-label="Kilos"></div>
+      <div class="peso-wheel peso-wheel-dec" data-wheel="dec" tabindex="0" aria-label="Fracción"></div>
+      <span class="peso-unit">kg</span>
+      <i class="peso-focus" aria-hidden="true"></i>
+    </div>
+    <div class="peso-actions">
+      <button class="peso-clear" type="button" hidden>Borrar</button>
+      <button class="peso-save" type="button">Guardar</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  import seed from "../data/pesos-iniciales.json";
+
+  const modal = document.getElementById("peso-modal") as HTMLDialogElement | null;
+
+  if (modal && typeof modal.showModal === "function") {
+    const profile = document.documentElement.dataset.profile ?? "andrey";
+    const KEY = `rutina:pesos:${profile}`;
+    const seedMap: Record<string, number> =
+      (seed as Record<string, any>)[profile] ?? {};
+
+    interface Entry {
+      kg: number;
+      fecha: string;
+      historial: { kg: number; fecha: string }[];
+    }
+
+    const load = (): Record<string, Entry> => {
+      try {
+        return JSON.parse(localStorage.getItem(KEY) ?? "{}");
+      } catch {
+        return {};
+      }
+    };
+    const store = (data: Record<string, Entry>) => {
+      try {
+        localStorage.setItem(KEY, JSON.stringify(data));
+      } catch {}
+    };
+
+    const currentKg = (exId: string): number | undefined =>
+      load()[exId]?.kg ?? seedMap[exId];
+
+    const fmt = (kg: number) => kg.toLocaleString("es-CO") + " kg";
+
+    /* ---- badges en las tarjetas ---- */
+    const paintBtn = (btn: HTMLElement) => {
+      const kg = currentKg(btn.dataset.pesoEx!);
+      const val = btn.querySelector<HTMLElement>(".peso-val")!;
+      const label = btn.querySelector<HTMLElement>(".peso-label")!;
+      if (kg != null) {
+        val.textContent = fmt(kg);
+        val.hidden = false;
+        label.textContent = "Peso";
+        btn.classList.add("has-peso");
+      } else {
+        val.hidden = true;
+        label.textContent = "Registrar peso";
+        btn.classList.remove("has-peso");
+      }
+    };
+    const buttons = document.querySelectorAll<HTMLElement>(".peso-btn");
+    buttons.forEach(paintBtn);
+
+    /* ---- rueda ---- */
+    const INTS = Array.from({ length: 201 }, (_, i) => i); // 0–200 kg
+    const DECS = [0, 0.25, 0.5, 0.75];
+    const ITEM_H = 44;
+
+    const intWheel = modal.querySelector<HTMLElement>('[data-wheel="int"]')!;
+    const decWheel = modal.querySelector<HTMLElement>('[data-wheel="dec"]')!;
+    const title = modal.querySelector<HTMLElement>(".peso-title")!;
+    const last = modal.querySelector<HTMLElement>(".peso-last")!;
+    const saveBtn = modal.querySelector<HTMLButtonElement>(".peso-save")!;
+    const clearBtn = modal.querySelector<HTMLButtonElement>(".peso-clear")!;
+    const closeBtn = modal.querySelector<HTMLButtonElement>(".peso-close")!;
+
+    const fill = (wheel: HTMLElement, values: number[], render: (v: number) => string) => {
+      wheel.replaceChildren(
+        ...values.map((v) => {
+          const d = document.createElement("div");
+          d.className = "peso-item";
+          d.textContent = render(v);
+          return d;
+        }),
+      );
+    };
+    fill(intWheel, INTS, String);
+    fill(decWheel, DECS, (v) => (v === 0 ? ",0" : "," + String(v).slice(2)));
+
+    const setIndex = (wheel: HTMLElement, i: number, smooth = false) => {
+      wheel.scrollTo({ top: i * ITEM_H, behavior: smooth ? "smooth" : "auto" });
+    };
+    const getIndex = (wheel: HTMLElement, max: number) =>
+      Math.max(0, Math.min(max, Math.round(wheel.scrollTop / ITEM_H)));
+
+    // Resalta el ítem centrado mientras gira la rueda.
+    const markActive = (wheel: HTMLElement, max: number) => {
+      const i = getIndex(wheel, max);
+      wheel.querySelectorAll(".peso-item").forEach((el, j) => {
+        el.classList.toggle("on", j === i);
+      });
+    };
+    [intWheel, decWheel].forEach((wheel) => {
+      const max = wheel === intWheel ? INTS.length - 1 : DECS.length - 1;
+      wheel.addEventListener("scroll", () => markActive(wheel, max), { passive: true });
+      // Tocar un ítem lo centra.
+      wheel.addEventListener("click", (e) => {
+        const item = (e.target as HTMLElement).closest(".peso-item");
+        if (!item) return;
+        const i = Array.prototype.indexOf.call(wheel.children, item);
+        setIndex(wheel, i, true);
+      });
+    });
+
+    /* ---- abrir / guardar ---- */
+    let currentEx = "";
+    let currentBtn: HTMLElement | null = null;
+
+    const open = (btn: HTMLElement) => {
+      currentEx = btn.dataset.pesoEx!;
+      currentBtn = btn;
+      title.textContent = btn.dataset.pesoTitle ?? "";
+      const entry = load()[currentEx];
+      last.textContent = entry
+        ? `Último: ${fmt(entry.kg)} · ${entry.fecha}`
+        : "Sin registros todavía";
+      clearBtn.hidden = !entry;
+      const kg = currentKg(currentEx) ?? 20;
+      const intPart = Math.floor(kg);
+      const decPart = kg - intPart;
+      const decIdx = DECS.reduce(
+        (best, v, i) => (Math.abs(v - decPart) < Math.abs(DECS[best] - decPart) ? i : best),
+        0,
+      );
+      modal.showModal();
+      document.body.style.overflow = "hidden";
+      // El scroll solo funciona con el dialog ya visible.
+      requestAnimationFrame(() => {
+        setIndex(intWheel, Math.min(intPart, 200));
+        setIndex(decWheel, decIdx);
+        markActive(intWheel, INTS.length - 1);
+        markActive(decWheel, DECS.length - 1);
+      });
+    };
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation(); // no abrir la guía del ejercicio
+        open(btn);
+      });
+    });
+
+    saveBtn.addEventListener("click", () => {
+      const kg =
+        INTS[getIndex(intWheel, INTS.length - 1)] +
+        DECS[getIndex(decWheel, DECS.length - 1)];
+      const fecha = new Date().toISOString().slice(0, 10);
+      const data = load();
+      const prev = data[currentEx];
+      data[currentEx] = {
+        kg,
+        fecha,
+        historial: [...(prev?.historial ?? []), { kg, fecha }].slice(-50),
+      };
+      store(data);
+      if (currentBtn) paintBtn(currentBtn);
+      if (navigator.vibrate) navigator.vibrate(10);
+      modal.close();
+    });
+
+    clearBtn.addEventListener("click", () => {
+      const data = load();
+      delete data[currentEx];
+      store(data);
+      if (currentBtn) paintBtn(currentBtn);
+      modal.close();
+    });
+
+    closeBtn.addEventListener("click", () => modal.close());
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) modal.close();
+    });
+    modal.addEventListener("close", () => {
+      document.body.style.overflow = "";
+    });
+  }
+</script>

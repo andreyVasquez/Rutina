@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <clipPath id="round"><rect width="512" height="512" rx="104"/></clipPath>
+    <pattern id="hatch" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(135)">
+      <rect width="16" height="40" fill="#ff4438"/>
+    </pattern>
+  </defs>
+
+  <rect width="512" height="512" rx="104" fill="#0b0b0d"/>
+
+  <!-- esquina con tramado (eco del hero) -->
+  <g clip-path="url(#round)" opacity="0.12">
+    <rect x="300" y="300" width="320" height="320" fill="url(#hatch)"/>
+  </g>
+
+  <!-- marca: cuadrado sesgado (como el ícono de la marca) -->
+  <g transform="translate(256 244) skewX(-12)">
+    <rect x="-118" y="-118" width="236" height="236" rx="30" fill="#ff4438"/>
+    <rect x="-60" y="-60" width="120" height="120" rx="16" fill="#0b0b0d"/>
+    <rect x="-108" y="150" width="216" height="24" rx="12" fill="#ffc53d"/>
+  </g>
+</svg>

@@ -1,0 +1,56 @@
+---
+const changes = [
+  {
+    title: "1 · El enfoque",
+    body: "Todo apunta a cuatro cosas: <b>hombros con anchura y línea, espalda alta que endereza la postura, glúteo 3 días por semana y piernas que protegen la rodilla</b>. Lo demás acompaña.",
+  },
+  {
+    title: "2 · Solo máquinas",
+    body: "Cada ejercicio usa <b>máquinas y poleas</b>: recorrido guiado, seguro entrenando sola y el peso queda en la placa — fácil de recordar y de subir.",
+  },
+  {
+    title: "3 · La semana",
+    body: "<b>Lunes</b> hombros y espalda alta · <b>martes</b> piernas y core · <b>miércoles</b> descanso · <b>jueves</b> pecho, hombro y tríceps · <b>viernes</b> espalda y bíceps · <b>sábado</b> glúteo e isquios · <b>domingo</b> descanso total.",
+  },
+  {
+    title: "4 · 20 días, 3 fases",
+    body: "<b>Días 1–5:</b> aprende las máquinas — ajusta asientos y deja 3–4 reps de sobra. <b>Días 6–14:</b> al completar el rango alto con buena técnica, sube al siguiente salto de placa. <b>Días 15–20:</b> mantén los pesos y cuida el descanso, justo antes del viaje.",
+  },
+  {
+    title: "5 · La rodilla manda",
+    body: "Prensa <b>solo hasta 90°</b>, extensiones ligeras en el último tercio, cero impacto (nada de trote ni pendiente) y <b>abductora en cada día de pierna</b>: la rodilla estable empieza en el glúteo medio.",
+  },
+  {
+    title: "6 · Postura en serio",
+    body: "El <b>face pull es el ejercicio más importante de la semana</b>, el pec deck invertido aparece 3 veces y el calentamiento trae doble mentón y retracción escapular: hombros atrás sin pensarlo.",
+  },
+  {
+    title: "7 · Toca cualquier tarjeta",
+    body: "Cada tarjeta trae la <b>foto del ejercicio</b> (posición inicial y final, alternándose) y al tocarla se abre la <b>guía completa: paso a paso y alternativas</b>. Cada alternativa también se abre con su propia guía.",
+  },
+  {
+    title: "8 · Cardio amable",
+    body: "Bici con el sillín alto o elíptica, <b>a ritmo de conversación</b>, 12–15 min al final de cada sesión. El cardio acompaña el plan; no lo castiga.",
+  },
+  {
+    title: "9 · Registro o nada",
+    body: "Anota <b>peso y repeticiones de cada ejercicio</b> en el celular. Sin registro no hay progresión — y en 20 días cada sesión cuenta.",
+  },
+];
+---
+
+<section class="wrap" id="cambios">
+  <div class="sec-head reveal">
+    <h2>Claves de la rutina</h2><span class="tag">y por qué</span>
+  </div>
+  <div class="changes">
+    {
+      changes.map((c) => (
+        <article class="change reveal">
+          <h3>{c.title}</h3>
+          <p set:html={c.body} />
+        </article>
+      ))
+    }
+  </div>
+</section>

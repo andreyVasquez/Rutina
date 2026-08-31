@@ -1,0 +1,44 @@
+---
+import { profiles, type ProfileId } from "../data/types";
+
+interface Props {
+  profile: ProfileId;
+  links: { href: string; label: string }[];
+}
+
+const { profile, links } = Astro.props;
+const other: ProfileId = profile === "andrey" ? "valeria" : "andrey";
+---
+
+<header class="topnav">
+  <a class="brand" href="#top"><i></i>Rutina</a>
+  <nav>
+    {links.map((l) => <a href={l.href}>{l.label}</a>)}
+  </nav>
+  <a
+    class="profile-switch"
+    href={`/${other}/`}
+    aria-label={`Cambiar al perfil de ${profiles[other].name}`}
+    title={`Cambiar a ${profiles[other].name}`}
+  >
+    <span class:list={["ps-name", profile === "andrey" && "on"]}>
+      {profiles.andrey.name.slice(0, 1)}
+    </span>
+    <span class="ps-track"><i></i></span>
+    <span class:list={["ps-name", profile === "valeria" && "on"]}>
+      {profiles.valeria.name.slice(0, 1)}
+    </span>
+  </a>
+</header>
+
+<script>
+  // Al cambiar de perfil, guarda la elección antes de navegar para que "/"
+  // redirija al perfil nuevo aunque la otra página no alcance a cargar.
+  document.querySelector(".profile-switch")?.addEventListener("click", (e) => {
+    const href = (e.currentTarget as HTMLAnchorElement).getAttribute("href")!;
+    const profile = href.replaceAll("/", "");
+    try {
+      localStorage.setItem("rutina:perfil", profile);
+    } catch {}
+  });
+</script>

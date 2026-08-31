@@ -1,0 +1,168 @@
+---
+import type { AltDetail, DayData } from "../data/types";
+
+interface Props {
+  day: DayData;
+  altCatalog: Record<string, AltDetail>;
+}
+
+const { day, altCatalog } = Astro.props;
+const gridClass = day.recovery ? "recov" : "cards";
+
+/** Id estable por ejercicio para guardar su peso: `<dia>-<slug-del-titulo>`. */
+const slug = (s: string) =>
+  s
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
+---
+
+<section class="day" id={day.id}>
+  <div class="wrap">
+    <header class="day-head reveal">
+      <span class="day-num">{day.num}</span>
+      <div>
+        <p class="day-kicker">{day.kicker}</p>
+        <h2>{day.title}</h2>
+      </div>
+    </header>
+    {day.quote && <p class="day-quote reveal">{day.quote}</p>}
+    <div class={gridClass}>
+      {
+        day.exercises.map((ex) => {
+          const openable = !!(ex.steps?.length || ex.alternatives?.length);
+          const exId = `${day.id}-${slug(ex.title)}`;
+          return (
+            <article
+              class:list={["card", "reveal", openable && "openable"]}
+              data-ex-id={exId}
+              tabindex={openable ? 0 : undefined}
+              role={openable ? "button" : undefined}
+              aria-haspopup={openable ? "dialog" : undefined}
+              aria-label={openable ? `${ex.title}: ver guía y alternativas` : undefined}
+            >
+              <div class:list={["pict", ex.images && "photo"]}>
+                {ex.images ? (
+                  <>
+                    <img
+                      class="frame"
+                      src={ex.images[0]}
+                      alt={`${ex.title} — posición inicial`}
+                      loading="lazy"
+                      width="850"
+                      height="569"
+                    />
+                    <img
+                      class="frame f2"
+                      src={ex.images[1]}
+                      alt={`${ex.title} — posición final`}
+                      loading="lazy"
+                      width="850"
+                      height="569"
+                    />
+                  </>
+                ) : (
+                  <svg class="icon">
+                    <use href={`#${ex.icon}`} />
+                  </svg>
+                )}
+                {ex.watch && <span class="watch">⌚ {ex.watch}</span>}
+                {openable && <span class="hint">+ guía</span>}
+              </div>
+              <div class="card-body">
+                <div class="card-top">
+                  <h3>{ex.title}</h3>
+                  <span class="reps">{ex.reps}</span>
+                </div>
+                <p set:html={ex.desc} />
+                {!day.recovery && (
+                  <button
+                    class="peso-btn"
+                    type="button"
+                    data-peso-ex={exId}
+                    data-peso-title={ex.title}
+                    aria-haspopup="dialog"
+                  >
+                    <svg class="peso-ic" aria-hidden="true">
+                      <use href="#ic-plate" />
+                    </svg>
+                    <span class="peso-label">Registrar peso</span>
+                    <b class="peso-val" hidden />
+                  </button>
+                )}
+              </div>
+              {openable && (
+                <template class="card-detail">
+                  <div class:list={["pict", "ex-pict", ex.images && "photo"]}>
+                    {ex.images ? (
+                      <>
+                        <img
+                          class="frame"
+                          src={ex.images[0]}
+                          alt={`${ex.title} — posición inicial`}
+                          width="850"
+                          height="569"
+                        />
+                        <img
+                          class="frame f2"
+                          src={ex.images[1]}
+                          alt={`${ex.title} — posición final`}
+                          width="850"
+                          height="569"
+                        />
+                      </>
+                    ) : (
+                      <svg class="icon">
+                        <use href={`#${ex.icon}`} />
+                      </svg>
+                    )}
+                    {ex.watch && <span class="watch">⌚ {ex.watch}</span>}
+                  </div>
+                  <div class="ex-info">
+                    <div class="ex-top">
+                      <h3>{ex.title}</h3>
+                      <span class="reps">{ex.reps}</span>
+                    </div>
+                    <p class="ex-desc" set:html={ex.desc} />
+                    {ex.steps?.length && (
+                      <>
+                        <h4 class="ex-sec">Cómo hacerlo</h4>
+                        <ol class="ex-steps">
+                          {ex.steps.map((s) => (
+                            <li set:html={s} />
+                          ))}
+                        </ol>
+                      </>
+                    )}
+                    {ex.alternatives?.length && (
+                      <>
+                        <h4 class="ex-sec">Alternativas</h4>
+                        <p class="ex-alts-hint">Toca una alternativa para ver su guía.</p>
+                        <ul class="ex-alts">
+                          {ex.alternatives.map((a) => (
+                            <li
+                              data-alt={a.id}
+                              tabindex="0"
+                              role="button"
+                              aria-label={`Ver guía: ${altCatalog[a.id].title}`}
+                            >
+                              <b>{altCatalog[a.id].title}</b>
+                              {a.note && <span> — {a.note}</span>}
+                              <span class="alt-go" aria-hidden="true">›</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </>
+                    )}
+                  </div>
+                </template>
+              )}
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

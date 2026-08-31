@@ -1,0 +1,38 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { profiles } from "../data/types";
+---
+
+<Layout title="Rutina — ¿Quién entrena?">
+  <!-- Redirige de una al último perfil usado; sin registro, muestra el selector. -->
+  <script is:inline>
+    try {
+      var p = localStorage.getItem("rutina:perfil");
+      if (p === "andrey" || p === "valeria") {
+        location.replace("/" + p + "/");
+      } else {
+        document.documentElement.classList.add("choose");
+      }
+    } catch (e) {
+      document.documentElement.classList.add("choose");
+    }
+  </script>
+
+  <main class="chooser">
+    <p class="kicker">Rutina</p>
+    <h1>¿Quién entrena<em>?</em></h1>
+    <div class="chooser-cards">
+      <a class="chooser-card ch-andrey" href="/andrey/">
+        <span class="ch-dot"></span>
+        <b>{profiles.andrey.name}</b>
+        <span class="ch-sub">Fuerza + MMA</span>
+      </a>
+      <a class="chooser-card ch-valeria" href="/valeria/">
+        <span class="ch-dot"></span>
+        <b>{profiles.valeria.name}</b>
+        <span class="ch-sub">Fuerza + Línea</span>
+      </a>
+    </div>
+    <p class="chooser-note">Se recuerda tu elección en este dispositivo.</p>
+  </main>
+</Layout>
