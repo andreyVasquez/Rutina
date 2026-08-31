@@ -12,7 +12,7 @@ npm-debug.log*
 # macOS
 .DS_Store
 
-# proyectos originales pre-merge (borrar cuando la app unificada esté validada)
-andrey/
-rutina-valeria/
-Rutina_Gym_V3.html
+# proyectos originales pre-merge, solo en la raíz (borrar cuando la app unificada esté validada)
+/andrey/
+/rutina-valeria/
+/Rutina_Gym_V3.html

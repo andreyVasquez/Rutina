@@ -1,0 +1,60 @@
+---
+const changes = [
+  {
+    title: "1 · Semana definitiva",
+    body: "Lunes, martes y miércoles en el gym (<b>máquinas Matrix, pesas, saco y zona cardio</b>); el jueves, <b>sesión personalizada: solo tú y el profe</b> — él dirige todo y ese día no entrenas nada más. El viernes, <b>descanso obligado por pico y placa</b> (y cae perfecto tras 4 días seguidos). Sábado o domingo, <b>pádel 1–2 h</b>; el otro día del finde, descanso total.",
+  },
+  {
+    title: "2 · Máximo una hora",
+    body: "Cada sesión de gym cabe en <b>60 minutos</b>: calentamiento corto, 5–6 ejercicios con intención y a la calle. Si vas corto de tiempo, recorta el finisher o una serie de los últimos ejercicios — <b>nunca la potencia ni los compuestos</b>.",
+  },
+  {
+    title: "3 · Todo al servicio del MMA",
+    body: "Cada ejercicio está elegido por evidencia en preparación de peleadores: <b>potencia de cadera para golpear y derribar (saltos, hip thrust, push press), golpeo con carga (saco, golpe en polea), agarre (acarreos, remos, curl martillo) y manguito rotador</b>. El cuello y los rounds duros van el jueves con el profe.",
+  },
+  {
+    title: "4 · Cardio de rounds",
+    body: "La condición se construye con <b>intervalos que imitan la pelea</b>: sprints en la <b>bici de aire</b> el lunes y rounds de saco el miércoles; los rounds duros son el jueves con el profe. El <b>pádel del finde</b> suma cardio jugado.",
+  },
+  {
+    title: "5 · Potencia primero",
+    body: "Saltos, golpes al saco y push press van <b>al inicio, en fresco</b>. La velocidad es lo primero que muere cuando te fatigas — no la entrenes cansado.",
+  },
+  {
+    title: "6 · Miércoles amable",
+    body: "El día previo a la sesión con el profe es <b>saco a ritmo técnico y bombeo de brazos en máquinas</b>: llegas al jueves con las manos afinadas, las piernas vivas y sin agujetas que estorben.",
+  },
+  {
+    title: "7 · Si la semana se rompe",
+    body: "¿Terremoto, viaje, imprevisto? <b>No recuperes días perdidos ni hagas dobles</b>: retoma el plan en el día que corresponde y sigue. Meses de constancia valen más que cualquier semana perfecta.",
+  },
+  {
+    title: "8 · Toca cualquier tarjeta",
+    body: "Cada tarjeta trae la <b>foto del ejercicio</b> (posición inicial y final, alternándose) y al tocarla se abre la <b>guía completa: paso a paso y alternativas</b>. Cada alternativa también se toca y abre <b>su propia guía</b> con foto y pasos.",
+  },
+  {
+    title: "9 · Progresión explícita",
+    body: "Nada de subir peso al azar. Usa <b>doble progresión</b> y registra peso y reps en cada sesión; en cardio, sube velocidad o rounds cada semana.",
+  },
+  {
+    title: "10 · Máquinas primero",
+    body: "Donde una máquina hace el trabajo, la rutina la usa (Matrix): montaje en segundos, seguridad entrenando solo y peso guardado en la app. Libre queda solo lo irreemplazable: <b>potencia (saltos, push press, saco) y agarre (acarreo)</b>. ¿Máquina ocupada? <b>Cambiar ejercicio</b> en la app propone la equivalente — cambia la herramienta, nunca el patrón.",
+  },
+];
+---
+
+<section class="wrap" id="cambios">
+  <div class="sec-head reveal">
+    <h2>Claves de la rutina</h2><span class="tag">y por qué</span>
+  </div>
+  <div class="changes">
+    {
+      changes.map((c) => (
+        <article class="change reveal">
+          <h3>{c.title}</h3>
+          <p set:html={c.body} />
+        </article>
+      ))
+    }
+  </div>
+</section>
