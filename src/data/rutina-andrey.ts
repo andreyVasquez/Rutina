@@ -11,6 +11,27 @@ const img = (id: string): [string, string] => [
  */
 export const altCatalog: Record<string, AltDetail> = {
   /* ---- Cardio / calentamiento ---- */
+  "cuerda-suave": {
+    title: "Cuerda suave",
+    reps: "4–5 min",
+    images: img("Rope_Jumping"),
+    desc: "El calentamiento del combate: pulso, tobillos, muñecas y juego de pies en menos tiempo que la elíptica.",
+    steps: [
+      "Cuerda a tu medida: pisándola al centro, las manijas llegan a las axilas.",
+      "Salta bajo (2–3 cm), en la punta de los pies; giran las muñecas, no los brazos.",
+      "Ritmo de charla, sin sprints: esto es calentamiento. Si te enredas, camina 10 s y retoma.",
+    ],
+  },
+  "eliptica-suave": {
+    title: "Elíptica suave",
+    reps: "6 min",
+    images: img("Elliptical_Trainer"),
+    desc: "Plan B sin impacto: día que llegas molido, tobillo sensible o gym sin espacio para saltar.",
+    steps: [
+      "Arranca suave: los primeros 2 min a ritmo de charla.",
+      "Sube la resistencia poco a poco hasta sudar ligero, sin agitarte.",
+    ],
+  },
   "escaladora": {
     title: "Escaladora",
     reps: "6–8 min",
@@ -681,6 +702,7 @@ export const days: DayData[] = [
           "Remata con 2 min de movilidad de cadera: círculos amplios, zancada profunda 20 s por lado y una sentadilla profunda sin peso.",
         ],
         alternatives: [
+          { id: "cuerda-suave", note: "4–5 min si prefieres saltar; suave, que hoy hay potencia de piernas." },
           { id: "escaladora", note: "activa más glúteo y sube el pulso más rápido." },
           { id: "bici-suave", note: "si las elípticas están ocupadas." },
           { id: "caminadora-cuesta", note: "caminando rápido con inclinación 8–10." },
@@ -824,17 +846,19 @@ export const days: DayData[] = [
     title: "Golpeo y Agarre — Torso",
     exercises: [
       {
-        images: img("Elliptical_Trainer"),
+        images: img("Rope_Jumping"),
         title: "Calentamiento",
         reps: "8 min",
-        desc: "6 min de elíptica o bici suave + 2 min de banda para hombro.",
-        watch: "Elíptica",
+        desc: "5 min de cuerda + 2 min de banda para hombro. <b>La cuerda es MMA desde el minuto uno:</b> pulso, muñecas y juego de pies antes de tocar el saco.",
+        watch: "Saltar la cuerda",
         steps: [
-          "6 min de elíptica o bici suave, subiendo el ritmo poco a poco.",
+          "Cuerda a tu medida: pisándola al centro, las manijas llegan a las axilas.",
+          "Salta bajo (2–3 cm), en la punta de los pies; giran las muñecas, no los brazos. Si te enredas, camina 10 s y retoma.",
           "Con tu banda: 15 separaciones al frente (pull-apart) + 15 rotaciones externas por lado.",
           "Cierra con 10 círculos grandes de brazos hacia atrás.",
         ],
         alternatives: [
+          { id: "eliptica-suave", note: "si llegas molido o no hay espacio para saltar." },
           { id: "escaladora", note: "mismos 6 min si lo prefieres." },
           { id: "remo-suave-polea", note: "activa espalda y hombro antes de empujar." },
         ],
@@ -960,19 +984,20 @@ export const days: DayData[] = [
       "Golpeo a ritmo y bombeo de brazos: el saco pule las manos hoy, el profe las examina mañana.",
     exercises: [
       {
-        images: img("Elliptical_Trainer"),
+        images: img("Rope_Jumping"),
         title: "Calentamiento",
         reps: "8 min",
-        desc: "6 min de elíptica o bici suave + 2 min de banda para hombro.",
-        watch: "Elíptica",
+        desc: "5 min de cuerda + 2 min de banda para hombro. <b>Hoy hay saco:</b> la cuerda enciende justo lo que vas a usar — ritmo, muñecas y pies.",
+        watch: "Saltar la cuerda",
         steps: [
-          "6 min de elíptica o bici suave, subiendo el ritmo poco a poco.",
+          "Cuerda a tu medida: pisándola al centro, las manijas llegan a las axilas.",
+          "Salta bajo (2–3 cm), en la punta de los pies; giran las muñecas, no los brazos. Si te enredas, camina 10 s y retoma.",
           "Con tu banda: 15 separaciones al frente + 15 rotaciones externas por lado.",
           "Cierra con 10 círculos grandes de brazos hacia atrás.",
         ],
         alternatives: [
+          { id: "eliptica-suave", note: "si llegas molido o no hay espacio para saltar." },
           { id: "escaladora", note: "mismos 6 min si lo prefieres." },
-          { id: "bici-suave", note: "si prefieres pedalear." },
         ],
       },
       {
