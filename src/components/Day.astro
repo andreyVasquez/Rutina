@@ -29,6 +29,16 @@ const slug = (s: string) =>
       </div>
     </header>
     {day.quote && <p class="day-quote reveal">{day.quote}</p>}
+    {day.warmup && (
+      <aside class="day-block warmup reveal">
+        <h3>{day.warmup.title ?? "Calentamiento"}</h3>
+        <ul>
+          {day.warmup.items.map((it) => (
+            <li set:html={it} />
+          ))}
+        </ul>
+      </aside>
+    )}
     <div class={gridClass}>
       {
         day.exercises.map((ex) => {
@@ -164,5 +174,15 @@ const slug = (s: string) =>
         })
       }
     </div>
+    {day.cooldown && (
+      <aside class="day-block cooldown reveal">
+        <h3>{day.cooldown.title ?? "Enfriamiento"}</h3>
+        <ul>
+          {day.cooldown.items.map((it) => (
+            <li set:html={it} />
+          ))}
+        </ul>
+      </aside>
+    )}
   </div>
 </section>

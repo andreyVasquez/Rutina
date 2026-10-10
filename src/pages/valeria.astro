@@ -5,15 +5,16 @@ import Nav from "../components/Nav.astro";
 import Hero from "../components/valeria/Hero.astro";
 import Changes from "../components/valeria/Changes.astro";
 import Rules from "../components/valeria/Rules.astro";
+import Phases from "../components/valeria/Phases.astro";
 import Day from "../components/Day.astro";
 import ExerciseModal from "../components/ExerciseModal.astro";
 import WeightModal from "../components/WeightModal.astro";
-import Cooldown from "../components/valeria/Cooldown.astro";
 import Footer from "../components/valeria/Footer.astro";
 import { days, altCatalog } from "../data/rutina-valeria";
 
 const links = [
   { href: "#reglas", label: "Reglas" },
+  { href: "#fases", label: "Fases" },
   { href: "#dia1", label: "Lun" },
   { href: "#dia2", label: "Mar" },
   { href: "#dia3", label: "Mié" },
@@ -21,7 +22,6 @@ const links = [
   { href: "#dia5", label: "Vie" },
   { href: "#dia6", label: "Sáb" },
   { href: "#dia7", label: "Dom" },
-  { href: "#estiramiento", label: "Estirar" },
 ];
 ---
 
@@ -31,9 +31,9 @@ const links = [
   <Hero />
   <Changes />
   <Rules />
+  <Phases />
   {days.map((day) => <Day day={day} altCatalog={altCatalog} />)}
   <ExerciseModal altCatalog={altCatalog} />
   <WeightModal />
-  <Cooldown />
   <Footer />
 </Layout>

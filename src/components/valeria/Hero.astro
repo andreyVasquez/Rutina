@@ -1,23 +1,24 @@
 ---
+import { ascenso, corta } from "../../data/plan-valeria";
 ---
 
 <section class="hero" id="top">
-  <p class="kicker reveal">Valeria · plan de 20 días</p>
+  <p class="kicker reveal">Valeria · rumbo al Acatenango</p>
   <h1>
     <span class="ghost reveal">Fuerza</span>
-    <span class="hit reveal">+ Línea<em>.</em></span>
+    <span class="hit reveal">+ Montaña<em>.</em></span>
   </h1>
   <p class="sub reveal">
-    Rutina de <strong>solo máquinas</strong> para Smart Fit:
-    <strong>hombros con línea, espalda derecha y glúteo 3 veces por semana</strong>,
-    con la <strong>rodilla protegida</strong> en cada ejercicio. 5 días por
-    semana, 75–90 min por sesión, y cada tarjeta se abre con su
-    <strong>guía paso a paso</strong>.
+    Preparación para subir el <strong>volcán Acatenango</strong>: unos
+    <strong>1.500 m de desnivel el primer día</strong> con mochila de
+    <strong>6–10 kg</strong>, campamento a <strong>~3.600 m</strong> y una
+    bajada exigente para las rodillas. Smart Fit, 5 días por semana, sesiones
+    de máximo 1,5 h — y la postura, que se queda como objetivo.
   </p>
   <div class="chips reveal">
-    <span class="chip"><b>5</b> días / semana</span>
-    <span class="chip">Solo <b>máquinas</b></span>
-    <span class="chip"><b>20 días</b> · 3 fases</span>
-    <span class="chip">Rodilla <b>protegida</b></span>
+    <span class="chip">Ascenso · <b>{corta(ascenso)} {ascenso.getUTCFullYear()}</b></span>
+    <span class="chip" data-hoy="resumen">Semana — · Fase —</span>
+    <span class="chip">Máx. <b>1,5 h</b> por sesión</span>
+    <span class="chip">Calentamiento y enfriamiento <b>obligatorios</b></span>
   </div>
 </section>

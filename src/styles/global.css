@@ -484,3 +484,33 @@ html.choose .chooser{visibility:visible}
 @media (prefers-reduced-motion:reduce){
   .peso-modal[open]{animation:none}
 }
+
+/* ---------- CALENTAMIENTO / ENFRIAMIENTO POR DÍA ---------- */
+.day-block{
+  border:1px solid var(--line);border-left:3px solid var(--amber);background:var(--panel);
+  padding:16px 20px 14px;margin-top:22px;
+}
+.day-block.cooldown{margin-top:16px}
+.day-block h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:8px}
+.day-block ul{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:6px 20px;color:var(--mut);font-size:14.5px}
+.day-block li{position:relative;padding-left:16px}
+.day-block li::before{content:"";position:absolute;left:0;top:.55em;width:7px;height:7px;background:var(--amber);transform:skewX(-12deg)}
+.day-block li b{color:var(--ink)}
+
+/* ---------- FASES (plan de ascenso) ---------- */
+.intro-fases{color:var(--mut);max-width:860px;margin-bottom:26px;font-size:15.5px}
+.intro-fases b{color:var(--ink)}
+.phases{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:14px}
+.phase{position:relative;border:1px solid var(--line);background:var(--panel);padding:20px 20px 18px;transition:border-color .18s ease}
+.phase::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--line)}
+.phase h3{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.phase-dates{margin:4px 0 12px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.phase dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px;color:var(--mut)}
+.phase dt{color:var(--ink);font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:13px;padding-top:1px}
+.phase dd{margin:0}
+.phase-weeks{list-style:none;margin-top:12px;display:flex;flex-wrap:wrap;gap:6px}
+.phase-weeks li{border:1px solid var(--line);background:var(--panel-2);padding:3px 9px;font-size:12.5px;color:var(--mut)}
+.phase-hoy{display:none;position:absolute;top:12px;right:12px;background:var(--red);color:#fff;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:5px 9px}
+.phase.hoy{border-color:var(--red);box-shadow:0 0 0 1px var(--red) inset}
+.phase.hoy::before{background:var(--red)}
+.phase.hoy .phase-hoy{display:block}
