@@ -1,0 +1,104 @@
+---
+/**
+ * Fases hasta la cumbre (perfil de Valeria): fechas calculadas desde
+ * FECHA_ASCENSO (src/data/plan-valeria.ts). El script detecta la fase y la
+ * semana de hoy, resalta la fase en esta sección y rellena los
+ * <b data-hoy="…"> del hero y de las tarjetas de caminadora, escaladora y
+ * caminata con lo que toca hoy.
+ */
+import { fases, ascenso, inicio, totalSemanas, hitos, corta, larga, semanaPlanDe } from "../../data/plan-valeria";
+
+/** "semanas 5–9" / "semana 17" según las semanas del plan que ocupa la fase. */
+const semanasDe = (ini: Date, fin: Date) => {
+  const a = semanaPlanDe(ini);
+  const b = semanaPlanDe(fin);
+  return a === b ? `semana ${a}` : `semanas ${a}–${b}`;
+};
+---
+
+<section class="wrap" id="fases">
+  <div class="sec-head reveal">
+    <h2>Fases hasta la cumbre</h2>
+    <span class="tag">{corta(inicio)} → {larga(ascenso)} · {totalSemanas} semanas</span>
+  </div>
+  <p class="intro-fases reveal">
+    Caminadora <b>siempre al 15 % de inclinación y 4,0 km/h, sin agarrarse de
+    las barandas</b>; escaladora <b>siempre a ritmo moderado</b>; mochila:
+    <b>la misma del viaje, cargada con botellas de agua (1 L = 1 kg)</b>. Las
+    fechas se calculan hacia atrás desde el día del ascenso: si la fecha
+    cambia, todas las fases se mueven con ella.
+  </p>
+  <div class="phases">
+    {
+      fases.map((f) => (
+        <article class="phase reveal" data-fase={f.id}>
+          <span class="phase-hoy" aria-hidden="true">Hoy</span>
+          <h3>Fase {f.num} · {f.nombre}</h3>
+          <p class="phase-dates">
+            {corta(f.inicio)} – {corta(f.fin)} · {semanasDe(f.inicio, f.fin)}
+          </p>
+          <dl>
+            <dt>Caminadora</dt>
+            <dd>{f.caminadora}</dd>
+            <dt>Escaladora</dt>
+            <dd>{f.escaladora}</dd>
+            <dt>Sábado</dt>
+            <dd>{f.sabado}</dd>
+            <dt>Fuerza</dt>
+            <dd>{f.fuerza}</dd>
+          </dl>
+          {f.caminadoraSemana && (
+            <ol class="phase-weeks">
+              {Array.from({ length: f.semanas }, (_, i) => (
+                <li>
+                  Sem {i + 1}: {f.caminadoraSemana!(i + 1)}
+                </li>
+              ))}
+            </ol>
+          )}
+        </article>
+      ))
+    }
+  </div>
+  <div class="callout reveal">
+    <h3>Hitos de la descarga</h3>
+    <p>
+      <b>Sin step-downs desde el {corta(hitos.sinStepDownsDesde)}</b> (los
+      últimos 5 días antes del ascenso) · <b>última sesión de pierna el
+      {corta(hitos.ultimaPierna)}</b> (3 días antes de subir) · <b>ascenso el
+      {larga(ascenso)}</b>.
+    </p>
+  </div>
+</section>
+
+<script>
+  import { estadoDe, hoyLocal, corta, inicio, totalSemanas } from "../../data/plan-valeria";
+
+  const hoy = estadoDe(hoyLocal());
+
+  // Rellena todos los <b data-hoy="…"> (en la página y dentro de los templates de los popups).
+  const fill = (clave: string, texto: string) => {
+    const selector = `[data-hoy="${clave}"]`;
+    document.querySelectorAll<HTMLElement>(selector).forEach((el) => (el.textContent = texto));
+    document.querySelectorAll<HTMLTemplateElement>("template").forEach((tpl) =>
+      tpl.content.querySelectorAll<HTMLElement>(selector).forEach((el) => (el.textContent = texto)),
+    );
+  };
+
+  if (hoy.estado === "plan" && hoy.fase) {
+    fill(
+      "resumen",
+      hoy.diasParaAscenso === 0
+        ? "¡Hoy es el ascenso!"
+        : `Semana ${hoy.semanaPlan} de ${totalSemanas} · Fase ${hoy.fase.num} ${hoy.fase.nombre} · faltan ${hoy.diasParaAscenso} días`,
+    );
+    fill("caminadora", hoy.caminadora!);
+    fill("escaladora", hoy.escaladora!);
+    fill("sabado", hoy.sabado!);
+    document.querySelector(`.phase[data-fase="${hoy.fase.id}"]`)?.classList.add("hoy");
+  } else if (hoy.estado === "antes") {
+    fill("resumen", `El plan arranca el ${corta(inicio)} · faltan ${hoy.diasParaAscenso} días para el ascenso`);
+  } else {
+    fill("resumen", "Plan completado: ¡cumbre!");
+  }
+</script>

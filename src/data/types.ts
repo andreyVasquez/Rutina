@@ -32,6 +32,14 @@ export interface Exercise {
   alternatives?: AltRef[];
 }
 
+/** Bloque de calentamiento o enfriamiento de un día: ítems en orden. */
+export interface DayBlock {
+  /** Título opcional (por defecto "Calentamiento" / "Enfriamiento"). */
+  title?: string;
+  /** Ítems en orden; pueden traer HTML inline (<b>). */
+  items: string[];
+}
+
 export interface DayData {
   id: string;
   num: string;
@@ -40,6 +48,10 @@ export interface DayData {
   quote?: string;
   /** Los días de descanso usan una grilla compacta (.recov) en vez de .cards. */
   recovery?: boolean;
+  /** Calentamiento de la sesión, si el día lo define (se pinta antes de las tarjetas). */
+  warmup?: DayBlock;
+  /** Enfriamiento de la sesión, si el día lo define (se pinta después de las tarjetas). */
+  cooldown?: DayBlock;
   exercises: Exercise[];
 }
 
@@ -66,7 +78,7 @@ export const profiles: Record<ProfileId, ProfileMeta> = {
   valeria: {
     id: "valeria",
     name: "Valeria",
-    title: "Rutina de Valeria — Fuerza + Línea",
+    title: "Rutina de Valeria — Rumbo al Acatenango",
     themeColor: "#100b11",
   },
 };
