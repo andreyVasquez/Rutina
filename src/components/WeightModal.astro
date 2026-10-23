@@ -4,7 +4,8 @@
  * abre este <dialog> con una rueda (scroll-snap) para elegir kg + fracción.
  * Se guarda por perfil en localStorage (`rutina:pesos:<perfil>`), con
  * historial de registros. `pesos-iniciales.json` sirve de semilla la primera
- * vez que se abre la app en un dispositivo.
+ * vez que se abre la app en un dispositivo, y `pesos-renombres.json` mueve el
+ * registro de los ejercicios que cambiaron de día o de nombre.
  */
 ---
 
@@ -29,6 +30,7 @@
 
 <script>
   import seed from "../data/pesos-iniciales.json";
+  import renombres from "../data/pesos-renombres.json";
 
   const modal = document.getElementById("peso-modal") as HTMLDialogElement | null;
 
@@ -56,6 +58,22 @@
         localStorage.setItem(KEY, JSON.stringify(data));
       } catch {}
     };
+
+    // Ejercicios que cambiaron de día o de nombre: su registro pasa al id nuevo.
+    const moves: Record<string, string> =
+      (renombres as Record<string, any>)[profile] ?? {};
+    {
+      const data = load();
+      let changed = false;
+      for (const [viejo, nuevo] of Object.entries(moves)) {
+        if (data[viejo] && !data[nuevo]) {
+          data[nuevo] = data[viejo];
+          delete data[viejo];
+          changed = true;
+        }
+      }
+      if (changed) store(data);
+    }
 
     const currentKg = (exId: string): number | undefined =>
       load()[exId]?.kg ?? seedMap[exId];

@@ -5,6 +5,7 @@ import Nav from "../components/Nav.astro";
 import Hero from "../components/andrey/Hero.astro";
 import Changes from "../components/andrey/Changes.astro";
 import Rules from "../components/andrey/Rules.astro";
+import Spine from "../components/andrey/Spine.astro";
 import Day from "../components/Day.astro";
 import ExerciseModal from "../components/ExerciseModal.astro";
 import WeightModal from "../components/WeightModal.astro";
@@ -14,6 +15,7 @@ import { days, altCatalog } from "../data/rutina-andrey";
 
 const links = [
   { href: "#reglas", label: "Reglas" },
+  { href: "#columna", label: "Columna" },
   { href: "#dia1", label: "Lun" },
   { href: "#dia2", label: "Mar" },
   { href: "#dia3", label: "Mié" },
@@ -30,6 +32,7 @@ const links = [
   <Hero />
   <Changes />
   <Rules />
+  <Spine />
   {days.map((day) => <Day day={day} altCatalog={altCatalog} />)}
   <ExerciseModal altCatalog={altCatalog} />
   <WeightModal />

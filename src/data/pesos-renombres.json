@@ -1,0 +1,14 @@
+{
+  "_comentario": "Ejercicios que cambiaron de día o de nombre, por perfil: { \"id-viejo\": \"id-nuevo\" }. Al abrir la app, el peso guardado con el id viejo pasa al id nuevo (si el nuevo aún no tiene registro) y el viejo se borra. Los ids son `<dia>-<slug-del-titulo>`, como en data-ex-id.",
+  "andrey": {
+    "dia2-press-de-pecho-en-maquina": "dia5-press-de-pecho-en-maquina",
+    "dia2-jalon-al-pecho": "dia3-jalon-al-pecho",
+    "dia2-face-pull-en-polea": "dia3-face-pull-en-polea",
+    "dia3-triceps-en-polea": "dia5-triceps-en-polea",
+    "dia3-curl-martillo-en-polea": "dia5-curl-martillo-en-polea",
+    "dia3-triceps-press-en-maquina": "dia5-triceps-press-en-maquina",
+    "dia3-curl-en-maquina-scott": "dia5-curl-en-maquina-scott",
+    "dia3-elevacion-lateral-en-maquina": "dia5-elevacion-lateral-en-maquina"
+  },
+  "valeria": {}
+}
