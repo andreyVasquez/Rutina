@@ -1,0 +1,72 @@
+---
+/**
+ * Escoliosis (perfil de Andrey): qué se ajustó en la rutina, qué dice la
+ * evidencia y qué preguntarle al ortopedista con la radiografía en la mano.
+ */
+const cards = [
+  {
+    title: "Lo que sale",
+    body: "<b>Saltos, cuerda, acarreos y rounds de saco</b>: impacto y desplazamiento, justo lo que el ortopedista pidió bajar. <b>Carga pesada sobre la columna</b>: sentadilla y rumano en Smith, push press. <b>Crunch con peso</b>: dobla la columna una y otra vez.",
+  },
+  {
+    title: "Lo que entra",
+    body: "Un <b>bloque de columna en cada sesión de gym</b>: plancha lateral, bird dog, curl-up de McGill, dead bug y Pallof — core fuerte sin doblar ni girar la columna. <b>Máquinas con la espalda apoyada</b> (prensa, remo con pecho apoyado, presses sentado) y trabajo a una pierna o un brazo con <b>las mismas reps por lado</b>.",
+  },
+  {
+    title: "Qué dice la evidencia",
+    body: "El core en posición neutra es de bajo riesgo y ayuda a la calidad de vida en escoliosis, aunque hay pocos estudios y de baja calidad. La <b>plancha lateral sobre el lado convexo</b> de la curva redujo el ángulo en un estudio pequeño sin grupo control (Fishman, 2014); un ensayo de 2019 no lo confirmó. Lo que más respaldo tiene son los <b>ejercicios específicos para escoliosis</b> (como el método Schroth), guiados por un fisioterapeuta.",
+  },
+  {
+    title: "Con la radiografía, pregunta",
+    body: "<b>1.</b> De qué lado es la convexidad de tu curva y si conviene darle más tiempo de plancha lateral a ese lado. <b>2.</b> Si puedes volver a los saltos, la cuerda y las cargas sobre la columna. <b>3.</b> Si el pádel y los derribos del MMA están bien. <b>4.</b> Si te remite a un fisioterapeuta para ejercicios específicos.",
+  },
+];
+---
+
+<section class="wrap" id="columna">
+  <div class="sec-head reveal">
+    <h2>Columna</h2><span class="tag">escoliosis · cómo se ajustó</span>
+  </div>
+  <p class="sec-intro reveal">
+    El ortopedista diagnosticó <b>escoliosis hacia la derecha</b> y pidió
+    <b>menos desplazamiento</b>; falta la radiografía lumbar. Mientras llega el
+    resultado, la rutina juega a lo seguro: <b>fuerte, pero con la columna
+    protegida</b>.
+  </p>
+  <div class="changes">
+    {
+      cards.map((c) => (
+        <article class="change reveal">
+          <h3>{c.title}</h3>
+          <p set:html={c.body} />
+        </article>
+      ))
+    }
+  </div>
+  <div class="callout reveal">
+    <h3>Señales para parar</h3>
+    <p>
+      Dolor que <b>baja a la pierna</b>, <b>hormigueo o adormecimiento</b>, o
+      dolor lumbar que <b>aumenta durante o después</b> del ejercicio: para y
+      consulta. Molestia muscular normal, sí; dolor que crece, no.
+    </p>
+    <p>
+      <em
+        >Fuentes:
+        <a href="https://pubmed.ncbi.nlm.nih.gov/25568820/" target="_blank" rel="noopener"
+          >Fishman et al., 2014 (plancha lateral)</a
+        > ·
+        <a
+          href="https://doaj.org/article/47a7cb032ab7410bae98fe416462cc9c"
+          target="_blank"
+          rel="noopener">Sarkisova et al., 2019 (ensayo aleatorizado)</a
+        > ·
+        <a
+          href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5795289/"
+          target="_blank"
+          rel="noopener">Guías SOSORT 2016</a
+        >.</em
+      >
+    </p>
+  </div>
+</section>
