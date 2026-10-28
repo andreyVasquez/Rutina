@@ -11,7 +11,18 @@ const img = (id: string): [string, string] => [
  * Regla: cada ejercicio tiene al menos una alternativa con máquina o polea.
  */
 export const altCatalog: Record<string, AltDetail> = {
-  /* ---- Cardio / calentamiento (todo sin impacto) ---- */
+  /* ---- Cardio / calentamiento ---- */
+  "cuerda-suave": {
+    title: "Cuerda suave",
+    reps: "4–5 min",
+    images: img("Rope_Jumping"),
+    desc: "Aprobada por el ortopedista tras la radiografía: pulso, tobillos, muñecas y juego de pies en poco tiempo.",
+    steps: [
+      "Cuerda a tu medida: pisándola al centro, las manijas llegan a las axilas.",
+      "Salta bajo (2–3 cm), en la punta de los pies; giran las muñecas, no los brazos.",
+      "Ritmo de charla, sin sprints: esto es calentamiento. Si te enredas, camina 10 s y retoma.",
+    ],
+  },
   "eliptica-suave": {
     title: "Elíptica suave",
     reps: "5–6 min",
@@ -48,7 +59,7 @@ export const altCatalog: Record<string, AltDetail> = {
     title: "Caminadora en cuesta",
     reps: "6 min",
     images: img("Running_Treadmill"),
-    desc: "Caminar rápido con inclinación calienta piernas y cadera sin trotar.",
+    desc: "Caminar rápido con inclinación calienta piernas y cadera sin trotar. <b>Solo como calentamiento corto</b>: el ortopedista pidió evitar las caminatas largas.",
     steps: [
       "Inclinación 8–10, velocidad de caminata rápida (5,5–6,5 km/h).",
       "Camina erguido, sin agarrarte de las barandas.",
@@ -522,7 +533,7 @@ const planchaLateral = (nota: string) => ({
   images: img("Side_Bridge"),
   title: "Plancha lateral",
   reps: "3 × 20–30 s / lado",
-  desc: `<b>Bloque de columna.</b> ${nota} Por ahora, <b>el mismo tiempo en los dos lados</b>: tras la radiografía, el ortopedista te dirá si conviene darle más a uno.`,
+  desc: `<b>Bloque de columna.</b> ${nota} <b>El mismo tiempo en los dos lados</b> hasta que un fisioterapeuta o el ortopedista te diga si conviene darle más a uno.`,
   watch: "Core",
   steps: [
     "De lado sobre el antebrazo, codo justo bajo el hombro, piernas estiradas y pies uno sobre otro.",
@@ -544,9 +555,10 @@ const planchaLateral = (nota: string) => ({
  *  - Martes: clase de boxeo. Jueves: clase de MMA. Ese día no hay nada más.
  *  - Sábado o domingo: pádel 1–2 h; el otro día del finde, descanso total.
  *
- * Escoliosis: el ortopedista pidió menos desplazamiento y la radiografía
- * lumbar está pendiente. Hasta tener el resultado, la rutina no trae saltos,
- * cuerda, acarreos ni rounds de saco, ni carga pesada sobre la columna.
+ * Escoliosis: con la radiografía, el ortopedista aprobó saltar la cuerda y
+ * pidió evitar caminatas largas y senderismo (medicación solo si hay dolor).
+ * La cuerda vuelve como calentamiento; la carga pesada sobre la columna sigue
+ * fuera porque no la habló.
  *
  * Cada ejercicio trae `steps` (paso a paso) y `alternatives` (ids del catálogo
  * de arriba); al tocar la tarjeta se abren en un popup, y cada alternativa
@@ -566,7 +578,7 @@ export const days: DayData[] = [
         images: img("Elliptical_Trainer"),
         title: "Calentamiento",
         reps: "8 min",
-        desc: "6 min de elíptica progresiva + 2 min de movilidad de cadera y columna. <b>Sin cuerda por ahora:</b> son saltos, y el ortopedista pidió menos desplazamiento.",
+        desc: "6 min de elíptica progresiva + 2 min de movilidad de cadera y columna. Hoy hay potencia de piernas: la elíptica las calienta sin gastarlas; <b>la cuerda queda como alternativa</b>.",
         watch: "Elíptica",
         steps: [
           "Arranca suave: los primeros 2 min a ritmo de charla.",
@@ -574,6 +586,7 @@ export const days: DayData[] = [
           "Movilidad, 2 min: gato-camello ×10, puente de glúteo ×10 y círculos de cadera ×10 por lado.",
         ],
         alternatives: [
+          { id: "cuerda-suave", note: "4–5 min, suave: que hoy hay potencia de piernas." },
           { id: "bici-suave", note: "si las elípticas están ocupadas." },
           { id: "escaladora", note: "activa más glúteo; ritmo constante." },
           { id: "caminadora-cuesta", note: "caminando con inclinación, sin trotar." },
@@ -700,7 +713,7 @@ export const days: DayData[] = [
         icon: "i-bag",
         title: "La clase",
         reps: "Con el profe",
-        desc: "Técnica, saco y rounds. <b>Cuéntale al profe el diagnóstico y lo que pidió el ortopedista</b> —menos desplazamiento— para que ajuste la cuerda y los ejercicios de pies mientras sale la radiografía. Si algo molesta en la espalda, deja ese ejercicio.",
+        desc: "Técnica, saco y rounds. <b>La cuerda ya está aprobada</b> por el ortopedista. Cuéntale al profe el diagnóstico y, si algo molesta en la espalda, deja ese ejercicio.",
         watch: "Boxeo",
       },
       {
@@ -860,7 +873,7 @@ export const days: DayData[] = [
         icon: "i-bag",
         title: "La clase",
         reps: "Con el profe",
-        desc: "Striking, lucha y rounds. <b>Avísale al profe del diagnóstico y de la recomendación del ortopedista</b> (menos desplazamiento). Si un derribo, una caída o una posición te carga la espalda, sal de ese ejercicio: mejor perder un ejercicio que una semana.",
+        desc: "Striking, lucha y rounds. <b>Avísale al profe del diagnóstico.</b> Los derribos y las caídas no los habló el ortopedista: si uno te carga la espalda, una caída o una posición te carga la espalda, sal de ese ejercicio: mejor perder un ejercicio que una semana.",
         watch: "Artes marciales",
       },
       {
@@ -882,19 +895,20 @@ export const days: DayData[] = [
     cooldown: enfriamiento("Pectoral en el marco de una puerta — <b>30 s por lado</b>"),
     exercises: [
       {
-        images: img("Bicycling_Stationary"),
+        images: img("Rope_Jumping"),
         title: "Calentamiento",
         reps: "8 min",
-        desc: "5 min de bici + 3 min de banda para hombro: articulaciones listas antes de empujar.",
-        watch: "Bicicleta estática",
+        desc: "5 min de cuerda + 3 min de banda para hombro. <b>Aprobada por el ortopedista:</b> pulso, muñecas y juego de pies antes de empujar.",
+        watch: "Saltar la cuerda",
         steps: [
-          "Asiento a la altura de la cadera; pedalea suave 2 min y sube la resistencia hasta sudar ligero.",
+          "Cuerda a tu medida: pisándola al centro, las manijas llegan a las axilas.",
+          "Salta bajo (2–3 cm), en la punta de los pies; giran las muñecas, no los brazos. Si te enredas, camina 10 s y retoma.",
           "Con tu banda: 15 separaciones al frente + 15 rotaciones externas por lado.",
           "10 círculos grandes de brazos hacia atrás y una serie liviana de press de pecho (12 reps con la mitad del peso).",
         ],
         alternatives: [
+          { id: "bici-suave", note: "si llegas molido del MMA o no hay espacio para saltar." },
           { id: "eliptica-suave", note: "mismos 5 min, moviendo los brazos." },
-          { id: "escaladora", note: "si las bicis están ocupadas." },
           { id: "remo-suave-polea", note: "activa espalda y hombro antes de empujar." },
         ],
       },
@@ -1055,7 +1069,7 @@ export const days: DayData[] = [
         icon: "i-padel",
         title: "El partido",
         reps: "1–2 h",
-        desc: "Tu cardio del finde, jugado. Ojo: <b>el pádel es puro desplazamiento y giro</b>, justo lo que el ortopedista pidió bajar — pregúntale por él después de la radiografía; mientras, mejor 1 h que 2. Hidrátate entre sets.",
+        desc: "Tu cardio del finde, jugado. Ojo: el ortopedista pidió <b>evitar caminatas largas y senderismo</b> y no habló del pádel, que es 1–2 h de pie y desplazándote. <b>Mejor 1 h que 2</b> hasta preguntarle; si la espalda molesta al día siguiente, acórtalo. Hidrátate entre sets.",
         watch: "Pádel",
       },
       {
